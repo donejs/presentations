@@ -922,32 +922,18 @@ export <span class="keyword">default</span> Component.extend({
 </section>
   </div>
   <div class="slide hidden" id="slide-31">
-    <section class="slide-content"><h2 id="routing">Routing</h2>
-<pre><code class="lang-javascript">import route from <span class="string">'can/route/'</span>;
-
-route(<span class="string">':page'</span>);
-route(<span class="string">':page/:slug'</span>);
-route(<span class="string">':page/:slug/:action'</span>);
-
-route.deparam(<span class="string">'/home'</span>)
-<span class="comment">// -&gt; { page: 'home' }</span>
-route.deparam(<span class="string">'/restaurants/cheese-city/order'</span>)
-<span class="comment">// -&gt; { page: 'restaurants', slug: 'cheese-city', action: 'order' }</span></code></pre>
-</section>
-  </div>
-  <div class="slide hidden" id="slide-32">
     <section class="slide-content"><h1 id="live-reload">Live Reload</h1>
 <h2 id="aka-hot-module-swapping">aka Hot Module Swapping</h2>
 </section>
   </div>
-  <div class="slide hidden" id="slide-33">
+  <div class="slide hidden" id="slide-32">
     <section class="slide-content"><ul>
 <li>Watch your app react to changes you make to modules as you edit the code.</li>
 <li>The window never reloads, only the modules you change.</li>
 </ul>
 </section>
   </div>
-  <div class="slide hidden" id="slide-34">
+  <div class="slide hidden" id="slide-33">
     <section class="slide-content"><h2 id="benefits">Benefits</h2>
 <ul>
 <li>0.1 second – users feel like their actions are directly causing something to happen on the screen.</li>
@@ -955,27 +941,129 @@ route.deparam(<span class="string">'/restaurants/cheese-city/order'</span>)
 </ul>
 </section>
   </div>
-  <div class="slide hidden" id="slide-35">
+  <div class="slide hidden" id="slide-34">
     <section class="slide-content"><p><img src="img/live-reload/lr-1.png" alt="lr-one"></p>
 </section>
   </div>
-  <div class="slide hidden" id="slide-36">
+  <div class="slide hidden" id="slide-35">
     <section class="slide-content"><p><img src="img/live-reload/lr-2.png" alt="lr-two"></p>
 </section>
   </div>
-  <div class="slide hidden" id="slide-37">
+  <div class="slide hidden" id="slide-36">
     <section class="slide-content"><p><img src="img/live-reload/lr-3.png" alt="lr-three"></p>
 </section>
   </div>
-  <div class="slide hidden" id="slide-38">
+  <div class="slide hidden" id="slide-37">
     <section class="slide-content"><p>Show files reloading in the network tab.</p>
 </section>
   </div>
+  <div class="slide hidden" id="slide-38">
+    <section class="slide-content"><h1 id="routing">Routing</h1>
+</section>
+  </div>
   <div class="slide hidden" id="slide-39">
-    <section class="slide-content"><h1 id="production-workflows">Production Workflows</h1>
+    <section class="slide-content"><h2 id="two-way-routing">Two way routing</h2>
+<p>Update <code>pmo/app.js</code> to:</p>
+<pre><code class="lang-javascript"><span class="comment">// pmo/app.js</span>
+import AppMap from <span class="string">"can-ssr/app-map"</span>;
+import route from <span class="string">'can/route/'</span>;
+
+<span class="keyword">const</span> AppState = AppMap.extend({});
+
+export <span class="keyword">default</span> AppState;
+
+route(<span class="string">':page'</span>, { page: <span class="string">'home'</span> });
+route(<span class="string">':page/:slug'</span>, { slug: <span class="literal">null</span> });
+route(<span class="string">':page/:slug/:action'</span>, { slug: <span class="literal">null</span>, action: <span class="literal">null</span> });
+
+export <span class="keyword">default</span> AppState;</code></pre>
 </section>
   </div>
   <div class="slide hidden" id="slide-40">
+    <section class="slide-content"><h2 id="routes-vs-application-state">Routes vs. application state</h2>
+<pre><code class="lang-javascript">route.deparam(<span class="string">'/home'</span>)
+<span class="comment">// -&gt; { page: 'home' }</span>
+route.deparam(<span class="string">'/restaurants/cheese-city/order'</span>)
+<span class="comment">// -&gt; { page: 'restaurants', slug: 'cheese-city', action: 'order' }</span>
+
+state.attr({ page: <span class="string">'order-history'</span> })
+<span class="comment">// -&gt; /order-history</span>
+state.attr({ page: <span class="string">'restaurants'</span>, slug: <span class="string">'cheese-city'</span> })
+<span class="comment">// -&gt; /restaurants/cheese-city</span>
+route.attr({
+    page: <span class="string">'restaurants'</span>,
+    state: <span class="string">'IL'</span>,
+    city: <span class="string">'Chicago'</span>
+})
+<span class="comment">// -&gt; /restaurants?state=IL&amp;city=Chicago</span></code></pre>
+</section>
+  </div>
+  <div class="slide hidden" id="slide-41">
+    <section class="slide-content"><h2 id="routing-in-templates">Routing in templates</h2>
+<pre><code class="lang-javascript">{{#eq page <span class="string">"home"</span>}}
+  &lt;pmo-home&gt;<span class="xml"><span class="tag">&lt;/<span class="title">pmo-home</span>&gt;</span>
+{{/eq}}
+{{#eq page "restaurants"}}
+  <span class="tag">&lt;<span class="title">can-import</span> <span class="attribute">from</span>=<span class="value">"pmo/restaurant/list/"</span> <span class="attribute">can-tag</span>=<span class="value">"pmo-loading"</span>&gt;</span>
+    <span class="tag">&lt;<span class="title">pmo-restaurant-list</span>&gt;</span><span class="tag">&lt;/<span class="title">pmo-restaurant-list</span>&gt;</span>
+  <span class="tag">&lt;/<span class="title">can-import</span>&gt;</span>
+{{/eq}}</span></code></pre>
+</section>
+  </div>
+  <div class="slide hidden" id="slide-42">
+    <section class="slide-content"><h2 id="-can-href-"><code>can-href</code></h2>
+<pre><code class="lang-javascript">&lt;div class=<span class="string">"restaurant"</span>&gt;
+  <span class="xml"><span class="tag">&lt;<span class="title">img</span> <span class="attribute">src</span>=<span class="value">"/{{images.thumbnail}}"</span> <span class="attribute">width</span>=<span class="value">"100"</span> <span class="attribute">height</span>=<span class="value">"100"</span>&gt;</span>
+  <span class="tag">&lt;<span class="title">h3</span>&gt;</span>{{name}}<span class="tag">&lt;/<span class="title">h3</span>&gt;</span>
+  <span class="tag">&lt;<span class="title">a</span> <span class="attribute">class</span>=<span class="value">"btn"</span> <span class="attribute">can-href</span>=<span class="value">"{ page='restaurants' slug=slug }"</span>&gt;</span>Details<span class="tag">&lt;/<span class="title">a</span>&gt;</span>
+<span class="tag">&lt;/<span class="title">div</span>&gt;</span></span></code></pre>
+<p><code>href</code> will be <code>/restaurants/&lt;restaurant-slug&gt;</code>.</p>
+<p>Change the route</p>
+<pre><code class="lang-javascript">route(<span class="string">':page/restaurant/:slug'</span>);</code></pre>
+<p><code>href</code> will become <code>/restaurants/restaurants/&lt;restaurant-slug&gt;</code>.</p>
+</section>
+  </div>
+  <div class="slide hidden" id="slide-43">
+    <section class="slide-content"><h2 id="benefits">Benefits</h2>
+<ul>
+<li>Keep routing rules separate from application logic.</li>
+<li>Update routing rules independent of the page.</li>
+<li>Makes you think about describing application state first</li>
+</ul>
+</section>
+  </div>
+  <div class="slide hidden" id="slide-44">
+    <section class="slide-content"><h1 id="super-models">Super Models</h1>
+</section>
+  </div>
+  <div class="slide hidden" id="slide-45">
+    <section class="slide-content"><h2 id="can-connect">can-connect</h2>
+<p>Middleware for persisting data that can:</p>
+<ul>
+<li>Retrieve, parse and extract data</li>
+<li>Keep lists live</li>
+<li>Perform real-time updates</li>
+<li>Cache (fall-through, inline-cache, localstorage, in-memory)</li>
+<li>Combine multiple requests</li>
+<li>Load data in-template (<code>&lt;restaurant-model get=&quot;{}&quot;&gt;{{value}}&lt;/restaurant-model&gt;</code>)</li>
+</ul>
+</section>
+  </div>
+  <div class="slide hidden  centered" id="slide-46">
+    <section class="slide-content"><h2 id="inline-cache">Inline cache</h2>
+<p><img src="img/inline-cache.png" alt="Inline Cache"></p>
+</section>
+  </div>
+  <div class="slide hidden  centered" id="slide-47">
+    <section class="slide-content"><h2 id="fall-through-cache">Fall-through cache</h2>
+<p><img src="img/fall-through.png" alt="Fall-through Cache"></p>
+</section>
+  </div>
+  <div class="slide hidden" id="slide-48">
+    <section class="slide-content"><h1 id="production-workflows">Production Workflows</h1>
+</section>
+  </div>
+  <div class="slide hidden" id="slide-49">
     <section class="slide-content"><h2 id="build-for-any-environment">Build for any Environment</h2>
 <ul>
 <li>The Web</li>
@@ -984,7 +1072,7 @@ route.deparam(<span class="string">'/restaurants/cheese-city/order'</span>)
 </ul>
 </section>
   </div>
-  <div class="slide hidden" id="slide-41">
+  <div class="slide hidden" id="slide-50">
     <section class="slide-content"><h2 id="steal-tools">Steal Tools</h2>
 <ul>
 <li>Creates optimized bundles for:<ul>
@@ -995,7 +1083,7 @@ route.deparam(<span class="string">'/restaurants/cheese-city/order'</span>)
 </ul>
 </section>
   </div>
-  <div class="slide hidden" id="slide-42">
+  <div class="slide hidden" id="slide-51">
     <section class="slide-content"><h3 id="steal-cordova-and-steal-nw">steal-cordova and steal-nw</h3>
 <pre><code class="lang-javascript"><span class="keyword">var</span> stealTools = require(<span class="string">"steal-tools"</span>);
 

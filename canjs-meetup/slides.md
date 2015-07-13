@@ -365,22 +365,6 @@ A StealJS plugin that allows composing CanJS Components in a single file:
 
 </hello-greeting>
 ```
---
-
-## Routing
-
-```javascript
-import route from 'can/route/';
-
-route(':page');
-route(':page/:slug');
-route(':page/:slug/:action');
-
-route.deparam('/home')
-// -> { page: 'home' }
-route.deparam('/restaurants/cheese-city/order')
-// -> { page: 'restaurants', slug: 'cheese-city', action: 'order' }
-```
 
 --
 
@@ -414,6 +398,129 @@ route.deparam('/restaurants/cheese-city/order')
 --
 
 Show files reloading in the network tab.
+
+--
+
+# Routing
+
+--
+
+## Two way routing
+
+Update `pmo/app.js` to:
+
+```javascript
+// pmo/app.js
+import AppMap from "can-ssr/app-map";
+import route from 'can/route/';
+
+const AppState = AppMap.extend({});
+
+export default AppState;
+
+route(':page', { page: 'home' });
+route(':page/:slug', { slug: null });
+route(':page/:slug/:action', { slug: null, action: null });
+
+export default AppState;
+```
+
+--
+
+## Routes vs. application state
+
+```javascript
+route.deparam('/home')
+// -> { page: 'home' }
+route.deparam('/restaurants/cheese-city/order')
+// -> { page: 'restaurants', slug: 'cheese-city', action: 'order' }
+
+state.attr({ page: 'order-history' })
+// -> /order-history
+state.attr({ page: 'restaurants', slug: 'cheese-city' })
+// -> /restaurants/cheese-city
+route.attr({
+	page: 'restaurants',
+	state: 'IL',
+	city: 'Chicago'
+})
+// -> /restaurants?state=IL&city=Chicago
+```
+
+--
+
+## Routing in templates
+
+```javascript
+{{#eq page "home"}}
+  <pmo-home></pmo-home>
+{{/eq}}
+{{#eq page "restaurants"}}
+  <can-import from="pmo/restaurant/list/" can-tag="pmo-loading">
+    <pmo-restaurant-list></pmo-restaurant-list>
+  </can-import>
+{{/eq}}
+```
+
+--
+
+## `can-href`
+
+```javascript
+<div class="restaurant">
+  <img src="/{{images.thumbnail}}" width="100" height="100">
+  <h3>{{name}}</h3>
+  <a class="btn" can-href="{ page='restaurants' slug=slug }">Details</a>
+</div>
+```
+
+`href` will be `/restaurants/<restaurant-slug>`.
+
+Change the route
+
+```javascript
+route(':page/restaurant/:slug');
+```
+
+`href` will become `/restaurants/restaurants/<restaurant-slug>`.
+
+--
+
+## Benefits
+
+- Keep routing rules separate from application logic.
+- Update routing rules independent of the page.
+- Makes you think about describing application state first
+
+--
+
+# Super Models
+
+
+--
+
+## can-connect
+
+Middleware for persisting data that can:
+
+- Retrieve, parse and extract data
+- Keep lists live
+- Perform real-time updates
+- Cache (fall-through, inline-cache, localstorage, in-memory)
+- Combine multiple requests
+- Load data in-template (`<restaurant-model get="{}">{{value}}</restaurant-model>`)
+
+-- centered
+
+## Inline cache
+
+![Inline Cache](img/inline-cache.png)
+
+-- centered
+
+## Fall-through cache
+
+![Fall-through Cache](img/fall-through.png)
 
 --
 
