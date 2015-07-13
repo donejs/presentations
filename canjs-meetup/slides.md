@@ -27,19 +27,168 @@ style: style.css
 * [<i class="fa fa-github"></i> daffl](https://github.com/daffl)
 * [<i class="fa fa-twitter"></i> @daffl](http://twitter.com/daffl)
 
+-- centered
+
+## Some History: JavaScriptMVC
+
+<img src="img/framework-timeline.png" style="width: 70%;" alt="Framework Timeline">
+
+-- centered
+
+## 2015
+
+<img src="img/donejs-logo-black.svg" style="width: 70%;" alt="Donejs">
+
 --
+
+## Comes with...
+
+- [StealJS](http://stealjs.com) - ES6, CJS, and AMD module loader and builder
+- [CanJS](http://canjs.com) - Custom elements and Model-View-ViewModel utilities
+- [jQuery](http://jquery.com) - DOM helpers
+- [jQuery++](http://jquerypp.com) - Extended DOM helpers
+- [QUnit](https://qunitjs.com/) or Mocha - Assertion library
+- [FuncUnit](http://funcunit.com) - Functional tests
+- Testee or Karma - Test runner
+- [DocumentJS](http://documentjs.com) - Documentation
+- [can-ssr](http://github.com/canjs/ssr) - Server-Side Rendering Utilities for CanJS
+
+--
+
+# Features
+
+--
+
+## Application
+
+- Universal (same code on server and client)
+- Pushstate routing
+- Real Time
+- Run everywhere ( IE9+, Andriod, iOS, node-webkit )
+
+--
+
+## Performance
+
+- Progressive loaded optimized production builds
+- Caching and minimal data requests
+- Minimal DOM updates
+- Application logic in worker thread
+
+--
+
+## Maintenance
+
+- Modlet workflow - tests, docs, and demo pages
+- Use and create NPM packages
+- Custom HTML elements
+- MVVM single direction architecture
+- Multi Versioned Documentation
+- Live reload
+- Functional tests
+
+--
+
+## [place-my-order.com](http://place-my-order.com)
+
+--
+
+## Getting started
+
+Create an application folder:
+
+```
+mkdir place-my-order
+cd place-my-order
+```
+
+DoneJS uses a `package.json` for configuration and dependencies:
+
+```
+npm init
+```
+
+And is installed via NPM:
+
+```
+npm install donejs --save
+```
+
+Also install packages for place-my-order.com assets (CSS, Images) and API:
+
+```
+npm install place-my-order-assets place-my-order-api --save
+```
+
+--
+
+## `pmo/index.stache`
+
+```javascript
+<html>
+  <head>
+    <title>Place My Order</title>
+    {{asset "css"}}
+  </head>
+  <body>
+    <can-import from="place-my-order-assets" />
+    <can-import from="pmo/app" [.]="{value}" />
+    <h1>{{message}}</h1>
+    {{asset "inline-cache"}}
+
+    {{#if isProduction}}
+      <script src="/node_modules/steal/steal.production.js"
+        main="pmo/index.stache!done-autorender"></script>
+    {{else}}
+      <script src="/node_modules/steal/steal.js"></script>
+    {{/if}}
+  </body>
+</html>
+```
+
+--
+
+## `pmo/app.js`
+
+```javascript
+// pmo/app.js
+import AppMap from "can-ssr/app-map";
+
+const AppState = AppMap.extend({
+  message: 'Hello World!'
+});
+
+export default AppState;
+```
+
+In `package.json` add:
+
+```javascript
+"scripts": {
+    "start": "can-serve --port 8080",
+```
+
+Then run
+
+```
+npm start
+```
+
+And go to [localhost:8080](http://localhost:8080).
+
+-- centered
 
 # Modlet Workflow
 
 ![modlets](img/modlet.png)
 
---
+-- centered
 
 ## Before
 
 ![modlet-before](img/modlet/before.png)
 
---
+-- centered
 
 ## After
 
@@ -133,7 +282,7 @@ app.listen(7000);
 ```javascript
 export const ViewModel = Map.extend({
   states: { get() { return State.findAll({}); } }, ...});
-  
+
 export default Component.extend({
   tag: 'app-restaurant-list',
   viewModel: ViewModel,
@@ -215,6 +364,22 @@ A StealJS plugin that allows composing CanJS Components in a single file:
   <h1>Hello world!</h1>
 
 </hello-greeting>
+```
+--
+
+## Routing
+
+```javascript
+import route from 'can/route/';
+
+route(':page');
+route(':page/:slug');
+route(':page/:slug/:action');
+
+route.deparam('/home')
+// -> { page: 'home' }
+route.deparam('/restaurants/cheese-city/order')
+// -> { page: 'restaurants', slug: 'cheese-city', action: 'order' }
 ```
 
 --

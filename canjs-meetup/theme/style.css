@@ -176,3 +176,7 @@ pre {
   margin-top: 6em;
   margin-left: 2em;
 }
+
+.centered {
+    text-align: center;
+}
