@@ -28,56 +28,6 @@ logo: theme/logo.png
 
 --
 
-# Components
-
---
-
-## Benefits
-
-* Declaratively write your application.
-* Separation between View Model and View logic.
-
-## Warts
-
-* Boilerplate.
-
---
-
-## done-component
-
-A StealJS plugin that allows composing CanJS Components in a single file:
-
-### hello.component
-
-```
-<can-component tag="hello-greeting">
-  <template>
-    <h1>Hello {{name}}!</h1>
-  </template>
-  <view-model>
-    import Map from "can/map/";
-
-    export default Map.extend({
-      name: ""
-    });
-  </view-model>
-</can-component>
-```
-
---
-
-### Output
-
-```
-<hello-greeting name="world">
-
-  <h1>Hello world!</h1>
-
-<hello-greeting>
-```
-
---
-
 # Server Side Rendering
 
 Getting rid of the loading indicator.
@@ -181,6 +131,56 @@ export default Component.extend({
 
 --
 
+# Components
+
+--
+
+## Benefits
+
+* Declaratively write your application.
+* Separation between View Model and View logic.
+
+## Warts
+
+* Boilerplate.
+
+--
+
+## done-component
+
+A StealJS plugin that allows composing CanJS Components in a single file:
+
+### hello.component
+
+```
+<can-component tag="hello-greeting">
+  <template>
+    <h1>Hello {{name}}!</h1>
+  </template>
+  <view-model>
+    import Map from "can/map/";
+
+    export default Map.extend({
+      name: ""
+    });
+  </view-model>
+</can-component>
+```
+
+--
+
+### Output
+
+```javascript
+<hello-greeting name="world">
+
+  <h1>Hello world!</h1>
+
+<hello-greeting>
+```
+
+--
+
 # Production Workflows
 
 --
@@ -194,3 +194,25 @@ export default Component.extend({
 --
 
 ## Steal Tools
+
+* Creates optimized bundles for:
+  * Progressively loaded single page applications.
+  * Multiple apps with shared dependencies.
+
+--
+
+### steal-cordova and steal-nw
+
+```javascript
+var stealTools = require("steal-tools");
+
+var stealCordova = require("steal-cordova")({
+  platforms: ["ios", "android"]
+});
+
+var buildPromise = stealTools.build({
+  config: __dirname + "/package.json!npm"
+});
+
+buildPromise.then(stealCordova.build);
+```

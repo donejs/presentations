@@ -603,54 +603,11 @@ pre {
 </section>
   </div>
   <div class="slide hidden" id="slide-4">
-    <section class="slide-content"><h1 id="components">Components</h1>
-</section>
-  </div>
-  <div class="slide hidden" id="slide-5">
-    <section class="slide-content"><h2 id="benefits">Benefits</h2>
-<ul>
-<li>Declaratively write your application.</li>
-<li>Separation between View Model and View logic.</li>
-</ul>
-<h2 id="warts">Warts</h2>
-<ul>
-<li>Boilerplate.</li>
-</ul>
-</section>
-  </div>
-  <div class="slide hidden" id="slide-6">
-    <section class="slide-content"><h2 id="done-component">done-component</h2>
-<p>A StealJS plugin that allows composing CanJS Components in a single file:</p>
-<h3 id="hello-component">hello.component</h3>
-<pre><code>&lt;can-component tag=&quot;hello-greeting&quot;&gt;
-  &lt;template&gt;
-    &lt;h1&gt;Hello {{name}}!&lt;/h1&gt;
-  &lt;/template&gt;
-  &lt;view-model&gt;
-    import Map from &quot;can/map/&quot;;
-
-    export default Map.extend({
-      name: &quot;&quot;
-    });
-  &lt;/view-model&gt;
-&lt;/can-component&gt;</code></pre>
-</section>
-  </div>
-  <div class="slide hidden" id="slide-7">
-    <section class="slide-content"><h3 id="output">Output</h3>
-<pre><code>&lt;hello-greeting name=&quot;world&quot;&gt;
-
-  &lt;h1&gt;Hello world!&lt;/h1&gt;
-
-&lt;hello-greeting&gt;</code></pre>
-</section>
-  </div>
-  <div class="slide hidden" id="slide-8">
     <section class="slide-content"><h1 id="server-side-rendering">Server Side Rendering</h1>
 <p>Getting rid of the loading indicator.</p>
 </section>
   </div>
-  <div class="slide hidden" id="slide-9">
+  <div class="slide hidden" id="slide-5">
     <section class="slide-content"><h2 id="benefits">Benefits</h2>
 <ul>
 <li>SEO</li>
@@ -658,7 +615,7 @@ pre {
 </ul>
 </section>
   </div>
-  <div class="slide hidden" id="slide-10">
+  <div class="slide hidden" id="slide-6">
     <section class="slide-content"><h2 id="implementation">Implementation</h2>
 <h3 id="single-context-virtual-dom">Single Context Virtual DOM</h3>
 <ul>
@@ -668,7 +625,7 @@ pre {
 </ul>
 </section>
   </div>
-  <div class="slide hidden" id="slide-11">
+  <div class="slide hidden" id="slide-7">
     <section class="slide-content"><h3 id="connected-lifecycle">Connected Lifecycle</h3>
 <pre><code>curl http://place-my-order.com/restaurants/cow-barn/order</code></pre>
 <pre><code>&lt;html&gt;
@@ -686,7 +643,7 @@ pre {
 &lt;/html&gt;</code></pre>
 </section>
   </div>
-  <div class="slide hidden" id="slide-12">
+  <div class="slide hidden" id="slide-8">
     <section class="slide-content"><h3 id="lib-app-js">lib/app.js</h3>
 <pre><code>var app = require(&quot;express&quot;)();
 var url = require(&quot;url&quot;);
@@ -708,7 +665,7 @@ app.get(&quot;/&quot;), function(req, res){
 app.listen(7000);</code></pre>
 </section>
   </div>
-  <div class="slide hidden" id="slide-13">
+  <div class="slide hidden" id="slide-9">
     <section class="slide-content"><h3 id="pmo-restaurant-list-js">pmo/restaurant/list.js</h3>
 <pre><code>export const ViewModel = Map.extend({
   states: { get() { return State.findAll({}); } }, ...});
@@ -726,7 +683,7 @@ export default Component.extend({
 });</code></pre>
 </section>
   </div>
-  <div class="slide hidden" id="slide-14">
+  <div class="slide hidden" id="slide-10">
     <section class="slide-content"><h2 id="server-side-rendering-techniques">Server Side Rendering Techniques</h2>
 <table>
 <thead>
@@ -756,6 +713,49 @@ export default Component.extend({
 </table>
 </section>
   </div>
+  <div class="slide hidden" id="slide-11">
+    <section class="slide-content"><h1 id="components">Components</h1>
+</section>
+  </div>
+  <div class="slide hidden" id="slide-12">
+    <section class="slide-content"><h2 id="benefits">Benefits</h2>
+<ul>
+<li>Declaratively write your application.</li>
+<li>Separation between View Model and View logic.</li>
+</ul>
+<h2 id="warts">Warts</h2>
+<ul>
+<li>Boilerplate.</li>
+</ul>
+</section>
+  </div>
+  <div class="slide hidden" id="slide-13">
+    <section class="slide-content"><h2 id="done-component">done-component</h2>
+<p>A StealJS plugin that allows composing CanJS Components in a single file:</p>
+<h3 id="hello-component">hello.component</h3>
+<pre><code>&lt;can-component tag=&quot;hello-greeting&quot;&gt;
+  &lt;template&gt;
+    &lt;h1&gt;Hello {{name}}!&lt;/h1&gt;
+  &lt;/template&gt;
+  &lt;view-model&gt;
+    import Map from &quot;can/map/&quot;;
+
+    export default Map.extend({
+      name: &quot;&quot;
+    });
+  &lt;/view-model&gt;
+&lt;/can-component&gt;</code></pre>
+</section>
+  </div>
+  <div class="slide hidden" id="slide-14">
+    <section class="slide-content"><h3 id="output">Output</h3>
+<pre><code class="lang-javascript">&lt;hello-greeting name=<span class="string">"world"</span>&gt;
+
+  <span class="xml"><span class="tag">&lt;<span class="title">h1</span>&gt;</span>Hello world!<span class="tag">&lt;/<span class="title">h1</span>&gt;</span>
+
+<span class="tag">&lt;<span class="title">hello-greeting</span>&gt;</span></span></code></pre>
+</section>
+  </div>
   <div class="slide hidden" id="slide-15">
     <section class="slide-content"><h1 id="production-workflows">Production Workflows</h1>
 </section>
@@ -771,6 +771,28 @@ export default Component.extend({
   </div>
   <div class="slide hidden" id="slide-17">
     <section class="slide-content"><h2 id="steal-tools">Steal Tools</h2>
+<ul>
+<li>Creates optimized bundles for:<ul>
+<li>Progressively loaded single page applications.</li>
+<li>Multiple apps with shared dependencies.</li>
+</ul>
+</li>
+</ul>
+</section>
+  </div>
+  <div class="slide hidden" id="slide-18">
+    <section class="slide-content"><h3 id="steal-cordova-and-steal-nw">steal-cordova and steal-nw</h3>
+<pre><code class="lang-javascript"><span class="keyword">var</span> stealTools = require(<span class="string">"steal-tools"</span>);
+
+<span class="keyword">var</span> stealCordova = require(<span class="string">"steal-cordova"</span>)({
+  platforms: [<span class="string">"ios"</span>, <span class="string">"android"</span>]
+});
+
+<span class="keyword">var</span> buildPromise = stealTools.build({
+  config: __dirname + <span class="string">"/package.json!npm"</span>
+});
+
+buildPromise.then(stealCordova.build);</code></pre>
 </section>
   </div>
 
