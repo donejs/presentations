@@ -12,8 +12,9 @@
     "node": "~0.10.0"
   },
   "devDependencies": {
-    "grunt-exec": "~0.4.0",
-    "grunt-contrib-watch": "~0.3.1"
+    "cleaver": "^0.7.4",
+    "grunt-contrib-watch": "~0.3.1",
+    "grunt-exec": "~0.4.0"
   },
   "scripts": {
     "start": "grunt"

@@ -603,7 +603,174 @@ pre {
 </section>
   </div>
   <div class="slide hidden" id="slide-4">
-    <section class="slide-content"><h1 id="hi">Hi</h1>
+    <section class="slide-content"><h1 id="components">Components</h1>
+</section>
+  </div>
+  <div class="slide hidden" id="slide-5">
+    <section class="slide-content"><h2 id="benefits">Benefits</h2>
+<ul>
+<li>Declaratively write your application.</li>
+<li>Separation between View Model and View logic.</li>
+</ul>
+<h2 id="warts">Warts</h2>
+<ul>
+<li>Boilerplate.</li>
+</ul>
+</section>
+  </div>
+  <div class="slide hidden" id="slide-6">
+    <section class="slide-content"><h2 id="done-component">done-component</h2>
+<p>A StealJS plugin that allows composing CanJS Components in a single file:</p>
+<h3 id="hello-component">hello.component</h3>
+<pre><code>&lt;can-component tag=&quot;hello-greeting&quot;&gt;
+  &lt;template&gt;
+    &lt;h1&gt;Hello {{name}}!&lt;/h1&gt;
+  &lt;/template&gt;
+  &lt;view-model&gt;
+    import Map from &quot;can/map/&quot;;
+
+    export default Map.extend({
+      name: &quot;&quot;
+    });
+  &lt;/view-model&gt;
+&lt;/can-component&gt;</code></pre>
+</section>
+  </div>
+  <div class="slide hidden" id="slide-7">
+    <section class="slide-content"><h3 id="output">Output</h3>
+<pre><code>&lt;hello-greeting name=&quot;world&quot;&gt;
+
+  &lt;h1&gt;Hello world!&lt;/h1&gt;
+
+&lt;hello-greeting&gt;</code></pre>
+</section>
+  </div>
+  <div class="slide hidden" id="slide-8">
+    <section class="slide-content"><h1 id="server-side-rendering">Server Side Rendering</h1>
+<p>Getting rid of the loading indicator.</p>
+</section>
+  </div>
+  <div class="slide hidden" id="slide-9">
+    <section class="slide-content"><h2 id="benefits">Benefits</h2>
+<ul>
+<li>SEO</li>
+<li>Perceived Performance</li>
+</ul>
+</section>
+  </div>
+  <div class="slide hidden" id="slide-10">
+    <section class="slide-content"><h2 id="implementation">Implementation</h2>
+<h3 id="single-context-virtual-dom">Single Context Virtual DOM</h3>
+<ul>
+<li>Everything runs in a single Node.js context.</li>
+<li>Uses a very lightweight DOM.</li>
+<li>Everything is connected to the render lifecycle.</li>
+</ul>
+</section>
+  </div>
+  <div class="slide hidden" id="slide-11">
+    <section class="slide-content"><h3 id="connected-lifecycle">Connected Lifecycle</h3>
+<pre><code>curl http://place-my-order.com/restaurants/cow-barn/order</code></pre>
+<pre><code>&lt;html&gt;
+&lt;head&gt;
+  &lt;link rel=&quot;stylesheet&quot; href=&quot;/dist/bundles/pmo/index.css&quot;&gt;
+  &lt;link rel=&quot;stylesheet&quot; href=&quot;/dist/bundles/pmo/order/new/new.css&quot;&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  ...
+
+  &lt;script&gt;
+    INLINE_CACHE = {&quot;restaurant&quot;:{&quot;{...&quot;}}}
+  &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+</section>
+  </div>
+  <div class="slide hidden" id="slide-12">
+    <section class="slide-content"><h3 id="lib-app-js">lib/app.js</h3>
+<pre><code>var app = require(&quot;express&quot;)();
+var url = require(&quot;url&quot;);
+
+var render = require(&quot;can-ssr&quot;)({
+  config: __dirname + &quot;/package.json!npm&quot;
+});
+
+app.get(&quot;/&quot;), function(req, res){
+
+  var pathname = url.parse(req.url).pathname;
+
+  render(pathname).then(function(html){
+    res.send(html);
+  });
+
+});
+
+app.listen(7000);</code></pre>
+</section>
+  </div>
+  <div class="slide hidden" id="slide-13">
+    <section class="slide-content"><h3 id="pmo-restaurant-list-js">pmo/restaurant/list.js</h3>
+<pre><code>export const ViewModel = Map.extend({
+  states: { get() { return State.findAll({}); } }, ...});
+
+export default Component.extend({
+  tag: &#39;app-restaurant-list&#39;,
+  viewModel: ViewModel,
+  template,
+  events: {
+    inserted: function(){
+      var statesPromise = this.attr(&quot;states&quot;);
+      this.scope.attr(&quot;@root&quot;).pageData( statesPromise );
+    }
+  }
+});</code></pre>
+</section>
+  </div>
+  <div class="slide hidden" id="slide-14">
+    <section class="slide-content"><h2 id="server-side-rendering-techniques">Server Side Rendering Techniques</h2>
+<table>
+<thead>
+<tr>
+<th>Technique</th>
+<th style="text-align:center">Maintainability</th>
+<th style="text-align:right">Speed</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Duplicate Code</td>
+<td style="text-align:center">0</td>
+<td style="text-align:right">10</td>
+</tr>
+<tr>
+<td>Headless Browser</td>
+<td style="text-align:center">9</td>
+<td style="text-align:right">5</td>
+</tr>
+<tr>
+<td>Virtual DOM</td>
+<td style="text-align:center">8</td>
+<td style="text-align:right">8</td>
+</tr>
+</tbody>
+</table>
+</section>
+  </div>
+  <div class="slide hidden" id="slide-15">
+    <section class="slide-content"><h1 id="production-workflows">Production Workflows</h1>
+</section>
+  </div>
+  <div class="slide hidden" id="slide-16">
+    <section class="slide-content"><h2 id="build-for-any-environment">Build for any Environment</h2>
+<ul>
+<li>The Web</li>
+<li>iOS and Android (Cordova)</li>
+<li>Desktop (NW.js)</li>
+</ul>
+</section>
+  </div>
+  <div class="slide hidden" id="slide-17">
+    <section class="slide-content"><h2 id="steal-tools">Steal Tools</h2>
 </section>
   </div>
 
