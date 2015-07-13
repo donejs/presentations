@@ -574,7 +574,10 @@ pre {
 }
 
 img[alt=modlet-before],
-img[alt=modlet-after] {
+img[alt=modlet-after],
+img[alt=lr-one],
+img[alt=lr-two],
+img[alt=lr-three] {
   width: 80%;
 }
 
@@ -658,56 +661,56 @@ img[alt=modlet-after] {
   <div class="slide hidden" id="slide-11">
     <section class="slide-content"><h3 id="connected-lifecycle">Connected Lifecycle</h3>
 <pre><code>curl http://place-my-order.com/restaurants/cow-barn/order</code></pre>
-<pre><code>&lt;html&gt;
-&lt;head&gt;
-  &lt;link rel=&quot;stylesheet&quot; href=&quot;/dist/bundles/pmo/index.css&quot;&gt;
-  &lt;link rel=&quot;stylesheet&quot; href=&quot;/dist/bundles/pmo/order/new/new.css&quot;&gt;
-&lt;/head&gt;
-&lt;body&gt;
+<pre><code class="lang-javascript">&lt;html&gt;
+<span class="xml"><span class="tag">&lt;<span class="title">head</span>&gt;</span>
+  <span class="tag">&lt;<span class="title">link</span> <span class="attribute">rel</span>=<span class="value">"stylesheet"</span> <span class="attribute">href</span>=<span class="value">"/dist/bundles/pmo/index.css"</span>&gt;</span>
+  <span class="tag">&lt;<span class="title">link</span> <span class="attribute">rel</span>=<span class="value">"stylesheet"</span> <span class="attribute">href</span>=<span class="value">"/dist/bundles/pmo/order/new/new.css"</span>&gt;</span>
+<span class="tag">&lt;/<span class="title">head</span>&gt;</span>
+<span class="tag">&lt;<span class="title">body</span>&gt;</span>
   ...
 
-  &lt;script&gt;
-    INLINE_CACHE = {&quot;restaurant&quot;:{&quot;{...&quot;}}}
-  &lt;/script&gt;
-&lt;/body&gt;
-&lt;/html&gt;</code></pre>
+  <span class="tag">&lt;<span class="title">script</span>&gt;</span><span class="javascript">
+    INLINE_CACHE = {<span class="string">"restaurant"</span>:{<span class="string">"{..."</span>}}}
+  </span><span class="tag">&lt;/<span class="title">script</span>&gt;</span>
+<span class="tag">&lt;/<span class="title">body</span>&gt;</span>
+<span class="tag">&lt;/<span class="title">html</span>&gt;</span></span></code></pre>
 </section>
   </div>
   <div class="slide hidden" id="slide-12">
     <section class="slide-content"><h3 id="lib-app-js">lib/app.js</h3>
-<pre><code>var app = require(&quot;express&quot;)();
-var url = require(&quot;url&quot;);
+<pre><code class="lang-javascript"><span class="keyword">var</span> app = require(<span class="string">"express"</span>)();
+<span class="keyword">var</span> url = require(<span class="string">"url"</span>);
 
-var render = require(&quot;can-ssr&quot;)({
-  config: __dirname + &quot;/package.json!npm&quot;
+<span class="keyword">var</span> render = require(<span class="string">"can-ssr"</span>)({
+  config: __dirname + <span class="string">"/package.json!npm"</span>
 });
 
-app.get(&quot;/&quot;), function(req, res){
+app.get(<span class="string">"/"</span>), <span class="keyword">function</span>(req, res){
 
-  var pathname = url.parse(req.url).pathname;
+  <span class="keyword">var</span> pathname = url.parse(req.url).pathname;
 
-  render(pathname).then(function(html){
+  render(pathname).then(<span class="keyword">function</span>(html){
     res.send(html);
   });
 
 });
 
-app.listen(7000);</code></pre>
+app.listen(<span class="number">7000</span>);</code></pre>
 </section>
   </div>
   <div class="slide hidden" id="slide-13">
     <section class="slide-content"><h3 id="pmo-restaurant-list-js">pmo/restaurant/list.js</h3>
-<pre><code>export const ViewModel = Map.extend({
-  states: { get() { return State.findAll({}); } }, ...});
+<pre><code class="lang-javascript">export <span class="keyword">const</span> ViewModel = Map.extend({
+  states: { get() { <span class="keyword">return</span> State.findAll({}); } }, ...});
 
-export default Component.extend({
-  tag: &#39;app-restaurant-list&#39;,
+export <span class="keyword">default</span> Component.extend({
+  tag: <span class="string">'app-restaurant-list'</span>,
   viewModel: ViewModel,
   template,
   events: {
-    inserted: function(){
-      var statesPromise = this.attr(&quot;states&quot;);
-      this.scope.attr(&quot;@root&quot;).pageData( statesPromise );
+    inserted: <span class="keyword">function</span>(){
+      <span class="keyword">var</span> statesPromise = <span class="keyword">this</span>.attr(<span class="string">"states"</span>);
+      <span class="keyword">this</span>.scope.attr(<span class="string">"@root"</span>).pageData( statesPromise );
     }
   }
 });</code></pre>
@@ -744,10 +747,18 @@ export default Component.extend({
 </section>
   </div>
   <div class="slide hidden" id="slide-15">
-    <section class="slide-content"><h1 id="components">Components</h1>
+    <section class="slide-content"><h2 id="can-serve">can-serve</h2>
+<ul>
+<li>A simple web server with proxying and server side rendering built in.</li>
+</ul>
+<pre><code>can-serve --proxy http://localhost:7070 --port 8080</code></pre>
 </section>
   </div>
   <div class="slide hidden" id="slide-16">
+    <section class="slide-content"><h1 id="components">Components</h1>
+</section>
+  </div>
+  <div class="slide hidden" id="slide-17">
     <section class="slide-content"><h2 id="benefits">Benefits</h2>
 <ul>
 <li>Declaratively write your application.</li>
@@ -759,38 +770,74 @@ export default Component.extend({
 </ul>
 </section>
   </div>
-  <div class="slide hidden" id="slide-17">
+  <div class="slide hidden" id="slide-18">
     <section class="slide-content"><h2 id="done-component">done-component</h2>
 <p>A StealJS plugin that allows composing CanJS Components in a single file:</p>
 <h3 id="hello-component">hello.component</h3>
-<pre><code>&lt;can-component tag=&quot;hello-greeting&quot;&gt;
-  &lt;template&gt;
-    &lt;h1&gt;Hello {{name}}!&lt;/h1&gt;
-  &lt;/template&gt;
-  &lt;view-model&gt;
-    import Map from &quot;can/map/&quot;;
+<pre><code class="lang-javascript">&lt;can-component tag=<span class="string">"hello-greeting"</span>&gt;
+  <span class="xml"><span class="tag">&lt;<span class="title">template</span>&gt;</span>
+    <span class="tag">&lt;<span class="title">h1</span>&gt;</span>Hello {{name}}!<span class="tag">&lt;/<span class="title">h1</span>&gt;</span>
+  <span class="tag">&lt;/<span class="title">template</span>&gt;</span>
+  <span class="tag">&lt;<span class="title">view-model</span>&gt;</span>
+    import Map from "can/map/";
 
     export default Map.extend({
-      name: &quot;&quot;
+      name: ""
     });
-  &lt;/view-model&gt;
-&lt;/can-component&gt;</code></pre>
+  <span class="tag">&lt;/<span class="title">view-model</span>&gt;</span>
+<span class="tag">&lt;/<span class="title">can-component</span>&gt;</span></span></code></pre>
 </section>
   </div>
-  <div class="slide hidden" id="slide-18">
+  <div class="slide hidden" id="slide-19">
     <section class="slide-content"><h3 id="output">Output</h3>
 <pre><code class="lang-javascript">&lt;hello-greeting name=<span class="string">"world"</span>&gt;
 
   <span class="xml"><span class="tag">&lt;<span class="title">h1</span>&gt;</span>Hello world!<span class="tag">&lt;/<span class="title">h1</span>&gt;</span>
 
-<span class="tag">&lt;<span class="title">hello-greeting</span>&gt;</span></span></code></pre>
-</section>
-  </div>
-  <div class="slide hidden" id="slide-19">
-    <section class="slide-content"><h1 id="production-workflows">Production Workflows</h1>
+<span class="tag">&lt;/<span class="title">hello-greeting</span>&gt;</span></span></code></pre>
 </section>
   </div>
   <div class="slide hidden" id="slide-20">
+    <section class="slide-content"><h1 id="live-reload">Live Reload</h1>
+<h2 id="aka-hot-module-swapping">aka Hot Module Swapping</h2>
+</section>
+  </div>
+  <div class="slide hidden" id="slide-21">
+    <section class="slide-content"><ul>
+<li>Watch your app react to changes you make to modules as you edit the code.</li>
+<li>The window never reloads, only the modules you change.</li>
+</ul>
+</section>
+  </div>
+  <div class="slide hidden" id="slide-22">
+    <section class="slide-content"><h2 id="benefits">Benefits</h2>
+<ul>
+<li>0.1 second – users feel like their actions are directly causing something to happen on the screen.</li>
+<li>1 second - users notice the short delay, but they stay focused on their current train of thought.</li>
+</ul>
+</section>
+  </div>
+  <div class="slide hidden" id="slide-23">
+    <section class="slide-content"><p><img src="img/live-reload/lr-1.png" alt="lr-one"></p>
+</section>
+  </div>
+  <div class="slide hidden" id="slide-24">
+    <section class="slide-content"><p><img src="img/live-reload/lr-2.png" alt="lr-two"></p>
+</section>
+  </div>
+  <div class="slide hidden" id="slide-25">
+    <section class="slide-content"><p><img src="img/live-reload/lr-3.png" alt="lr-three"></p>
+</section>
+  </div>
+  <div class="slide hidden" id="slide-26">
+    <section class="slide-content"><p>Show files reloading in the network tab.</p>
+</section>
+  </div>
+  <div class="slide hidden" id="slide-27">
+    <section class="slide-content"><h1 id="production-workflows">Production Workflows</h1>
+</section>
+  </div>
+  <div class="slide hidden" id="slide-28">
     <section class="slide-content"><h2 id="build-for-any-environment">Build for any Environment</h2>
 <ul>
 <li>The Web</li>
@@ -799,7 +846,7 @@ export default Component.extend({
 </ul>
 </section>
   </div>
-  <div class="slide hidden" id="slide-21">
+  <div class="slide hidden" id="slide-29">
     <section class="slide-content"><h2 id="steal-tools">Steal Tools</h2>
 <ul>
 <li>Creates optimized bundles for:<ul>
@@ -810,7 +857,7 @@ export default Component.extend({
 </ul>
 </section>
   </div>
-  <div class="slide hidden" id="slide-22">
+  <div class="slide hidden" id="slide-30">
     <section class="slide-content"><h3 id="steal-cordova-and-steal-nw">steal-cordova and steal-nw</h3>
 <pre><code class="lang-javascript"><span class="keyword">var</span> stealTools = require(<span class="string">"steal-tools"</span>);
 

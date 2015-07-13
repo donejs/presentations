@@ -85,7 +85,7 @@ Getting rid of the loading indicator.
 curl http://place-my-order.com/restaurants/cow-barn/order
 ```
 
-```
+```javascript
 <html>
 <head>
   <link rel="stylesheet" href="/dist/bundles/pmo/index.css">
@@ -105,7 +105,7 @@ curl http://place-my-order.com/restaurants/cow-barn/order
 
 ### lib/app.js
 
-```
+```javascript
 var app = require("express")();
 var url = require("url");
 
@@ -130,7 +130,7 @@ app.listen(7000);
 
 ### pmo/restaurant/list.js
 
-```
+```javascript
 export const ViewModel = Map.extend({
   states: { get() { return State.findAll({}); } }, ...});
   
@@ -159,6 +159,16 @@ export default Component.extend({
 
 --
 
+## can-serve
+
+* A simple web server with proxying and server side rendering built in.
+
+```
+can-serve --proxy http://localhost:7070 --port 8080
+```
+
+--
+
 # Components
 
 --
@@ -180,7 +190,7 @@ A StealJS plugin that allows composing CanJS Components in a single file:
 
 ### hello.component
 
-```
+```javascript
 <can-component tag="hello-greeting">
   <template>
     <h1>Hello {{name}}!</h1>
@@ -204,8 +214,41 @@ A StealJS plugin that allows composing CanJS Components in a single file:
 
   <h1>Hello world!</h1>
 
-<hello-greeting>
+</hello-greeting>
 ```
+
+--
+
+# Live Reload
+## aka Hot Module Swapping
+
+--
+
+* Watch your app react to changes you make to modules as you edit the code.
+* The window never reloads, only the modules you change.
+
+--
+
+## Benefits
+
+* 0.1 second – users feel like their actions are directly causing something to happen on the screen.
+* 1 second - users notice the short delay, but they stay focused on their current train of thought.
+
+--
+
+![lr-one](img/live-reload/lr-1.png)
+
+--
+
+![lr-two](img/live-reload/lr-2.png)
+
+--
+
+![lr-three](img/live-reload/lr-3.png)
+
+--
+
+Show files reloading in the network tab.
 
 --
 
