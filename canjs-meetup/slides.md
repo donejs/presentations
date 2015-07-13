@@ -3,6 +3,7 @@ output: index.html
 theme: theme
 controls: false
 logo: theme/logo.png
+style: style.css
 
 --
 
@@ -25,6 +26,33 @@ logo: theme/logo.png
 
 * [<i class="fa fa-github"></i> daffl](https://github.com/daffl)
 * [<i class="fa fa-twitter"></i> @daffl](http://twitter.com/daffl)
+
+--
+
+# Modlet Workflow
+
+![modlets](img/modlet.png)
+
+--
+
+## Before
+
+![modlet-before](img/modlet/before.png)
+
+--
+
+## After
+
+![modlet-after](img/modlet/after.png)
+
+--
+
+## Benefits
+
+* Easier to identify missing tests or documentation.
+* More likely to update tests and documentation.
+* Good API design.
+* Easier to develop in isolation.
 
 --
 

@@ -573,6 +573,11 @@ pre {
   margin-left: 2em;
 }
 
+img[alt=modlet-before],
+img[alt=modlet-after] {
+  width: 80%;
+}
+
   </style>
 </head>
 <body>
@@ -603,11 +608,36 @@ pre {
 </section>
   </div>
   <div class="slide hidden" id="slide-4">
+    <section class="slide-content"><h1 id="modlet-workflow">Modlet Workflow</h1>
+<p><img src="img/modlet.png" alt="modlets"></p>
+</section>
+  </div>
+  <div class="slide hidden" id="slide-5">
+    <section class="slide-content"><h2 id="before">Before</h2>
+<p><img src="img/modlet/before.png" alt="modlet-before"></p>
+</section>
+  </div>
+  <div class="slide hidden" id="slide-6">
+    <section class="slide-content"><h2 id="after">After</h2>
+<p><img src="img/modlet/after.png" alt="modlet-after"></p>
+</section>
+  </div>
+  <div class="slide hidden" id="slide-7">
+    <section class="slide-content"><h2 id="benefits">Benefits</h2>
+<ul>
+<li>Easier to identify missing tests or documentation.</li>
+<li>More likely to update tests and documentation.</li>
+<li>Good API design.</li>
+<li>Easier to develop in isolation.</li>
+</ul>
+</section>
+  </div>
+  <div class="slide hidden" id="slide-8">
     <section class="slide-content"><h1 id="server-side-rendering">Server Side Rendering</h1>
 <p>Getting rid of the loading indicator.</p>
 </section>
   </div>
-  <div class="slide hidden" id="slide-5">
+  <div class="slide hidden" id="slide-9">
     <section class="slide-content"><h2 id="benefits">Benefits</h2>
 <ul>
 <li>SEO</li>
@@ -615,7 +645,7 @@ pre {
 </ul>
 </section>
   </div>
-  <div class="slide hidden" id="slide-6">
+  <div class="slide hidden" id="slide-10">
     <section class="slide-content"><h2 id="implementation">Implementation</h2>
 <h3 id="single-context-virtual-dom">Single Context Virtual DOM</h3>
 <ul>
@@ -625,7 +655,7 @@ pre {
 </ul>
 </section>
   </div>
-  <div class="slide hidden" id="slide-7">
+  <div class="slide hidden" id="slide-11">
     <section class="slide-content"><h3 id="connected-lifecycle">Connected Lifecycle</h3>
 <pre><code>curl http://place-my-order.com/restaurants/cow-barn/order</code></pre>
 <pre><code>&lt;html&gt;
@@ -643,7 +673,7 @@ pre {
 &lt;/html&gt;</code></pre>
 </section>
   </div>
-  <div class="slide hidden" id="slide-8">
+  <div class="slide hidden" id="slide-12">
     <section class="slide-content"><h3 id="lib-app-js">lib/app.js</h3>
 <pre><code>var app = require(&quot;express&quot;)();
 var url = require(&quot;url&quot;);
@@ -665,7 +695,7 @@ app.get(&quot;/&quot;), function(req, res){
 app.listen(7000);</code></pre>
 </section>
   </div>
-  <div class="slide hidden" id="slide-9">
+  <div class="slide hidden" id="slide-13">
     <section class="slide-content"><h3 id="pmo-restaurant-list-js">pmo/restaurant/list.js</h3>
 <pre><code>export const ViewModel = Map.extend({
   states: { get() { return State.findAll({}); } }, ...});
@@ -683,7 +713,7 @@ export default Component.extend({
 });</code></pre>
 </section>
   </div>
-  <div class="slide hidden" id="slide-10">
+  <div class="slide hidden" id="slide-14">
     <section class="slide-content"><h2 id="server-side-rendering-techniques">Server Side Rendering Techniques</h2>
 <table>
 <thead>
@@ -713,11 +743,11 @@ export default Component.extend({
 </table>
 </section>
   </div>
-  <div class="slide hidden" id="slide-11">
+  <div class="slide hidden" id="slide-15">
     <section class="slide-content"><h1 id="components">Components</h1>
 </section>
   </div>
-  <div class="slide hidden" id="slide-12">
+  <div class="slide hidden" id="slide-16">
     <section class="slide-content"><h2 id="benefits">Benefits</h2>
 <ul>
 <li>Declaratively write your application.</li>
@@ -729,7 +759,7 @@ export default Component.extend({
 </ul>
 </section>
   </div>
-  <div class="slide hidden" id="slide-13">
+  <div class="slide hidden" id="slide-17">
     <section class="slide-content"><h2 id="done-component">done-component</h2>
 <p>A StealJS plugin that allows composing CanJS Components in a single file:</p>
 <h3 id="hello-component">hello.component</h3>
@@ -747,7 +777,7 @@ export default Component.extend({
 &lt;/can-component&gt;</code></pre>
 </section>
   </div>
-  <div class="slide hidden" id="slide-14">
+  <div class="slide hidden" id="slide-18">
     <section class="slide-content"><h3 id="output">Output</h3>
 <pre><code class="lang-javascript">&lt;hello-greeting name=<span class="string">"world"</span>&gt;
 
@@ -756,11 +786,11 @@ export default Component.extend({
 <span class="tag">&lt;<span class="title">hello-greeting</span>&gt;</span></span></code></pre>
 </section>
   </div>
-  <div class="slide hidden" id="slide-15">
+  <div class="slide hidden" id="slide-19">
     <section class="slide-content"><h1 id="production-workflows">Production Workflows</h1>
 </section>
   </div>
-  <div class="slide hidden" id="slide-16">
+  <div class="slide hidden" id="slide-20">
     <section class="slide-content"><h2 id="build-for-any-environment">Build for any Environment</h2>
 <ul>
 <li>The Web</li>
@@ -769,7 +799,7 @@ export default Component.extend({
 </ul>
 </section>
   </div>
-  <div class="slide hidden" id="slide-17">
+  <div class="slide hidden" id="slide-21">
     <section class="slide-content"><h2 id="steal-tools">Steal Tools</h2>
 <ul>
 <li>Creates optimized bundles for:<ul>
@@ -780,7 +810,7 @@ export default Component.extend({
 </ul>
 </section>
   </div>
-  <div class="slide hidden" id="slide-18">
+  <div class="slide hidden" id="slide-22">
     <section class="slide-content"><h3 id="steal-cordova-and-steal-nw">steal-cordova and steal-nw</h3>
 <pre><code class="lang-javascript"><span class="keyword">var</span> stealTools = require(<span class="string">"steal-tools"</span>);
 
