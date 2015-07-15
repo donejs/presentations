@@ -463,7 +463,62 @@ console.log(template(vm));
 
 --
 
-# Using other projects
+# Sharing projects
+
+--
+
+## Benefits
+
+* Already using the modlet workflow.
+* Can share components throughout the company.
+* Useable in any module loader.
+
+--
+
+## bit-tabs
+
+* A simple tabs component.
+* Exports to CommonJS, AMD, and standalone.
+* Useable with Browserify, WebPack, RequireJS, StealJS.
+
+--
+
+```javascript
+var stealTools = require("steal-tools");
+
+stealTools.export({
+  system: {
+    config: __dirname + "/package.json!npm"
+  },
+  outputs: {
+    "+cjs": {},
+    "+amd": {},
+    "+global-js": {},
+    "+global-css": {}
+  }
+});
+```
+
+--
+
+## Using bit-tabs
+
+```
+npm install bit-tabs --save
+```
+
+```javascript
+<can-import from="bit-tabs"/>
+
+<bit-tabs>
+  <bit-panel title="CanJS">
+    CanJS provides the MV*
+  </bit-panel>
+  <bit-panel title="StealJS">
+    StealJS provides the infrastructure.
+  </bit-panel>
+</bit-tabs>
+```
 
 --
 

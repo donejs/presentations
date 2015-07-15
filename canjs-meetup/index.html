@@ -1014,14 +1014,63 @@ console.log(template(vm));</code></pre>
 </section>
   </div>
   <div class="slide hidden" id="slide-40">
-    <section class="slide-content"><h1 id="using-other-projects">Using other projects</h1>
+    <section class="slide-content"><h1 id="sharing-projects">Sharing projects</h1>
 </section>
   </div>
   <div class="slide hidden" id="slide-41">
-    <section class="slide-content"><h1 id="routing">Routing</h1>
+    <section class="slide-content"><h2 id="benefits">Benefits</h2>
+<ul>
+<li>Already using the modlet workflow.</li>
+<li>Can share components throughout the company.</li>
+<li>Useable in any module loader.</li>
+</ul>
 </section>
   </div>
   <div class="slide hidden" id="slide-42">
+    <section class="slide-content"><h2 id="bit-tabs">bit-tabs</h2>
+<ul>
+<li>A simple tabs component.</li>
+<li>Exports to CommonJS, AMD, and standalone.</li>
+<li>Useable with Browserify, WebPack, RequireJS, StealJS.</li>
+</ul>
+</section>
+  </div>
+  <div class="slide hidden" id="slide-43">
+    <section class="slide-content"><pre><code class="lang-javascript"><span class="keyword">var</span> stealTools = require(<span class="string">"steal-tools"</span>);
+
+stealTools.export({
+  system: {
+    config: __dirname + <span class="string">"/package.json!npm"</span>
+  },
+  outputs: {
+    <span class="string">"+cjs"</span>: {},
+    <span class="string">"+amd"</span>: {},
+    <span class="string">"+global-js"</span>: {},
+    <span class="string">"+global-css"</span>: {}
+  }
+});</code></pre>
+</section>
+  </div>
+  <div class="slide hidden" id="slide-44">
+    <section class="slide-content"><h2 id="using-bit-tabs">Using bit-tabs</h2>
+<pre><code>npm install bit-tabs --save</code></pre>
+<pre><code class="lang-javascript">&lt;can-import from=<span class="string">"bit-tabs"</span>/&gt;
+
+<span class="xml"><span class="tag">&lt;<span class="title">bit-tabs</span>&gt;</span>
+  <span class="tag">&lt;<span class="title">bit-panel</span> <span class="attribute">title</span>=<span class="value">"CanJS"</span>&gt;</span>
+    CanJS provides the MV*
+  <span class="tag">&lt;/<span class="title">bit-panel</span>&gt;</span>
+  <span class="tag">&lt;<span class="title">bit-panel</span> <span class="attribute">title</span>=<span class="value">"StealJS"</span>&gt;</span>
+    StealJS provides the infrastructure.
+  <span class="tag">&lt;/<span class="title">bit-panel</span>&gt;</span>
+<span class="tag">&lt;/<span class="title">bit-tabs</span>&gt;</span></span></code></pre>
+</section>
+  </div>
+  <div class="slide hidden" id="slide-45">
+    <section class="slide-content"><h1 id="routing">Routing</h1>
+</section>
+  </div>
+  <div class="slide hidden" id="slide-46">
     <section class="slide-content"><h2 id="two-way-routing">Two way routing</h2>
 <p>Update <code>pmo/app.js</code> to:</p>
 <pre><code class="lang-javascript"><span class="comment">// pmo/app.js</span>
@@ -1039,7 +1088,7 @@ route(<span class="string">':page/:slug/:action'</span>, { slug: <span class="li
 export <span class="keyword">default</span> AppState;</code></pre>
 </section>
   </div>
-  <div class="slide hidden" id="slide-43">
+  <div class="slide hidden" id="slide-47">
     <section class="slide-content"><h2 id="routes-vs-application-state">Routes vs. application state</h2>
 <pre><code class="lang-javascript">route.deparam(<span class="string">'/home'</span>)
 <span class="comment">// -&gt; { page: 'home' }</span>
@@ -1058,7 +1107,7 @@ route.attr({
 <span class="comment">// -&gt; /restaurants?state=IL&amp;city=Chicago</span></code></pre>
 </section>
   </div>
-  <div class="slide hidden" id="slide-44">
+  <div class="slide hidden" id="slide-48">
     <section class="slide-content"><h2 id="routing-in-templates">Routing in templates</h2>
 <pre><code class="lang-javascript">{{#eq page <span class="string">"home"</span>}}
   &lt;pmo-home&gt;<span class="xml"><span class="tag">&lt;/<span class="title">pmo-home</span>&gt;</span>
@@ -1070,7 +1119,7 @@ route.attr({
 {{/eq}}</span></code></pre>
 </section>
   </div>
-  <div class="slide hidden" id="slide-45">
+  <div class="slide hidden" id="slide-49">
     <section class="slide-content"><h2 id="nested-routes">Nested routes</h2>
 <pre><code class="lang-javascript">route(<span class="string">':page/:slug'</span>, { slug: <span class="literal">null</span> });
 route(<span class="string">':page/:slug/:action'</span>, { slug: <span class="literal">null</span>, action: <span class="literal">null</span> });</code></pre>
@@ -1092,7 +1141,7 @@ route(<span class="string">':page/:slug/:action'</span>, { slug: <span class="li
 {{/eq}}</span></code></pre>
 </section>
   </div>
-  <div class="slide hidden" id="slide-46">
+  <div class="slide hidden" id="slide-50">
     <section class="slide-content"><h2 id="-can-href-"><code>can-href</code></h2>
 <pre><code class="lang-javascript">&lt;div class=<span class="string">"restaurant"</span>&gt;
   <span class="xml"><span class="tag">&lt;<span class="title">img</span> <span class="attribute">src</span>=<span class="value">"/{{images.thumbnail}}"</span> <span class="attribute">width</span>=<span class="value">"100"</span> <span class="attribute">height</span>=<span class="value">"100"</span>&gt;</span>
@@ -1105,7 +1154,7 @@ route(<span class="string">':page/:slug/:action'</span>, { slug: <span class="li
 <p><code>href</code> will become <code>/restaurants/restaurants/&lt;restaurant-slug&gt;</code>.</p>
 </section>
   </div>
-  <div class="slide hidden" id="slide-47">
+  <div class="slide hidden" id="slide-51">
     <section class="slide-content"><h2 id="benefits">Benefits</h2>
 <ul>
 <li>Keep routing rules separate from application logic.</li>
@@ -1114,11 +1163,11 @@ route(<span class="string">':page/:slug/:action'</span>, { slug: <span class="li
 </ul>
 </section>
   </div>
-  <div class="slide hidden" id="slide-48">
+  <div class="slide hidden" id="slide-52">
     <section class="slide-content"><h1 id="super-models">Super Models</h1>
 </section>
   </div>
-  <div class="slide hidden" id="slide-49">
+  <div class="slide hidden" id="slide-53">
     <section class="slide-content"><h2 id="can-connect">can-connect</h2>
 <p>Middleware for persisting data that can:</p>
 <ul>
@@ -1131,7 +1180,7 @@ route(<span class="string">':page/:slug/:action'</span>, { slug: <span class="li
 </ul>
 </section>
   </div>
-  <div class="slide hidden" id="slide-50">
+  <div class="slide hidden" id="slide-54">
     <section class="slide-content"><h2 id="load-data-in-stache-templates">Load data in Stache templates</h2>
 <pre><code class="lang-javascript">&lt;can-import from=<span class="string">"pmo/models/restaurant"</span> /&gt;
 <span class="xml"><span class="tag">&lt;<span class="title">restaurant-model</span> <span class="attribute">get-list</span>=<span class="value">"{ state=state city=city }"</span>&gt;</span>
@@ -1151,21 +1200,21 @@ route(<span class="string">':page/:slug/:action'</span>, { slug: <span class="li
 <span class="tag">&lt;/<span class="title">restaurant-model</span>&gt;</span></span></code></pre>
 </section>
   </div>
-  <div class="slide hidden  centered" id="slide-51">
+  <div class="slide hidden  centered" id="slide-55">
     <section class="slide-content"><h2 id="inline-cache">Inline cache</h2>
 <p><img src="img/inline-cache.png" alt="Inline Cache"></p>
 </section>
   </div>
-  <div class="slide hidden  centered" id="slide-52">
+  <div class="slide hidden  centered" id="slide-56">
     <section class="slide-content"><h2 id="combined-request-and-fall-through-cache">Combined request and fall-through cache</h2>
 <p><img src="img/fall-through.png" alt="Fall-through Cache"></p>
 </section>
   </div>
-  <div class="slide hidden" id="slide-53">
+  <div class="slide hidden" id="slide-57">
     <section class="slide-content"><h1 id="testing">Testing</h1>
 </section>
   </div>
-  <div class="slide hidden" id="slide-54">
+  <div class="slide hidden" id="slide-58">
     <section class="slide-content"><h2 id="a-simple-qunit-test">A simple QUnit test</h2>
 <p><code>pmo/test.js</code>:</p>
 <pre><code class="lang-javascript">import QUnit from <span class="string">'steal-qunit'</span>;
@@ -1181,7 +1230,7 @@ QUnit.test(<span class="string">'basics'</span>, <span class="keyword">function<
 &lt;div id="qunit-fixture"&gt;&lt;/div&gt;</code></pre>
 </section>
   </div>
-  <div class="slide hidden" id="slide-55">
+  <div class="slide hidden" id="slide-59">
     <section class="slide-content"><h2 id="automating-tests">Automating tests</h2>
 <p>Install a command line test runner:</p>
 <pre><code>npm install testee --save-dev</code></pre>
@@ -1192,7 +1241,7 @@ QUnit.test(<span class="string">'basics'</span>, <span class="keyword">function<
 <pre><code>npm test</code></pre>
 </section>
   </div>
-  <div class="slide hidden" id="slide-56">
+  <div class="slide hidden" id="slide-60">
     <section class="slide-content"><h2 id="testing-components">Testing components</h2>
 <pre><code class="lang-javascript">&lt;can-component tag=<span class="string">"pmo-counter"</span>&gt;
   <span class="xml"><span class="tag">&lt;<span class="title">template</span>&gt;</span>
@@ -1213,7 +1262,7 @@ QUnit.test(<span class="string">'basics'</span>, <span class="keyword">function<
 <span class="tag">&lt;/<span class="title">can-component</span>&gt;</span></span></code></pre>
 </section>
   </div>
-  <div class="slide hidden" id="slide-57">
+  <div class="slide hidden" id="slide-61">
     <section class="slide-content"><h2 id="functional-unit-tests">Functional unit-tests</h2>
 <pre><code class="lang-javascript">import QUnit from <span class="string">'steal-qunit'</span>;
 import F from <span class="string">'funcunit'</span>;
@@ -1235,11 +1284,11 @@ QUnit.test('Increments count', function(){
 });</span></code></pre>
 </section>
   </div>
-  <div class="slide hidden" id="slide-58">
+  <div class="slide hidden" id="slide-62">
     <section class="slide-content"><h1 id="production-workflows">Production Workflows</h1>
 </section>
   </div>
-  <div class="slide hidden" id="slide-59">
+  <div class="slide hidden" id="slide-63">
     <section class="slide-content"><h2 id="build-for-any-environment">Build for any Environment</h2>
 <ul>
 <li>The Web</li>
@@ -1248,7 +1297,7 @@ QUnit.test('Increments count', function(){
 </ul>
 </section>
   </div>
-  <div class="slide hidden" id="slide-60">
+  <div class="slide hidden" id="slide-64">
     <section class="slide-content"><h2 id="steal-tools">Steal Tools</h2>
 <ul>
 <li>Creates optimized bundles for:<ul>
@@ -1259,7 +1308,7 @@ QUnit.test('Increments count', function(){
 </ul>
 </section>
   </div>
-  <div class="slide hidden" id="slide-61">
+  <div class="slide hidden" id="slide-65">
     <section class="slide-content"><h3 id="steal-cordova-and-steal-nw">steal-cordova and steal-nw</h3>
 <pre><code class="lang-javascript"><span class="keyword">var</span> stealTools = require(<span class="string">"steal-tools"</span>);
 
