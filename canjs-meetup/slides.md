@@ -174,33 +174,6 @@ Then start the application at [localhost:8080](http://localhost:8080)
 npm start
 ```
 
--- centered
-
-# Modlet Workflow
-
-![modlets](img/modlet.png)
-
--- centered
-
-## Before
-
-![modlet-before](img/modlet/before.png)
-
--- centered
-
-## After
-
-![modlet-after](img/modlet/after.png)
-
---
-
-## Benefits
-
-* Easier to identify missing tests or documentation.
-* More likely to update tests and documentation.
-* Good API design.
-* Easier to develop in isolation.
-
 --
 
 # Server Side Rendering
@@ -313,6 +286,37 @@ export default Component.extend({
 ```
 can-serve --proxy http://localhost:7070 --port 8080
 ```
+
+-- 
+
+# Workflows
+
+-- centered
+
+# Modlet Workflow
+
+![modlets](img/modlet.png)
+
+-- centered
+
+## Before
+
+![modlet-before](img/modlet/before.png)
+
+-- centered
+
+## After
+
+![modlet-after](img/modlet/after.png)
+
+--
+
+## Benefits
+
+* Easier to identify missing tests or documentation.
+* More likely to update tests and documentation.
+* Good API design.
+* Easier to develop in isolation.
 
 --
 
