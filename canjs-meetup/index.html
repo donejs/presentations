@@ -636,15 +636,12 @@ img[alt=lr-three] {
 <li>Testee or Karma - Test runner</li>
 <li><a href="http://documentjs.com">DocumentJS</a> - Documentation</li>
 <li><a href="http://github.com/canjs/ssr">can-ssr</a> - Server-Side Rendering Utilities for CanJS</li>
+<li><a href="https://github.com/canjs/can-connect">can-connect</a> - Assemble real-time, high performance, restful data connections.</li>
 </ul>
 </section>
   </div>
   <div class="slide hidden" id="slide-7">
-    <section class="slide-content"><h1 id="features">Features</h1>
-</section>
-  </div>
-  <div class="slide hidden" id="slide-8">
-    <section class="slide-content"><h2 id="application">Application</h2>
+    <section class="slide-content"><h2 id="application-features">Application features</h2>
 <ul>
 <li>Universal (same code on server and client)</li>
 <li>Pushstate routing</li>
@@ -653,8 +650,8 @@ img[alt=lr-three] {
 </ul>
 </section>
   </div>
-  <div class="slide hidden" id="slide-9">
-    <section class="slide-content"><h2 id="performance">Performance</h2>
+  <div class="slide hidden" id="slide-8">
+    <section class="slide-content"><h2 id="performance-features">Performance features</h2>
 <ul>
 <li>Progressive loaded optimized production builds</li>
 <li>Caching and minimal data requests</li>
@@ -663,8 +660,8 @@ img[alt=lr-three] {
 </ul>
 </section>
   </div>
-  <div class="slide hidden" id="slide-10">
-    <section class="slide-content"><h2 id="maintenance">Maintenance</h2>
+  <div class="slide hidden" id="slide-9">
+    <section class="slide-content"><h2 id="maintenance-features">Maintenance features</h2>
 <ul>
 <li>Modlet workflow - tests, docs, and demo pages</li>
 <li>Use and create NPM packages</li>
@@ -676,11 +673,12 @@ img[alt=lr-three] {
 </ul>
 </section>
   </div>
-  <div class="slide hidden" id="slide-11">
+  <div class="slide hidden  centered" id="slide-10">
     <section class="slide-content"><h2 id="-place-my-order-com-http-place-my-order-com-"><a href="http://place-my-order.com">place-my-order.com</a></h2>
+<p><img src="img/place-my-order.png" alt="place-my-order.com"></p>
 </section>
   </div>
-  <div class="slide hidden" id="slide-12">
+  <div class="slide hidden" id="slide-11">
     <section class="slide-content"><h2 id="getting-started">Getting started</h2>
 <p>Create an application folder:</p>
 <pre><code>mkdir place-my-order
@@ -693,7 +691,7 @@ cd place-my-order</code></pre>
 <pre><code>npm install place-my-order-assets place-my-order-api --save</code></pre>
 </section>
   </div>
-  <div class="slide hidden" id="slide-13">
+  <div class="slide hidden" id="slide-12">
     <section class="slide-content"><h2 id="-pmo-index-stache-"><code>pmo/index.stache</code></h2>
 <pre><code class="lang-javascript">&lt;html&gt;
   <span class="xml"><span class="tag">&lt;<span class="title">head</span>&gt;</span>
@@ -716,7 +714,7 @@ cd place-my-order</code></pre>
 <span class="tag">&lt;/<span class="title">html</span>&gt;</span></span></code></pre>
 </section>
   </div>
-  <div class="slide hidden" id="slide-14">
+  <div class="slide hidden" id="slide-13">
     <section class="slide-content"><h2 id="-pmo-app-js-"><code>pmo/app.js</code></h2>
 <pre><code class="lang-javascript"><span class="comment">// pmo/app.js</span>
 import AppMap from <span class="string">"can-ssr/app-map"</span>;
@@ -727,29 +725,29 @@ import AppMap from <span class="string">"can-ssr/app-map"</span>;
 
 export <span class="keyword">default</span> AppState;</code></pre>
 <p>In <code>package.json</code> add:</p>
-<pre><code class="lang-javascript"><span class="string">"scripts"</span>: {
+<pre><code class="lang-javascript"><span class="string">"main"</span>: <span class="string">"pmo/index.stache!done-autorender"</span>,
+<span class="string">"scripts"</span>: {
     <span class="string">"start"</span>: <span class="string">"can-serve --port 8080"</span>,</code></pre>
-<p>Then run</p>
+<p>Then start the application at <a href="http://localhost:8080">localhost:8080</a></p>
 <pre><code>npm start</code></pre>
-<p>And go to <a href="http://localhost:8080">localhost:8080</a>.</p>
 </section>
   </div>
-  <div class="slide hidden  centered" id="slide-15">
+  <div class="slide hidden  centered" id="slide-14">
     <section class="slide-content"><h1 id="modlet-workflow">Modlet Workflow</h1>
 <p><img src="img/modlet.png" alt="modlets"></p>
 </section>
   </div>
-  <div class="slide hidden  centered" id="slide-16">
+  <div class="slide hidden  centered" id="slide-15">
     <section class="slide-content"><h2 id="before">Before</h2>
 <p><img src="img/modlet/before.png" alt="modlet-before"></p>
 </section>
   </div>
-  <div class="slide hidden  centered" id="slide-17">
+  <div class="slide hidden  centered" id="slide-16">
     <section class="slide-content"><h2 id="after">After</h2>
 <p><img src="img/modlet/after.png" alt="modlet-after"></p>
 </section>
   </div>
-  <div class="slide hidden" id="slide-18">
+  <div class="slide hidden" id="slide-17">
     <section class="slide-content"><h2 id="benefits">Benefits</h2>
 <ul>
 <li>Easier to identify missing tests or documentation.</li>
@@ -759,12 +757,12 @@ export <span class="keyword">default</span> AppState;</code></pre>
 </ul>
 </section>
   </div>
-  <div class="slide hidden" id="slide-19">
+  <div class="slide hidden" id="slide-18">
     <section class="slide-content"><h1 id="server-side-rendering">Server Side Rendering</h1>
 <p>Getting rid of the loading indicator.</p>
 </section>
   </div>
-  <div class="slide hidden" id="slide-20">
+  <div class="slide hidden" id="slide-19">
     <section class="slide-content"><h2 id="benefits">Benefits</h2>
 <ul>
 <li>SEO</li>
@@ -772,7 +770,7 @@ export <span class="keyword">default</span> AppState;</code></pre>
 </ul>
 </section>
   </div>
-  <div class="slide hidden" id="slide-21">
+  <div class="slide hidden" id="slide-20">
     <section class="slide-content"><h2 id="implementation">Implementation</h2>
 <h3 id="single-context-virtual-dom">Single Context Virtual DOM</h3>
 <ul>
@@ -782,7 +780,7 @@ export <span class="keyword">default</span> AppState;</code></pre>
 </ul>
 </section>
   </div>
-  <div class="slide hidden" id="slide-22">
+  <div class="slide hidden" id="slide-21">
     <section class="slide-content"><h3 id="connected-lifecycle">Connected Lifecycle</h3>
 <pre><code>curl http://place-my-order.com/restaurants/cow-barn/order</code></pre>
 <pre><code class="lang-javascript">&lt;html&gt;
@@ -800,7 +798,7 @@ export <span class="keyword">default</span> AppState;</code></pre>
 <span class="tag">&lt;/<span class="title">html</span>&gt;</span></span></code></pre>
 </section>
   </div>
-  <div class="slide hidden" id="slide-23">
+  <div class="slide hidden" id="slide-22">
     <section class="slide-content"><h3 id="lib-app-js">lib/app.js</h3>
 <pre><code class="lang-javascript"><span class="keyword">var</span> app = require(<span class="string">"express"</span>)();
 <span class="keyword">var</span> url = require(<span class="string">"url"</span>);
@@ -822,7 +820,7 @@ app.get(<span class="string">"/"</span>), <span class="keyword">function</span>(
 app.listen(<span class="number">7000</span>);</code></pre>
 </section>
   </div>
-  <div class="slide hidden" id="slide-24">
+  <div class="slide hidden" id="slide-23">
     <section class="slide-content"><h3 id="pmo-restaurant-list-js">pmo/restaurant/list.js</h3>
 <pre><code class="lang-javascript">export <span class="keyword">const</span> ViewModel = Map.extend({
   states: { get() { <span class="keyword">return</span> State.findAll({}); } }, ...});
@@ -840,7 +838,7 @@ export <span class="keyword">default</span> Component.extend({
 });</code></pre>
 </section>
   </div>
-  <div class="slide hidden" id="slide-25">
+  <div class="slide hidden" id="slide-24">
     <section class="slide-content"><h2 id="server-side-rendering-techniques">Server Side Rendering Techniques</h2>
 <table>
 <thead>
@@ -870,7 +868,7 @@ export <span class="keyword">default</span> Component.extend({
 </table>
 </section>
   </div>
-  <div class="slide hidden" id="slide-26">
+  <div class="slide hidden" id="slide-25">
     <section class="slide-content"><h2 id="can-serve">can-serve</h2>
 <ul>
 <li>A simple web server with proxying and server side rendering built in.</li>
@@ -878,11 +876,11 @@ export <span class="keyword">default</span> Component.extend({
 <pre><code>can-serve --proxy http://localhost:7070 --port 8080</code></pre>
 </section>
   </div>
-  <div class="slide hidden" id="slide-27">
+  <div class="slide hidden" id="slide-26">
     <section class="slide-content"><h1 id="components">Components</h1>
 </section>
   </div>
-  <div class="slide hidden" id="slide-28">
+  <div class="slide hidden" id="slide-27">
     <section class="slide-content"><h2 id="benefits">Benefits</h2>
 <ul>
 <li>Declaratively write your application.</li>
@@ -894,7 +892,7 @@ export <span class="keyword">default</span> Component.extend({
 </ul>
 </section>
   </div>
-  <div class="slide hidden" id="slide-29">
+  <div class="slide hidden" id="slide-28">
     <section class="slide-content"><h2 id="done-component">done-component</h2>
 <p>A StealJS plugin that allows composing CanJS Components in a single file:</p>
 <h3 id="hello-component">hello.component</h3>
@@ -912,7 +910,7 @@ export <span class="keyword">default</span> Component.extend({
 <span class="tag">&lt;/<span class="title">can-component</span>&gt;</span></span></code></pre>
 </section>
   </div>
-  <div class="slide hidden" id="slide-30">
+  <div class="slide hidden" id="slide-29">
     <section class="slide-content"><h3 id="output">Output</h3>
 <pre><code class="lang-javascript">&lt;hello-greeting name=<span class="string">"world"</span>&gt;
 
@@ -921,19 +919,19 @@ export <span class="keyword">default</span> Component.extend({
 <span class="tag">&lt;/<span class="title">hello-greeting</span>&gt;</span></span></code></pre>
 </section>
   </div>
-  <div class="slide hidden" id="slide-31">
+  <div class="slide hidden" id="slide-30">
     <section class="slide-content"><h1 id="live-reload">Live Reload</h1>
 <h2 id="aka-hot-module-swapping">aka Hot Module Swapping</h2>
 </section>
   </div>
-  <div class="slide hidden" id="slide-32">
+  <div class="slide hidden" id="slide-31">
     <section class="slide-content"><ul>
 <li>Watch your app react to changes you make to modules as you edit the code.</li>
 <li>The window never reloads, only the modules you change.</li>
 </ul>
 </section>
   </div>
-  <div class="slide hidden" id="slide-33">
+  <div class="slide hidden" id="slide-32">
     <section class="slide-content"><h2 id="benefits">Benefits</h2>
 <ul>
 <li>0.1 second – users feel like their actions are directly causing something to happen on the screen.</li>
@@ -941,20 +939,24 @@ export <span class="keyword">default</span> Component.extend({
 </ul>
 </section>
   </div>
-  <div class="slide hidden" id="slide-34">
+  <div class="slide hidden" id="slide-33">
     <section class="slide-content"><p><img src="img/live-reload/lr-1.png" alt="lr-one"></p>
 </section>
   </div>
-  <div class="slide hidden" id="slide-35">
+  <div class="slide hidden" id="slide-34">
     <section class="slide-content"><p><img src="img/live-reload/lr-2.png" alt="lr-two"></p>
 </section>
   </div>
-  <div class="slide hidden" id="slide-36">
+  <div class="slide hidden" id="slide-35">
     <section class="slide-content"><p><img src="img/live-reload/lr-3.png" alt="lr-three"></p>
 </section>
   </div>
-  <div class="slide hidden" id="slide-37">
+  <div class="slide hidden" id="slide-36">
     <section class="slide-content"><p>Show files reloading in the network tab.</p>
+</section>
+  </div>
+  <div class="slide hidden" id="slide-37">
+    <section class="slide-content"><h1 id="using-other-projects">Using other projects</h1>
 </section>
   </div>
   <div class="slide hidden" id="slide-38">
@@ -1011,6 +1013,28 @@ route.attr({
 </section>
   </div>
   <div class="slide hidden" id="slide-42">
+    <section class="slide-content"><h2 id="nested-routes">Nested routes</h2>
+<pre><code class="lang-javascript">route(<span class="string">':page/:slug'</span>, { slug: <span class="literal">null</span> });
+route(<span class="string">':page/:slug/:action'</span>, { slug: <span class="literal">null</span>, action: <span class="literal">null</span> });</code></pre>
+<pre><code class="lang-javascript">{{#eq page <span class="string">"home"</span>}}
+  &lt;pmo-home&gt;<span class="xml"><span class="tag">&lt;/<span class="title">pmo-home</span>&gt;</span>
+{{/eq}}
+{{#eq page "restaurants"}}
+  {{#if slug}}
+    {{#eq action 'order'}}
+      <span class="tag">&lt;<span class="title">pmo-order-new</span> <span class="attribute">slug</span>=<span class="value">"{slug}"</span>&gt;</span><span class="tag">&lt;/<span class="title">pmo-order-new</span>&gt;</span>
+    {{/eq}}
+
+    {{^if action}}
+      <span class="tag">&lt;<span class="title">pmo-restaurant-details</span>&gt;</span><span class="tag">&lt;/<span class="title">pmo-restaurant-details</span>&gt;</span>
+    {{/if}}
+  {{else}}
+    <span class="tag">&lt;<span class="title">pmo-restaurant-list</span>&gt;</span><span class="tag">&lt;/<span class="title">pmo-restaurant-list</span>&gt;</span>
+  {{/if}}
+{{/eq}}</span></code></pre>
+</section>
+  </div>
+  <div class="slide hidden" id="slide-43">
     <section class="slide-content"><h2 id="-can-href-"><code>can-href</code></h2>
 <pre><code class="lang-javascript">&lt;div class=<span class="string">"restaurant"</span>&gt;
   <span class="xml"><span class="tag">&lt;<span class="title">img</span> <span class="attribute">src</span>=<span class="value">"/{{images.thumbnail}}"</span> <span class="attribute">width</span>=<span class="value">"100"</span> <span class="attribute">height</span>=<span class="value">"100"</span>&gt;</span>
@@ -1023,7 +1047,7 @@ route.attr({
 <p><code>href</code> will become <code>/restaurants/restaurants/&lt;restaurant-slug&gt;</code>.</p>
 </section>
   </div>
-  <div class="slide hidden" id="slide-43">
+  <div class="slide hidden" id="slide-44">
     <section class="slide-content"><h2 id="benefits">Benefits</h2>
 <ul>
 <li>Keep routing rules separate from application logic.</li>
@@ -1032,11 +1056,11 @@ route.attr({
 </ul>
 </section>
   </div>
-  <div class="slide hidden" id="slide-44">
+  <div class="slide hidden" id="slide-45">
     <section class="slide-content"><h1 id="super-models">Super Models</h1>
 </section>
   </div>
-  <div class="slide hidden" id="slide-45">
+  <div class="slide hidden" id="slide-46">
     <section class="slide-content"><h2 id="can-connect">can-connect</h2>
 <p>Middleware for persisting data that can:</p>
 <ul>
@@ -1045,25 +1069,105 @@ route.attr({
 <li>Perform real-time updates</li>
 <li>Cache (fall-through, inline-cache, localstorage, in-memory)</li>
 <li>Combine multiple requests</li>
-<li>Load data in-template (<code>&lt;restaurant-model get=&quot;{}&quot;&gt;{{value}}&lt;/restaurant-model&gt;</code>)</li>
+<li><code>can.Model</code> compatibility layer</li>
 </ul>
 </section>
   </div>
-  <div class="slide hidden  centered" id="slide-46">
+  <div class="slide hidden" id="slide-47">
+    <section class="slide-content"><h2 id="load-data-in-stache-templates">Load data in Stache templates</h2>
+<pre><code class="lang-javascript">&lt;can-import from=<span class="string">"pmo/models/restaurant"</span> /&gt;
+<span class="xml"><span class="tag">&lt;<span class="title">restaurant-model</span> <span class="attribute">get-list</span>=<span class="value">"{ state=state city=city }"</span>&gt;</span>
+  {{#if isPending}}
+    <span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"loading"</span>&gt;</span><span class="tag">&lt;/<span class="title">div</span>&gt;</span>
+  {{else}}
+    {{#if isResolved}}
+      <span class="tag">&lt;<span class="title">ul</span>&gt;</span>
+      {{#each value}}
+        <span class="tag">&lt;<span class="title">li</span>&gt;</span>{{name}}<span class="tag">&lt;/<span class="title">li</span>&gt;</span>
+      {{/each}}
+      <span class="tag">&lt;/<span class="title">ul</span>&gt;</span>
+    {{else}}
+      <span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"error"</span>&gt;</span>An error occurred<span class="tag">&lt;/<span class="title">div</span>&gt;</span>
+    {{/if}}
+  {{/if}}
+<span class="tag">&lt;/<span class="title">restaurant-model</span>&gt;</span></span></code></pre>
+</section>
+  </div>
+  <div class="slide hidden  centered" id="slide-48">
     <section class="slide-content"><h2 id="inline-cache">Inline cache</h2>
 <p><img src="img/inline-cache.png" alt="Inline Cache"></p>
 </section>
   </div>
-  <div class="slide hidden  centered" id="slide-47">
-    <section class="slide-content"><h2 id="fall-through-cache">Fall-through cache</h2>
+  <div class="slide hidden  centered" id="slide-49">
+    <section class="slide-content"><h2 id="combined-request-and-fall-through-cache">Combined request and fall-through cache</h2>
 <p><img src="img/fall-through.png" alt="Fall-through Cache"></p>
 </section>
   </div>
-  <div class="slide hidden" id="slide-48">
+  <div class="slide hidden" id="slide-50">
+    <section class="slide-content"><h1 id="testing">Testing</h1>
+</section>
+  </div>
+  <div class="slide hidden" id="slide-51">
+    <section class="slide-content"><h2 id="a-simple-qunit-test">A simple QUnit test</h2>
+<p><code>pmo/restaurant/list/list_test.js</code>:</p>
+<pre><code class="lang-javascript">import { ViewModel } from <span class="string">'./list'</span>;
+import QUnit from <span class="string">'steal-qunit'</span>;
+
+QUnit.module(<span class="string">'pmo/restaurant/list'</span>);
+
+QUnit.test(<span class="string">'basics'</span>, <span class="keyword">function</span>(){
+  ok(<span class="literal">true</span>, <span class="string">'Test ran'</span>);
+});</code></pre>
+<p><code>pmo/restaurant/list/test.html</code>:</p>
+<pre><code class="lang-javascript">&lt;title&gt;pmo/restaurant/list&lt;/title&gt;
+&lt;script src="../../../node_modules/steal/steal.js" main="pmo/restaurant/list/list_test"&gt;&lt;/script&gt;
+&lt;div id="qunit-fixture"&gt;&lt;/div&gt;</code></pre>
+</section>
+  </div>
+  <div class="slide hidden" id="slide-52">
+    <section class="slide-content"><h2 id="automating-tests">Automating tests</h2>
+<p>Install a command line test runner:</p>
+<pre><code>npm install testee --save-dev</code></pre>
+<p>Update the <code>npm test</code> script:</p>
+<pre><code class="lang-javascript"><span class="string">"scripts"</span>: {
+    <span class="string">"test"</span>: <span class="string">"testee pmo/restaurant/list/test.html --browsers firefox"</span>,</code></pre>
+<p>Run the tests:</p>
+<pre><code>npm test</code></pre>
+</section>
+  </div>
+  <div class="slide hidden" id="slide-53">
+    <section class="slide-content"><h2 id="testing-components">Testing components</h2>
+<pre><code class="lang-javascript">import Component from <span class="string">'can/component/'</span>;
+import Map from <span class="string">'can/map/'</span>;
+import <span class="string">'can/map/define/'</span>;
+import stache from <span class="string">'can/stache/'</span>;
+
+export <span class="keyword">const</span> ViewModel = Map.extend({
+  define: {
+    count: { value: <span class="number">0</span> }
+  },
+  increment() {
+    <span class="keyword">this</span>.attr(<span class="string">'count'</span>, <span class="keyword">this</span>.attr(<span class="string">'count'</span>)++);
+  }
+});
+
+export <span class="keyword">default</span> Component.extend({
+  tag: <span class="string">'app-counter'</span>,
+  template: stache(`&lt;p&gt;Button clicked {{count}} times
+    &lt;button can-click=<span class="string">"{increment}"</span>&gt;<span class="xml"><span class="tag">&lt;/<span class="title">button</span>&gt;</span><span class="tag">&lt;/<span class="title">p</span>&gt;</span>`),
+  viewModel: ViewModel
+});</span></code></pre>
+</section>
+  </div>
+  <div class="slide hidden" id="slide-54">
+    <section class="slide-content"><h2 id="functional-unit-tests">Functional unit-tests</h2>
+</section>
+  </div>
+  <div class="slide hidden" id="slide-55">
     <section class="slide-content"><h1 id="production-workflows">Production Workflows</h1>
 </section>
   </div>
-  <div class="slide hidden" id="slide-49">
+  <div class="slide hidden" id="slide-56">
     <section class="slide-content"><h2 id="build-for-any-environment">Build for any Environment</h2>
 <ul>
 <li>The Web</li>
@@ -1072,7 +1176,7 @@ route.attr({
 </ul>
 </section>
   </div>
-  <div class="slide hidden" id="slide-50">
+  <div class="slide hidden" id="slide-57">
     <section class="slide-content"><h2 id="steal-tools">Steal Tools</h2>
 <ul>
 <li>Creates optimized bundles for:<ul>
@@ -1083,7 +1187,7 @@ route.attr({
 </ul>
 </section>
   </div>
-  <div class="slide hidden" id="slide-51">
+  <div class="slide hidden" id="slide-58">
     <section class="slide-content"><h3 id="steal-cordova-and-steal-nw">steal-cordova and steal-nw</h3>
 <pre><code class="lang-javascript"><span class="keyword">var</span> stealTools = require(<span class="string">"steal-tools"</span>);
 

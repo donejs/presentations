@@ -52,14 +52,11 @@ style: style.css
 - Testee or Karma - Test runner
 - [DocumentJS](http://documentjs.com) - Documentation
 - [can-ssr](http://github.com/canjs/ssr) - Server-Side Rendering Utilities for CanJS
+- [can-connect](https://github.com/canjs/can-connect) - Assemble real-time, high performance, restful data connections.
 
 --
 
-# Features
-
---
-
-## Application
+## Application features
 
 - Universal (same code on server and client)
 - Pushstate routing
@@ -68,7 +65,7 @@ style: style.css
 
 --
 
-## Performance
+## Performance features
 
 - Progressive loaded optimized production builds
 - Caching and minimal data requests
@@ -77,7 +74,7 @@ style: style.css
 
 --
 
-## Maintenance
+## Maintenance features
 
 - Modlet workflow - tests, docs, and demo pages
 - Use and create NPM packages
@@ -87,9 +84,11 @@ style: style.css
 - Live reload
 - Functional tests
 
---
+-- centered
 
 ## [place-my-order.com](http://place-my-order.com)
+
+![place-my-order.com](img/place-my-order.png)
 
 --
 
@@ -164,17 +163,16 @@ export default AppState;
 In `package.json` add:
 
 ```javascript
+"main": "pmo/index.stache!done-autorender",
 "scripts": {
     "start": "can-serve --port 8080",
 ```
 
-Then run
+Then start the application at [localhost:8080](http://localhost:8080)
 
 ```
 npm start
 ```
-
-And go to [localhost:8080](http://localhost:8080).
 
 -- centered
 
@@ -401,6 +399,10 @@ Show files reloading in the network tab.
 
 --
 
+# Using other projects
+
+--
+
 # Routing
 
 --
@@ -464,6 +466,34 @@ route.attr({
 
 --
 
+## Nested routes
+
+```javascript
+route(':page/:slug', { slug: null });
+route(':page/:slug/:action', { slug: null, action: null });
+```
+
+```javascript
+{{#eq page "home"}}
+  <pmo-home></pmo-home>
+{{/eq}}
+{{#eq page "restaurants"}}
+  {{#if slug}}
+    {{#eq action 'order'}}
+      <pmo-order-new slug="{slug}"></pmo-order-new>
+    {{/eq}}
+
+    {{^if action}}
+      <pmo-restaurant-details></pmo-restaurant-details>
+    {{/if}}
+  {{else}}
+    <pmo-restaurant-list></pmo-restaurant-list>
+  {{/if}}
+{{/eq}}
+```
+
+--
+
 ## `can-href`
 
 ```javascript
@@ -496,7 +526,6 @@ route(':page/restaurant/:slug');
 
 # Super Models
 
-
 --
 
 ## can-connect
@@ -508,7 +537,30 @@ Middleware for persisting data that can:
 - Perform real-time updates
 - Cache (fall-through, inline-cache, localstorage, in-memory)
 - Combine multiple requests
-- Load data in-template (`<restaurant-model get="{}">{{value}}</restaurant-model>`)
+- `can.Model` compatibility layer
+
+--
+
+## Load data in Stache templates
+
+```javascript
+<can-import from="pmo/models/restaurant" />
+<restaurant-model get-list="{ state=state city=city }">
+  {{#if isPending}}
+    <div class="loading"></div>
+  {{else}}
+    {{#if isResolved}}
+      <ul>
+      {{#each value}}
+        <li>{{name}}</li>
+      {{/each}}
+      </ul>
+    {{else}}
+      <div class="error">An error occurred</div>
+    {{/if}}
+  {{/if}}
+</restaurant-model>
+```
 
 -- centered
 
@@ -518,9 +570,94 @@ Middleware for persisting data that can:
 
 -- centered
 
-## Fall-through cache
+## Combined request and fall-through cache
 
 ![Fall-through Cache](img/fall-through.png)
+
+--
+
+# Testing
+
+--
+
+## A simple QUnit test
+
+`pmo/restaurant/list/list_test.js`:
+
+```javascript
+import { ViewModel } from './list';
+import QUnit from 'steal-qunit';
+
+QUnit.module('pmo/restaurant/list');
+
+QUnit.test('basics', function(){
+  ok(true, 'Test ran');
+});
+```
+
+`pmo/restaurant/list/test.html`:
+
+```javascript
+<title>pmo/restaurant/list</title>
+<script src="../../../node_modules/steal/steal.js" main="pmo/restaurant/list/list_test"></script>
+<div id="qunit-fixture"></div>
+```
+
+--
+
+## Automating tests
+
+Install a command line test runner:
+
+```
+npm install testee --save-dev
+```
+
+Update the `npm test` script:
+
+```javascript
+"scripts": {
+    "test": "testee pmo/restaurant/list/test.html --browsers firefox",
+```
+
+Run the tests:
+
+```
+npm test
+```
+
+--
+
+## Testing components
+
+```javascript
+import Component from 'can/component/';
+import Map from 'can/map/';
+import 'can/map/define/';
+import stache from 'can/stache/';
+
+export const ViewModel = Map.extend({
+  define: {
+    count: { value: 0 }
+  },
+  increment() {
+    this.attr('count', this.attr('count')++);
+  }
+});
+
+export default Component.extend({
+  tag: 'app-counter',
+  template: stache(`<p>Button clicked {{count}} times
+    <button can-click="{increment}"></button></p>`),
+  viewModel: ViewModel
+});
+```
+
+--
+
+## Functional unit-tests
+
+
 
 --
 
