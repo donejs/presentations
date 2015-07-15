@@ -320,6 +320,47 @@ can-serve --proxy http://localhost:7070 --port 8080
 
 --
 
+###### hello.stache
+```javascript
+<h1>Hello {{name}}</h1>
+```
+
+###### hello-viewmodel.js
+```javascript
+import Map from "can/map/";
+
+export default Map.extend({
+  name: ""
+});
+```
+
+###### hello.js
+```javascript
+import Component from "can/component/";
+import ViewModel from "./hello-viewmodel";
+import template from "./hello.stache!";
+
+Component.extend({
+  tag: "hello-greeting",
+  viewModel: ViewModel,
+  template
+});
+```
+
+--
+
+### Output
+
+```javascript
+<hello-greeting name="world">
+
+  <h1>Hello world!</h1>
+
+</hello-greeting>
+```
+
+--
+
 ## Benefits
 
 * Declaratively write your application.
@@ -354,14 +395,16 @@ A StealJS plugin that allows composing CanJS Components in a single file:
 
 --
 
-### Output
+## Testing
 
 ```javascript
-<hello-greeting name="world">
+import QUnit from "steal-qunit";
+import { ViewModel as HelloVM } from "hello-world.component!";
 
-  <h1>Hello world!</h1>
-
-</hello-greeting>
+QUnit.test("view model works", function(){
+  let map = new HelloVM();
+  ...
+});
 ```
 
 --

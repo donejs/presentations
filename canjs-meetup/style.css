@@ -5,3 +5,8 @@ img[alt=lr-two],
 img[alt=lr-three] {
   width: 80%;
 }
+
+h6 {
+  margin: 0;
+  padding: 0;
+}
