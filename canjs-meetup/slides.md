@@ -480,6 +480,8 @@ console.log(template(vm));
 * A simple tabs component.
 * Exports to CommonJS, AMD, and standalone.
 * Useable with Browserify, WebPack, RequireJS, StealJS.
+* Published to NPM.
+* Semver for versioning.
 
 --
 
@@ -813,6 +815,38 @@ QUnit.test('Increments count', function(){
 * Creates optimized bundles for:
   * Progressively loaded single page applications.
   * Multiple apps with shared dependencies.
+
+-- one-hundred
+
+![steal1](img/steal1.png)
+
+-- one-hundred
+
+![steal1](img/steal2.png)
+
+-- one-hundred
+
+![steal1](img/steal3.png)
+
+-- one-hundred
+
+![steal1](img/steal4.png)
+
+-- one-hundred
+
+![steal1](img/steal5.png)
+
+-- one-hundred
+
+![steal1](img/steal6.png)
+
+-- one-hundred
+
+![steal1](img/steal7.png)
+
+-- one-hundred
+
+![steal1](img/steal8.png)
 
 --
 
