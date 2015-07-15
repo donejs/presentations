@@ -165,13 +165,12 @@ In `package.json` add:
 ```javascript
 "main": "pmo/index.stache!done-autorender",
 "scripts": {
-    "start": "can-serve --port 8080",
-```
-
-Then start the application at [localhost:8080](http://localhost:8080)
-
-```
-npm start
+  "start": "can-serve --port 8080",
+  "test": "echo \"Error: no test specified\" && exit 1"
+},
+"system": {
+  "npmIgnore": ["documentjs", "place-my-order-api"]
+}
 ```
 
 --
@@ -199,7 +198,7 @@ Getting rid of the loading indicator.
 
 --
 
-### Connected Lifecycle
+## Connected Lifecycle
 
 ```
 curl http://place-my-order.com/restaurants/cow-barn/order
@@ -223,7 +222,7 @@ curl http://place-my-order.com/restaurants/cow-barn/order
 
 --
 
-### lib/app.js
+## `lib/app.js`
 
 ```javascript
 var app = require("express")();
@@ -259,8 +258,8 @@ export default Component.extend({
   viewModel: ViewModel,
   template,
   events: {
-    inserted: function(){
-      var statesPromise = this.attr("states");
+    inserted(){
+      let statesPromise = this.attr("states");
       this.scope.attr("@root").pageData( statesPromise );
     }
   }
@@ -339,6 +338,7 @@ export default Map.extend({
 ```
 
 ###### hello.js
+
 ```javascript
 import Component from "can/component/";
 import ViewModel from "./hello-viewmodel";
@@ -399,16 +399,37 @@ A StealJS plugin that allows composing CanJS Components in a single file:
 
 --
 
-## Testing
+## Composition
 
 ```javascript
-import QUnit from "steal-qunit";
-import { ViewModel as HelloVM } from "hello-world.component!";
+import { ViewModel, template } from "hello-world.component!";
 
-QUnit.test("view model works", function(){
-  let map = new HelloVM();
-  ...
-});
+const vm = new ViewModel();
+
+console.log(template(vm));
+```
+
+--
+
+## `pmo/home.component`
+
+```javascript
+<can-component tag="pmo-home">
+  <template>
+    <div class="homepage">
+      <img src="node_modules/place-my-order-assets/images/homepage-hero.jpg"
+        width="250" height="380" />
+      <h1>Ordering food has never been easier</h1>
+      <p>
+        We make it easier than ever to order gourmet food
+        from your favorite local restaurants.
+      </p>
+      <p><a class="btn" href="/restaurants" role="button">
+        Choose a Restaurant
+      </a></p>
+    </div>
+  </template>
+</can-component>
 ```
 
 --
@@ -428,21 +449,17 @@ QUnit.test("view model works", function(){
 * 0.1 second – users feel like their actions are directly causing something to happen on the screen.
 * 1 second - users notice the short delay, but they stay focused on their current train of thought.
 
---
+-- centered
 
 ![lr-one](img/live-reload/lr-1.png)
 
---
+-- centered
 
 ![lr-two](img/live-reload/lr-2.png)
 
---
+-- centered
 
 ![lr-three](img/live-reload/lr-3.png)
-
---
-
-Show files reloading in the network tab.
 
 --
 
@@ -629,24 +646,23 @@ Middleware for persisting data that can:
 
 ## A simple QUnit test
 
-`pmo/restaurant/list/list_test.js`:
+`pmo/test.js`:
 
 ```javascript
-import { ViewModel } from './list';
 import QUnit from 'steal-qunit';
 
-QUnit.module('pmo/restaurant/list');
+QUnit.module('Basic tests');
 
 QUnit.test('basics', function(){
   ok(true, 'Test ran');
 });
 ```
 
-`pmo/restaurant/list/test.html`:
+`pmo/test.html`:
 
 ```javascript
-<title>pmo/restaurant/list</title>
-<script src="../../../node_modules/steal/steal.js" main="pmo/restaurant/list/list_test"></script>
+<title>pmo/test</title>
+<script src="../node_modules/steal/steal.js" main="pmo/test"></script>
 <div id="qunit-fixture"></div>
 ```
 
@@ -664,7 +680,7 @@ Update the `npm test` script:
 
 ```javascript
 "scripts": {
-    "test": "testee pmo/restaurant/list/test.html --browsers firefox",
+    "test": "testee pmo/test.html --browsers firefox",
 ```
 
 Run the tests:
@@ -678,26 +694,23 @@ npm test
 ## Testing components
 
 ```javascript
-import Component from 'can/component/';
-import Map from 'can/map/';
-import 'can/map/define/';
-import stache from 'can/stache/';
+<can-component tag="pmo-counter">
+  <template>
+    Button clicked <span class="count">{{count}}</span> times
+    <button class="btn" can-click="{increment}">Update count</button>
+  </template>
+  <view-model>
+    import Map from 'can/map/';
+    import 'can/map/define/';
 
-export const ViewModel = Map.extend({
-  define: {
-    count: { value: 0 }
-  },
-  increment() {
-    this.attr('count', this.attr('count')++);
-  }
-});
-
-export default Component.extend({
-  tag: 'app-counter',
-  template: stache(`<p>Button clicked {{count}} times
-    <button can-click="{increment}"></button></p>`),
-  viewModel: ViewModel
-});
+    export default Map.extend({
+      define: { count: { value: 0 } },
+      increment() {
+        this.attr('count', this.attr('count') + 1);
+      }
+    });
+  </view-model>
+</can-component>
 ```
 
 --
@@ -705,6 +718,26 @@ export default Component.extend({
 ## Functional unit-tests
 
 
+```javascript
+import QUnit from 'steal-qunit';
+import F from 'funcunit';
+import Home from './counter.component!';
+import stache from 'can/view/stache/';
+import $ from 'jquery';
+
+F.attach(QUnit);
+
+const template = stache(`<pmo-counter></pmo-counter>`);
+
+QUnit.module('pmo/counter');
+
+QUnit.test('Increments count', function(){
+  $('#qunit-fixture').html(template({}));
+  F('pmo-counter .count').html('0', 'Count 0 intially');
+  F('pmo-counter button').click();
+  F('pmo-counter .count').html('1', 'Count incremented');
+});
+```
 
 --
 

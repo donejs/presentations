@@ -732,9 +732,12 @@ export <span class="keyword">default</span> AppState;</code></pre>
 <p>In <code>package.json</code> add:</p>
 <pre><code class="lang-javascript"><span class="string">"main"</span>: <span class="string">"pmo/index.stache!done-autorender"</span>,
 <span class="string">"scripts"</span>: {
-    <span class="string">"start"</span>: <span class="string">"can-serve --port 8080"</span>,</code></pre>
-<p>Then start the application at <a href="http://localhost:8080">localhost:8080</a></p>
-<pre><code>npm start</code></pre>
+  <span class="string">"start"</span>: <span class="string">"can-serve --port 8080"</span>,
+  <span class="string">"test"</span>: <span class="string">"echo \"Error: no test specified\" &amp;&amp; exit 1"</span>
+},
+<span class="string">"system"</span>: {
+  <span class="string">"npmIgnore"</span>: [<span class="string">"documentjs"</span>, <span class="string">"place-my-order-api"</span>]
+}</code></pre>
 </section>
   </div>
   <div class="slide hidden" id="slide-14">
@@ -761,7 +764,7 @@ export <span class="keyword">default</span> AppState;</code></pre>
 </section>
   </div>
   <div class="slide hidden" id="slide-17">
-    <section class="slide-content"><h3 id="connected-lifecycle">Connected Lifecycle</h3>
+    <section class="slide-content"><h2 id="connected-lifecycle">Connected Lifecycle</h2>
 <pre><code>curl http://place-my-order.com/restaurants/cow-barn/order</code></pre>
 <pre><code class="lang-javascript">&lt;html&gt;
 <span class="xml"><span class="tag">&lt;<span class="title">head</span>&gt;</span>
@@ -779,7 +782,7 @@ export <span class="keyword">default</span> AppState;</code></pre>
 </section>
   </div>
   <div class="slide hidden" id="slide-18">
-    <section class="slide-content"><h3 id="lib-app-js">lib/app.js</h3>
+    <section class="slide-content"><h2 id="-lib-app-js-"><code>lib/app.js</code></h2>
 <pre><code class="lang-javascript"><span class="keyword">var</span> app = require(<span class="string">"express"</span>)();
 <span class="keyword">var</span> url = require(<span class="string">"url"</span>);
 
@@ -810,8 +813,8 @@ export <span class="keyword">default</span> Component.extend({
   viewModel: ViewModel,
   template,
   events: {
-    inserted: <span class="keyword">function</span>(){
-      <span class="keyword">var</span> statesPromise = <span class="keyword">this</span>.attr(<span class="string">"states"</span>);
+    inserted(){
+      <span class="keyword">let</span> statesPromise = <span class="keyword">this</span>.attr(<span class="string">"states"</span>);
       <span class="keyword">this</span>.scope.attr(<span class="string">"@root"</span>).pageData( statesPromise );
     }
   }
@@ -950,29 +953,47 @@ Component.extend({
 </section>
   </div>
   <div class="slide hidden" id="slide-32">
-    <section class="slide-content"><h2 id="testing">Testing</h2>
-<pre><code class="lang-javascript">import QUnit from <span class="string">"steal-qunit"</span>;
-import { ViewModel as HelloVM } from <span class="string">"hello-world.component!"</span>;
+    <section class="slide-content"><h2 id="composition">Composition</h2>
+<pre><code class="lang-javascript">import { ViewModel, template } from <span class="string">"hello-world.component!"</span>;
 
-QUnit.test(<span class="string">"view model works"</span>, <span class="keyword">function</span>(){
-  <span class="keyword">let</span> map = <span class="keyword">new</span> HelloVM();
-  ...
-});</code></pre>
+<span class="keyword">const</span> vm = <span class="keyword">new</span> ViewModel();
+
+console.log(template(vm));</code></pre>
 </section>
   </div>
   <div class="slide hidden" id="slide-33">
+    <section class="slide-content"><h2 id="-pmo-home-component-"><code>pmo/home.component</code></h2>
+<pre><code class="lang-javascript">&lt;can-component tag=<span class="string">"pmo-home"</span>&gt;
+  <span class="xml"><span class="tag">&lt;<span class="title">template</span>&gt;</span>
+    <span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"homepage"</span>&gt;</span>
+      <span class="tag">&lt;<span class="title">img</span> <span class="attribute">src</span>=<span class="value">"node_modules/place-my-order-assets/images/homepage-hero.jpg"</span>
+        <span class="attribute">width</span>=<span class="value">"250"</span> <span class="attribute">height</span>=<span class="value">"380"</span> /&gt;</span>
+      <span class="tag">&lt;<span class="title">h1</span>&gt;</span>Ordering food has never been easier<span class="tag">&lt;/<span class="title">h1</span>&gt;</span>
+      <span class="tag">&lt;<span class="title">p</span>&gt;</span>
+        We make it easier than ever to order gourmet food
+        from your favorite local restaurants.
+      <span class="tag">&lt;/<span class="title">p</span>&gt;</span>
+      <span class="tag">&lt;<span class="title">p</span>&gt;</span><span class="tag">&lt;<span class="title">a</span> <span class="attribute">class</span>=<span class="value">"btn"</span> <span class="attribute">href</span>=<span class="value">"/restaurants"</span> <span class="attribute">role</span>=<span class="value">"button"</span>&gt;</span>
+        Choose a Restaurant
+      <span class="tag">&lt;/<span class="title">a</span>&gt;</span><span class="tag">&lt;/<span class="title">p</span>&gt;</span>
+    <span class="tag">&lt;/<span class="title">div</span>&gt;</span>
+  <span class="tag">&lt;/<span class="title">template</span>&gt;</span>
+<span class="tag">&lt;/<span class="title">can-component</span>&gt;</span></span></code></pre>
+</section>
+  </div>
+  <div class="slide hidden" id="slide-34">
     <section class="slide-content"><h1 id="live-reload">Live Reload</h1>
 <h2 id="aka-hot-module-swapping">aka Hot Module Swapping</h2>
 </section>
   </div>
-  <div class="slide hidden" id="slide-34">
+  <div class="slide hidden" id="slide-35">
     <section class="slide-content"><ul>
 <li>Watch your app react to changes you make to modules as you edit the code.</li>
 <li>The window never reloads, only the modules you change.</li>
 </ul>
 </section>
   </div>
-  <div class="slide hidden" id="slide-35">
+  <div class="slide hidden" id="slide-36">
     <section class="slide-content"><h2 id="benefits">Benefits</h2>
 <ul>
 <li>0.1 second – users feel like their actions are directly causing something to happen on the screen.</li>
@@ -980,20 +1001,16 @@ QUnit.test(<span class="string">"view model works"</span>, <span class="keyword"
 </ul>
 </section>
   </div>
-  <div class="slide hidden" id="slide-36">
+  <div class="slide hidden  centered" id="slide-37">
     <section class="slide-content"><p><img src="img/live-reload/lr-1.png" alt="lr-one"></p>
 </section>
   </div>
-  <div class="slide hidden" id="slide-37">
+  <div class="slide hidden  centered" id="slide-38">
     <section class="slide-content"><p><img src="img/live-reload/lr-2.png" alt="lr-two"></p>
 </section>
   </div>
-  <div class="slide hidden" id="slide-38">
+  <div class="slide hidden  centered" id="slide-39">
     <section class="slide-content"><p><img src="img/live-reload/lr-3.png" alt="lr-three"></p>
-</section>
-  </div>
-  <div class="slide hidden" id="slide-39">
-    <section class="slide-content"><p>Show files reloading in the network tab.</p>
 </section>
   </div>
   <div class="slide hidden" id="slide-40">
@@ -1150,18 +1167,17 @@ route(<span class="string">':page/:slug/:action'</span>, { slug: <span class="li
   </div>
   <div class="slide hidden" id="slide-54">
     <section class="slide-content"><h2 id="a-simple-qunit-test">A simple QUnit test</h2>
-<p><code>pmo/restaurant/list/list_test.js</code>:</p>
-<pre><code class="lang-javascript">import { ViewModel } from <span class="string">'./list'</span>;
-import QUnit from <span class="string">'steal-qunit'</span>;
+<p><code>pmo/test.js</code>:</p>
+<pre><code class="lang-javascript">import QUnit from <span class="string">'steal-qunit'</span>;
 
-QUnit.module(<span class="string">'pmo/restaurant/list'</span>);
+QUnit.module(<span class="string">'Basic tests'</span>);
 
 QUnit.test(<span class="string">'basics'</span>, <span class="keyword">function</span>(){
   ok(<span class="literal">true</span>, <span class="string">'Test ran'</span>);
 });</code></pre>
-<p><code>pmo/restaurant/list/test.html</code>:</p>
-<pre><code class="lang-javascript">&lt;title&gt;pmo/restaurant/list&lt;/title&gt;
-&lt;script src="../../../node_modules/steal/steal.js" main="pmo/restaurant/list/list_test"&gt;&lt;/script&gt;
+<p><code>pmo/test.html</code>:</p>
+<pre><code class="lang-javascript">&lt;title&gt;pmo/test&lt;/title&gt;
+&lt;script src="../node_modules/steal/steal.js" main="pmo/test"&gt;&lt;/script&gt;
 &lt;div id="qunit-fixture"&gt;&lt;/div&gt;</code></pre>
 </section>
   </div>
@@ -1171,37 +1187,52 @@ QUnit.test(<span class="string">'basics'</span>, <span class="keyword">function<
 <pre><code>npm install testee --save-dev</code></pre>
 <p>Update the <code>npm test</code> script:</p>
 <pre><code class="lang-javascript"><span class="string">"scripts"</span>: {
-    <span class="string">"test"</span>: <span class="string">"testee pmo/restaurant/list/test.html --browsers firefox"</span>,</code></pre>
+    <span class="string">"test"</span>: <span class="string">"testee pmo/test.html --browsers firefox"</span>,</code></pre>
 <p>Run the tests:</p>
 <pre><code>npm test</code></pre>
 </section>
   </div>
   <div class="slide hidden" id="slide-56">
     <section class="slide-content"><h2 id="testing-components">Testing components</h2>
-<pre><code class="lang-javascript">import Component from <span class="string">'can/component/'</span>;
-import Map from <span class="string">'can/map/'</span>;
-import <span class="string">'can/map/define/'</span>;
-import stache from <span class="string">'can/stache/'</span>;
+<pre><code class="lang-javascript">&lt;can-component tag=<span class="string">"pmo-counter"</span>&gt;
+  <span class="xml"><span class="tag">&lt;<span class="title">template</span>&gt;</span>
+    Button clicked <span class="tag">&lt;<span class="title">span</span> <span class="attribute">class</span>=<span class="value">"count"</span>&gt;</span>{{count}}<span class="tag">&lt;/<span class="title">span</span>&gt;</span> times
+    <span class="tag">&lt;<span class="title">button</span> <span class="attribute">class</span>=<span class="value">"btn"</span> <span class="attribute">can-click</span>=<span class="value">"{increment}"</span>&gt;</span>Update count<span class="tag">&lt;/<span class="title">button</span>&gt;</span>
+  <span class="tag">&lt;/<span class="title">template</span>&gt;</span>
+  <span class="tag">&lt;<span class="title">view-model</span>&gt;</span>
+    import Map from 'can/map/';
+    import 'can/map/define/';
 
-export <span class="keyword">const</span> ViewModel = Map.extend({
-  define: {
-    count: { value: <span class="number">0</span> }
-  },
-  increment() {
-    <span class="keyword">this</span>.attr(<span class="string">'count'</span>, <span class="keyword">this</span>.attr(<span class="string">'count'</span>)++);
-  }
-});
-
-export <span class="keyword">default</span> Component.extend({
-  tag: <span class="string">'app-counter'</span>,
-  template: stache(`&lt;p&gt;Button clicked {{count}} times
-    &lt;button can-click=<span class="string">"{increment}"</span>&gt;<span class="xml"><span class="tag">&lt;/<span class="title">button</span>&gt;</span><span class="tag">&lt;/<span class="title">p</span>&gt;</span>`),
-  viewModel: ViewModel
-});</span></code></pre>
+    export default Map.extend({
+      define: { count: { value: 0 } },
+      increment() {
+        this.attr('count', this.attr('count') + 1);
+      }
+    });
+  <span class="tag">&lt;/<span class="title">view-model</span>&gt;</span>
+<span class="tag">&lt;/<span class="title">can-component</span>&gt;</span></span></code></pre>
 </section>
   </div>
   <div class="slide hidden" id="slide-57">
     <section class="slide-content"><h2 id="functional-unit-tests">Functional unit-tests</h2>
+<pre><code class="lang-javascript">import QUnit from <span class="string">'steal-qunit'</span>;
+import F from <span class="string">'funcunit'</span>;
+import Home from <span class="string">'./counter.component!'</span>;
+import stache from <span class="string">'can/view/stache/'</span>;
+import $ from <span class="string">'jquery'</span>;
+
+F.attach(QUnit);
+
+<span class="keyword">const</span> template = stache(`&lt;pmo-counter&gt;<span class="xml"><span class="tag">&lt;/<span class="title">pmo-counter</span>&gt;</span>`);
+
+QUnit.module('pmo/counter');
+
+QUnit.test('Increments count', function(){
+  $('#qunit-fixture').html(template({}));
+  F('pmo-counter .count').html('0', 'Count 0 intially');
+  F('pmo-counter button').click();
+  F('pmo-counter .count').html('1', 'Count incremented');
+});</span></code></pre>
 </section>
   </div>
   <div class="slide hidden" id="slide-58">
