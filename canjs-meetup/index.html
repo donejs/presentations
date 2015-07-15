@@ -592,7 +592,7 @@ h6 {
 
 .one-hundred p,
 .one-hundred img {
-  height: 100%;
+  max-width: 100%;
   text-align: center;
 }
 
@@ -920,7 +920,7 @@ Component.extend({
 </section>
   </div>
   <div class="slide hidden" id="slide-29">
-    <section class="slide-content"><h3 id="output">Output</h3>
+    <section class="slide-content"><h2 id="output">Output</h2>
 <pre><code class="lang-javascript">&lt;hello-greeting name=<span class="string">"world"</span>&gt;
 
   <span class="xml"><span class="tag">&lt;<span class="title">h1</span>&gt;</span>Hello world!<span class="tag">&lt;/<span class="title">h1</span>&gt;</span>
@@ -1028,7 +1028,7 @@ console.log(template(vm));</code></pre>
 <ul>
 <li>Already using the modlet workflow.</li>
 <li>Can share components throughout the company.</li>
-<li>Useable in any module loader.</li>
+<li>Usable in any module loader.</li>
 </ul>
 </section>
   </div>
@@ -1037,7 +1037,7 @@ console.log(template(vm));</code></pre>
 <ul>
 <li>A simple tabs component.</li>
 <li>Exports to CommonJS, AMD, and standalone.</li>
-<li>Useable with Browserify, WebPack, RequireJS, StealJS.</li>
+<li>Usable with Browserify, WebPack, RequireJS, StealJS.</li>
 <li>Published to NPM.</li>
 <li>Semver for versioning.</li>
 </ul>
@@ -1271,20 +1271,32 @@ QUnit.test(<span class="string">'basics'</span>, <span class="keyword">function<
 </section>
   </div>
   <div class="slide hidden" id="slide-61">
-    <section class="slide-content"><h2 id="functional-unit-tests">Functional unit-tests</h2>
+    <section class="slide-content"><h2 id="viewmodel-tests">ViewModel tests</h2>
 <pre><code class="lang-javascript">import QUnit from <span class="string">'steal-qunit'</span>;
 import F from <span class="string">'funcunit'</span>;
-import Home from <span class="string">'./counter.component!'</span>;
+import Counter from <span class="string">'./counter.component!'</span>;
 import stache from <span class="string">'can/view/stache/'</span>;
 import $ from <span class="string">'jquery'</span>;
 
 F.attach(QUnit);
 
+QUnit.module(<span class="string">'ViewModel test'</span>)
+
+QUnit.test(<span class="string">'Increments count'</span>, <span class="keyword">function</span>() {
+  <span class="keyword">let</span> vm = <span class="keyword">new</span> Counter.ViewModel();
+  QUnit.equal(vm.attr(<span class="string">'count'</span>), <span class="number">0</span>, <span class="string">'Count initialized'</span>);
+  vm.increment();
+  QUnit.equal(vm.attr(<span class="string">'count'</span>), <span class="number">1</span>, <span class="string">'Count incremented'</span>);
+});</code></pre>
+</section>
+  </div>
+  <div class="slide hidden" id="slide-62">
+    <section class="slide-content"><h2 id="functional-unit-tests">Functional unit-tests</h2>
+<pre><code class="lang-javascript">QUnit.module(<span class="string">'Component tests'</span>);
+
 <span class="keyword">const</span> template = stache(`&lt;pmo-counter&gt;<span class="xml"><span class="tag">&lt;/<span class="title">pmo-counter</span>&gt;</span>`);
 
-QUnit.module('pmo/counter');
-
-QUnit.test('Increments count', function(){
+QUnit.test('Component works', function(){
   $('#qunit-fixture').html(template({}));
   F('pmo-counter .count').html('0', 'Count 0 intially');
   F('pmo-counter button').click();
@@ -1292,11 +1304,11 @@ QUnit.test('Increments count', function(){
 });</span></code></pre>
 </section>
   </div>
-  <div class="slide hidden" id="slide-62">
+  <div class="slide hidden" id="slide-63">
     <section class="slide-content"><h1 id="production-workflows">Production Workflows</h1>
 </section>
   </div>
-  <div class="slide hidden" id="slide-63">
+  <div class="slide hidden" id="slide-64">
     <section class="slide-content"><h2 id="build-for-any-environment">Build for any Environment</h2>
 <ul>
 <li>The Web</li>
@@ -1305,7 +1317,7 @@ QUnit.test('Increments count', function(){
 </ul>
 </section>
   </div>
-  <div class="slide hidden" id="slide-64">
+  <div class="slide hidden" id="slide-65">
     <section class="slide-content"><h2 id="steal-tools">Steal Tools</h2>
 <ul>
 <li>Creates optimized bundles for:<ul>
@@ -1316,39 +1328,39 @@ QUnit.test('Increments count', function(){
 </ul>
 </section>
   </div>
-  <div class="slide hidden  one-hundred" id="slide-65">
+  <div class="slide hidden  one-hundred" id="slide-66">
     <section class="slide-content"><p><img src="img/steal1.png" alt="steal1"></p>
 </section>
   </div>
-  <div class="slide hidden  one-hundred" id="slide-66">
+  <div class="slide hidden  one-hundred" id="slide-67">
     <section class="slide-content"><p><img src="img/steal2.png" alt="steal1"></p>
 </section>
   </div>
-  <div class="slide hidden  one-hundred" id="slide-67">
+  <div class="slide hidden  one-hundred" id="slide-68">
     <section class="slide-content"><p><img src="img/steal3.png" alt="steal1"></p>
 </section>
   </div>
-  <div class="slide hidden  one-hundred" id="slide-68">
+  <div class="slide hidden  one-hundred" id="slide-69">
     <section class="slide-content"><p><img src="img/steal4.png" alt="steal1"></p>
 </section>
   </div>
-  <div class="slide hidden  one-hundred" id="slide-69">
+  <div class="slide hidden  one-hundred" id="slide-70">
     <section class="slide-content"><p><img src="img/steal5.png" alt="steal1"></p>
 </section>
   </div>
-  <div class="slide hidden  one-hundred" id="slide-70">
+  <div class="slide hidden  one-hundred" id="slide-71">
     <section class="slide-content"><p><img src="img/steal6.png" alt="steal1"></p>
 </section>
   </div>
-  <div class="slide hidden  one-hundred" id="slide-71">
+  <div class="slide hidden  one-hundred" id="slide-72">
     <section class="slide-content"><p><img src="img/steal7.png" alt="steal1"></p>
 </section>
   </div>
-  <div class="slide hidden  one-hundred" id="slide-72">
+  <div class="slide hidden  one-hundred" id="slide-73">
     <section class="slide-content"><p><img src="img/steal8.png" alt="steal1"></p>
 </section>
   </div>
-  <div class="slide hidden" id="slide-73">
+  <div class="slide hidden" id="slide-74">
     <section class="slide-content"><h3 id="steal-cordova-and-steal-nw">steal-cordova and steal-nw</h3>
 <pre><code class="lang-javascript"><span class="keyword">var</span> stealTools = require(<span class="string">"steal-tools"</span>);
 

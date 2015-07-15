@@ -353,7 +353,7 @@ Component.extend({
 
 --
 
-### Output
+## Output
 
 ```javascript
 <hello-greeting name="world">
@@ -471,7 +471,7 @@ console.log(template(vm));
 
 * Already using the modlet workflow.
 * Can share components throughout the company.
-* Useable in any module loader.
+* Usable in any module loader.
 
 --
 
@@ -479,7 +479,7 @@ console.log(template(vm));
 
 * A simple tabs component.
 * Exports to CommonJS, AMD, and standalone.
-* Useable with Browserify, WebPack, RequireJS, StealJS.
+* Usable with Browserify, WebPack, RequireJS, StealJS.
 * Published to NPM.
 * Semver for versioning.
 
@@ -772,23 +772,38 @@ npm test
 
 --
 
-## Functional unit-tests
-
+## ViewModel tests
 
 ```javascript
 import QUnit from 'steal-qunit';
 import F from 'funcunit';
-import Home from './counter.component!';
+import Counter from './counter.component!';
 import stache from 'can/view/stache/';
 import $ from 'jquery';
 
 F.attach(QUnit);
 
+QUnit.module('ViewModel test')
+
+QUnit.test('Increments count', function() {
+  let vm = new Counter.ViewModel();
+  QUnit.equal(vm.attr('count'), 0, 'Count initialized');
+  vm.increment();
+  QUnit.equal(vm.attr('count'), 1, 'Count incremented');
+});
+```
+
+--
+
+## Functional unit-tests
+
+
+```javascript
+QUnit.module('Component tests');
+
 const template = stache(`<pmo-counter></pmo-counter>`);
 
-QUnit.module('pmo/counter');
-
-QUnit.test('Increments count', function(){
+QUnit.test('Component works', function(){
   $('#qunit-fixture').html(template({}));
   F('pmo-counter .count').html('0', 'Count 0 intially');
   F('pmo-counter button').click();
