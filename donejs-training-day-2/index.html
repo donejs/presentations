@@ -1,0 +1,1100 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+  <title>DoneJS - Your app. Done.</title>
+    <link href='http://fonts.googleapis.com/css?family=Lato&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="theme/font-awesome.css">
+  <style type="text/css">
+    body {
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  color: #222;
+  background-color: #f7f7f7;
+  font-size: 100%;
+}
+
+.slide {
+  position: absolute;
+  top: 0; bottom: 0;
+  left: 0; right: 0;
+}
+
+.slide-content {
+  width: 800px;
+  height: 600px;
+  overflow: hidden;
+  margin: 80px auto 0 auto;
+  padding: 30px;
+
+  font-weight: 200;
+  font-size: 200%;
+  line-height: 1.375;
+}
+
+.controls {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+}
+
+.arrow {
+  width: 0; height: 0;
+  border: 30px solid #333;
+  float: left;
+  margin-right: 30px;
+
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.prev {
+  border-top-color: transparent;
+  border-bottom-color: transparent;
+  border-left-color: transparent;
+
+  border-left-width: 0;
+  border-right-width: 50px;
+}
+
+.next {
+  border-top-color: transparent;
+  border-bottom-color: transparent;
+  border-right-color: transparent;
+
+  border-left-width: 50px;
+  border-right-width: 0;
+}
+
+.prev:hover {
+  border-right-color: #888;
+  cursor: pointer;
+}
+
+.next:hover {
+  border-left-color: #888;
+  cursor: pointer;
+}
+
+h1 {
+  font-size: 300%;
+  line-height: 1.2;
+  text-align: center;
+  margin: 170px 0 0;
+}
+
+h2 {
+  font-size: 100%;
+  line-height: 1.2;
+  margin: 5px 0;
+  text-align: center;
+  font-weight: 200;
+}
+
+h3 {
+  font-size: 140%;
+  line-height: 1.2;
+  border-bottom: 1px solid #aaa;
+  margin: 0;
+  padding-bottom: 15px;
+}
+
+ul {
+  padding: 20px 0 0 60px;
+  font-weight: 200;
+  line-height: 1.375;
+}
+
+.author h1 {
+  font-size: 170%;
+  font-weight: 200;
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.author h3 {
+  font-weight: 100;
+  text-align: center;
+  font-size: 95%;
+  border: none;
+}
+
+a {
+  text-decoration: none;
+  color: #44a4dd;
+}
+
+a:hover {
+  color: #66b5ff;
+}
+
+pre {
+  font-size: 60%;
+  line-height: 1.3;
+}
+
+.progress {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+}
+
+.progress-bar {
+  width: 0%;
+  height: 3px;
+  background-color: #b4b4b4;
+
+  -webkit-transition: width 0.05s ease-out;
+  -moz-transition: width 0.05s ease-out;
+  -o-transition: width 0.05s ease-out;
+  transition: width 0.05s ease-out;
+}
+
+.hidden {
+  display: none;
+}
+
+@media (max-width: 850px) {
+
+  body {
+    font-size: 70%;
+  }
+
+  .slide-content {
+    width: auto;
+  }
+
+  img {
+    width: 100%;
+  }
+
+  h1 {
+    margin-top: 120px;
+  }
+
+  .prev, .prev:hover {
+    border-right-color: rgba(135, 135, 135, 0.5);
+  }
+
+  .next, .next:hover {
+    border-left-color: rgba(135, 135, 135, 0.5);
+  }
+}
+
+@media (max-width: 480px) {
+  body {
+    font-size: 50%;
+    overflow: hidden;
+  }
+
+  .slide-content {
+    padding: 10px;
+    margin-top: 10px;
+    height: 340px;
+  }
+
+  h1 {
+    margin-top: 50px;
+  }
+
+  ul {
+    padding-left: 25px;
+  }
+}
+
+@media print {
+  * {
+    -webkit-print-color-adjust: exact;
+  }
+
+  @page {
+    size: letter;
+  }
+
+  .hidden {
+    display: inline;
+  }
+
+  html {
+    width: 100%;
+    height: 100%;
+    overflow: visible;
+  }
+
+  body {
+    margin: 0 auto !important;
+    border: 0;
+    padding: 0;
+    float: none !important;
+    overflow: visible;
+    background: none !important;
+    font-size: 52%;
+  }
+
+  .progress, .controls {
+    display: none;
+  }
+
+  .slide {
+    position: static;
+  }
+
+  .slide-content {
+    border: 1px solid #222;
+    margin-top: 0;
+    margin-bottom: 40px;
+    height: 3.5in;
+    overflow: visible;
+  }
+
+  .slide:nth-child(even) {
+    /* 2 slides per page */
+    page-break-before: always;
+  }
+}
+
+/*
+github.com style (c) Vasily Polovnyov <vast@whiteants.net>
+*/
+
+code, pre {
+  border: 1px solid #ddd;
+  border-radius: 3px;
+  overflow: auto;
+  padding: 6px 10px;
+}
+
+code {
+  padding: 0 5px;
+}
+
+pre>code {
+  margin: 0; padding: 0;
+  border: none;
+  background: transparent;
+}
+
+pre .comment,
+pre .template_comment,
+pre .diff .header,
+pre .javadoc {
+  color: #998;
+  font-style: italic
+}
+
+pre .keyword,
+pre .css .rule .keyword,
+pre .winutils,
+pre .javascript .title,
+pre .nginx .title,
+pre .subst,
+pre .request,
+pre .status {
+  color: #333;
+  font-weight: bold
+}
+
+pre .number,
+pre .hexcolor,
+pre .ruby .constant {
+  color: #099;
+}
+
+pre .string,
+pre .tag .value,
+pre .phpdoc,
+pre .tex .formula {
+  color: #d14
+}
+
+pre .title,
+pre .id {
+  color: #900;
+  font-weight: bold
+}
+
+pre .javascript .title,
+pre .lisp .title,
+pre .clojure .title,
+pre .subst {
+  font-weight: normal
+}
+
+pre .class .title,
+pre .haskell .type,
+pre .vhdl .literal,
+pre .tex .command {
+  color: #458;
+  font-weight: bold
+}
+
+pre .tag,
+pre .tag .title,
+pre .rules .property,
+pre .django .tag .keyword {
+  color: #000080;
+  font-weight: normal
+}
+
+pre .attribute,
+pre .variable,
+pre .lisp .body {
+  color: #008080
+}
+
+pre .regexp {
+  color: #009926
+}
+
+pre .class {
+  color: #458;
+  font-weight: bold
+}
+
+pre .symbol,
+pre .ruby .symbol .string,
+pre .lisp .keyword,
+pre .tex .special,
+pre .prompt {
+  color: #990073
+}
+
+pre .built_in,
+pre .lisp .title,
+pre .clojure .built_in {
+  color: #0086b3
+}
+
+pre .preprocessor,
+pre .pi,
+pre .doctype,
+pre .shebang,
+pre .cdata {
+  color: #999;
+  font-weight: bold
+}
+
+pre .deletion {
+  background: #fdd
+}
+
+pre .addition {
+  background: #dfd
+}
+
+pre .diff .change {
+  background: #0086b3
+}
+
+pre .chunk {
+  color: #aaa
+}
+
+* {
+  -ms-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Lato', sans-serif;
+  font-weight: 100;
+  color: #333333;
+  background: #FFFFFF;
+}
+
+h1, h2, h3, h4, h5, p, ul {
+  margin: 10px 0;
+}
+
+h1 {
+  font-size: 2em;
+  font-weight: 900;
+  margin: 20px 0 20px 0;
+}
+
+h2 {
+  color: #3781a4;
+  font-weight: 500;
+  font-size: 1.5em;
+  margin: 20px 0;
+}
+
+h3 {
+  font-weight: 300;
+}
+
+p {
+  font-weight: 100;
+  font-size: 0.9em;
+}
+
+ul {
+  padding: 20px 0 20px 60px;
+  font-size: 0.9em;
+}
+
+.progress-bar {
+  background: #3781a4;
+}
+
+.logo {
+  position: absolute;
+  right: 20px;
+  bottom: 20px;
+}
+
+@media (max-width: 979px) {
+  .logo {
+    height: 120px;
+    width: 120px;
+  }
+}
+
+@media (max-width: 768px) {
+  .logo {
+    height: 100px;
+    width: 100px;
+  }
+}
+
+@media (max-width: 480px) {
+  .logo {
+    height: 80px;
+    width: 80px;
+  }
+}
+
+.slide-content {
+  width: 100%;
+  height: 100%;
+/*  min-height: 600px;
+  min-width: 800px;
+  max-height: 800px;
+  max-width: 1200px;*/
+  margin: 0 auto;
+  padding: 30px;
+}
+
+.title .slide-content {
+  display: table;
+}
+
+.title h1 {
+  display: table-cell;
+  vertical-align: middle;
+  z-index: 10;
+}
+
+.presenter img {
+  height: 200px;
+  width: 200px;
+  margin: 0 auto;
+  border: 5px solid #AAAAAA;
+  -webkit-border-radius: 100px;
+  -moz-border-radius: 100px;
+  border-radius: 100px;
+  -webkit-box-shadow: 0 2px 3px rgba(0, 0, 0, 0.5);
+  -moz-box-shadow: 0 2px 3px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 2px 3px rgba(0, 0, 0, 0.5);
+}
+
+
+.presenter h2 {
+  color: #333333;
+}
+.presenter p {
+  text-align: center;
+}
+
+.presenter ul {
+  width: 100%;
+  padding: 0;
+  margin: 10px 0;
+  list-style: none;
+  display: inline-block;
+  text-align: center;
+}
+
+.presenter li {
+  display: inline;
+  padding: 0 10px;
+}
+
+.sponsors h1 {
+  margin: 20px 0 40px 0;
+}
+
+.sponsors p {
+  float: left;
+  text-align: center;
+  width: 50%;
+  padding: 0 20px;
+}
+
+.sponsors p > img {
+  width: 100%;
+  max-width: 240px;
+}
+
+.image p > img {
+  max-width: 600px;
+  max-height: 400px;
+  margin: 20px auto;
+  display: table-cell;
+}
+
+pre {
+  font-size: 80% !important;
+}
+
+#jasmine, #qunit, #mocha {
+  font-size: 2em;
+}
+
+#jasmine {
+  margin-top: 0.5em;
+  float: left;
+}
+
+#qunit {
+  margin-top: 3em;
+  margin-right: 1em;
+  float: right;
+}
+
+#mocha {
+  margin-top: 6em;
+  margin-left: 2em;
+}
+
+.centered {
+    text-align: center;
+}
+
+.title-page h1 {
+    margin-top: 10%;
+}
+
+.title-page {
+    color: white;
+    background-color: #3781a4;
+}
+img[alt=modlet-before],
+img[alt=modlet-after],
+img[alt=lr-one],
+img[alt=lr-two],
+img[alt=lr-three] {
+  width: 80%;
+}
+
+h6 {
+  margin: 0;
+  padding: 0;
+}
+
+.one-hundred p,
+.one-hundred img {
+  max-width: 100%;
+  text-align: center;
+}
+
+  </style>
+</head>
+<body>
+    <div class="progress">
+    <div class="progress-bar"></div>
+  </div>
+
+  <div class="slide  title-page" id="slide-1">
+    <section class="slide-content"><h1>
+    <img alt="DoneJS logo" src="img/donejs-logo-white.svg" />
+    <p>Your app. Done.</p>
+</h1></section>
+  </div>
+  <div class="slide hidden  centered" id="slide-2">
+    <section class="slide-content"><h2 id="what-are-we-trying-to-do-">What are we trying to do?</h2>
+<p><img src="img/donejs-devices.svg" style="margin: 3em 0; width: 80%;" alt="DoneJS platforms" /></p>
+<h4 id="build-maintainable-high-performance-real-time-web-and-mobile-applications-">Build maintainable, high performance, real time, web and mobile applications.</h4>
+</section>
+  </div>
+  <div class="slide hidden  centered" id="slide-3">
+    <section class="slide-content"><h2 id="history-javascriptmvc">History: JavaScriptMVC</h2>
+<p><img src="img/framework-timeline.png" style="width: 70%;" alt="Framework Timeline"></p>
+</section>
+  </div>
+  <div class="slide hidden  centered" id="slide-4">
+    <section class="slide-content"><h2 id="2015">2015</h2>
+<p><img src="img/donejs-logo-black.svg" style="width: 70%; margin-top: 2em;" alt="Donejs"></p>
+</section>
+  </div>
+  <div class="slide hidden" id="slide-5">
+    <section class="slide-content"><h2 id="comes-with-">Comes with...</h2>
+<ul>
+<li><a href="http://stealjs.com">StealJS</a> - ES6, CJS, and AMD module loader and builder</li>
+<li><a href="http://canjs.com">CanJS</a> - Custom elements and Model-View-ViewModel utilities</li>
+<li><a href="http://jquery.com">jQuery</a> - DOM helpers</li>
+<li><a href="http://jquerypp.com">jQuery++</a> - Extended DOM helpers</li>
+<li><a href="https://qunitjs.com/">QUnit</a> or Mocha - Assertion library</li>
+<li><a href="http://funcunit.com">FuncUnit</a> - Functional tests</li>
+<li><a href="https://github.com/bitovi/testee">Testee</a> - Test runner</li>
+<li><a href="http://documentjs.com">DocumentJS</a> - Documentation</li>
+<li><a href="http://github.com/canjs/ssr">can-ssr</a> - Server-Side Rendering Utilities for CanJS</li>
+<li><a href="https://github.com/canjs/can-connect">can-connect</a> - Assemble real-time, high performance, restful data connections.</li>
+</ul>
+</section>
+  </div>
+  <div class="slide hidden" id="slide-6">
+    <section class="slide-content"><h2 id="application-features">Application features</h2>
+<ul>
+<li>Universal (same code on server and client)</li>
+<li>Pushstate routing</li>
+<li>Real Time</li>
+<li>Run everywhere ( IE9+, Andriod, iOS, node-webkit )</li>
+</ul>
+</section>
+  </div>
+  <div class="slide hidden" id="slide-7">
+    <section class="slide-content"><h2 id="performance-features">Performance features</h2>
+<ul>
+<li>Progressive loaded optimized production builds</li>
+<li>Caching and minimal data requests</li>
+<li>Minimal DOM updates</li>
+<li>Application logic in worker thread</li>
+</ul>
+</section>
+  </div>
+  <div class="slide hidden" id="slide-8">
+    <section class="slide-content"><h2 id="maintenance-features">Maintenance features</h2>
+<ul>
+<li>Modlet workflow - tests, docs, and demo pages</li>
+<li>Use and create NPM packages</li>
+<li>Custom HTML elements</li>
+<li>MVVM single direction architecture</li>
+<li>Multi Versioned Documentation</li>
+<li>Live reload</li>
+<li>Functional tests</li>
+</ul>
+</section>
+  </div>
+  <div class="slide hidden  title-page" id="slide-9">
+    <section class="slide-content"><h1 id="from-scratch-">From scratch...</h1>
+</section>
+  </div>
+  <div class="slide hidden" id="slide-10">
+    <section class="slide-content"><h2 id="npm-stealjs">NPM + StealJS</h2>
+<p>Create a new NPM package and install dependencies:</p>
+<pre><code>mkdir place-my-order
+cd place-my-order
+npm init
+npm install steal can --save</code></pre>
+<p>Create <code>index.html</code>:</p>
+<pre><code class="lang-javascript">&lt;!DOCTYPE html&gt;
+<span class="xml"><span class="tag">&lt;<span class="title">html</span>&gt;</span>
+  <span class="tag">&lt;<span class="title">head</span>&gt;</span>
+    <span class="tag">&lt;<span class="title">title</span>&gt;</span>Place My Order<span class="tag">&lt;/<span class="title">title</span>&gt;</span>
+  <span class="tag">&lt;/<span class="title">head</span>&gt;</span>
+  <span class="tag">&lt;<span class="title">body</span>&gt;</span>
+    <span class="tag">&lt;<span class="title">script</span> <span class="attribute">src</span>=<span class="value">"node_modules/steal/steal.js"</span>&gt;</span><span class="javascript"></span><span class="tag">&lt;/<span class="title">script</span>&gt;</span>
+  <span class="tag">&lt;/<span class="title">body</span>&gt;</span>
+<span class="tag">&lt;/<span class="title">html</span>&gt;</span></span></code></pre>
+</section>
+  </div>
+  <div class="slide hidden" id="slide-11">
+    <section class="slide-content"><h2 id="app-js-and-main-template">app.js and main template</h2>
+<p>Add <code>app.js</code>:</p>
+<pre><code class="lang-javascript">import $ from <span class="string">'jquery'</span>;
+import Map from <span class="string">'can/map/'</span>;
+import template from <span class="string">'./index.stache!'</span>;
+
+<span class="keyword">let</span> state = <span class="keyword">new</span> Map({
+    message: <span class="string">'Hello world'</span>
+});
+
+$(<span class="string">'body'</span>).append(template(state));</code></pre>
+<p>And the template in <code>index.stache</code>:</p>
+<pre><code class="lang-javascript">&lt;h1&gt;{{message}}&lt;<span class="regexp">/h1&gt;</code></pre>
+</section>
+  </div>
+  <div class="slide hidden  title-page" id="slide-12">
+    <section class="slide-content"><h1 id="creating-a-donejs-application">Creating a DoneJS application</h1>
+</section>
+  </div>
+  <div class="slide hidden" id="slide-13">
+    <section class="slide-content"><h2 id="the-donejs-cli">The DoneJS CLI</h2>
+<p>A command line utility that is used to execute generators and other scripts <em>installed locally in your project</em>:</p>
+<pre><code>npm install donejs -g</code></pre>
+<ul>
+<li><code>donejs init [appname]</code> initializes a new application in the current or <code>appname</code> folder.</li>
+<li><code>donejs generate</code> runs generators from <a href="https://github.com/donejs/generator-donejs">generator-donejs</a></li>
+<li><code>donejs &lt;script&gt;</code> runs scripts declared in your <code>package.json</code></li>
+<li>if no script is found it will try to run the local <code>donejs-</code> prefixed binary (<code>node_modules/.bin/donejs-&lt;script&gt;</code>)</li>
+</ul>
+<p><strong>Example: Development mode</strong></p>
+<pre><code>donejs develop</code></pre>
+</section>
+  </div>
+  <div class="slide hidden" id="slide-14">
+    <section class="slide-content"><h2 id="generator-donejs">generator-donejs</h2>
+<p>A <a href="http://yeoman.io/">Yeoman</a> generator for the application, components and models.</p>
+<pre><code class="lang-javascript"><span class="keyword">var</span> generators = require(<span class="string">'yeoman-generator'</span>);
+<span class="keyword">var</span> path = require(<span class="string">'path'</span>);
+
+module.exports = generators.Base.extend({
+  prompting() {
+        <span class="keyword">this</span>.prompt({
+            name: <span class="string">'name'</span>, type: String, required: <span class="literal">true</span>,
+            message: <span class="string">'The name for you model (e.g. order)'</span>
+        }, prompts =&gt; {
+            <span class="keyword">this</span>.name = prompts.name;
+            done();
+        });
+  },
+
+  writing() {
+    <span class="keyword">this</span>.fs.copyTpl(<span class="keyword">this</span>.templatePath(<span class="string">'mymodel.js'</span>),
+      <span class="keyword">this</span>.destinationPath(path.join(<span class="string">'models'</span>, <span class="string">'mymodel.js'</span>)),
+      { data }
+    );
+  }
+});</code></pre>
+</section>
+  </div>
+  <div class="slide hidden  centered" id="slide-15">
+    <section class="slide-content"><h2 id="assets-and-api">Assets and API</h2>
+<p><img src="img/feathers-logo.png" style="width: 50%; margin-top: 1em;" alt="Feathers logo" /></p>
+<h2 id="-">+</h2>
+<p><img src="img/less-logo.png" style="width: 50%;" alt="Less logo" /></p>
+</section>
+  </div>
+  <div class="slide hidden  title-page" id="slide-16">
+    <section class="slide-content"><h1>Custom elements <br><small>aka &lt;components /&gt;</small></h1></section>
+  </div>
+  <div class="slide hidden  centered" id="slide-17">
+    <section class="slide-content"><h2 id="modlet-workflows">Modlet workflows</h2>
+<p><img src="img/modlet.png" alt="modlets"></p>
+</section>
+  </div>
+  <div class="slide hidden  centered" id="slide-18">
+    <section class="slide-content"><h2 id="not-modlets">Not Modlets</h2>
+<p><img src="img/modlet/before.png" alt="modlet-before"></p>
+</section>
+  </div>
+  <div class="slide hidden  centered" id="slide-19">
+    <section class="slide-content"><h2 id="modlets-">Modlets!</h2>
+<p><img src="img/modlet/after.png" alt="modlet-after"></p>
+</section>
+  </div>
+  <div class="slide hidden" id="slide-20">
+    <section class="slide-content"><h2 id="done-component">done-component</h2>
+</section>
+  </div>
+  <div class="slide hidden" id="slide-21">
+    <section class="slide-content"><h2 id="modlet-components">Modlet components</h2>
+</section>
+  </div>
+  <div class="slide hidden  title-page" id="slide-22">
+    <section class="slide-content"><h1 id="routing">Routing</h1>
+</section>
+  </div>
+  <div class="slide hidden" id="slide-23">
+    <section class="slide-content"><h2 id="canjs-2-3">CanJS 2.3</h2>
+<ul>
+<li><a href="http://canjs.com/2.3-pre/docs/can.view.href.html">can-href</a></li>
+<li><a href="http://canjs.com/2.3-pre/docs/can%7Cview%7Cstache%7Csystem.import.html">&lt;can-import /&gt;</a></li>
+<li>Stache sub-expressions (<code>{{#helper1 (helper2 prop test) &#39;arg&#39;}}</code>)</li>
+<li>Base URL helper <a href="http://canjs.com/2.3-pre/docs/can.stache.helpers.tilde.html">{{~}}</a></li>
+<li><code>switch</code> statements<ul>
+<li><a href="http://canjs.com/2.3-pre/docs/can.stache.helpers.switch.html">{{#switch}}</a></li>
+<li><a href="http://canjs.com/2.3-pre/docs/can.stache.helpers.case.html">{{#case}}</a></li>
+<li><a href="http://canjs.com/2.3-pre/docs/can.stache.helpers.default.html">{{#default}}</a></li>
+</ul>
+</li>
+</ul>
+</section>
+  </div>
+  <div class="slide hidden" id="slide-24">
+    <section class="slide-content"><h2 id="routes-vs-application-state">Routes vs. application state</h2>
+<pre><code class="lang-javascript">route.deparam(<span class="string">'/home'</span>)
+<span class="comment">// -&gt; { page: 'home' }</span>
+route.deparam(<span class="string">'/restaurants/cheese-city/order'</span>)
+<span class="comment">// -&gt; { page: 'restaurants', slug: 'cheese-city', action: 'order' }</span>
+
+state.attr({ page: <span class="string">'order-history'</span> })
+<span class="comment">// -&gt; /order-history</span>
+state.attr({ page: <span class="string">'restaurants'</span>, slug: <span class="string">'cheese-city'</span> })
+<span class="comment">// -&gt; /restaurants/cheese-city</span>
+route.attr({
+    page: <span class="string">'restaurants'</span>,
+    state: <span class="string">'IL'</span>,
+    city: <span class="string">'Chicago'</span>
+})
+<span class="comment">// -&gt; /restaurants?state=IL&amp;city=Chicago</span></code></pre>
+</section>
+  </div>
+  <div class="slide hidden  title-page" id="slide-25">
+    <section class="slide-content"><h1 id="creating-a-view-model">Creating a view-model</h1>
+</section>
+  </div>
+  <div class="slide hidden" id="slide-26">
+    <section class="slide-content"><h2 id="view-model-state">View model state</h2>
+<pre><code class="lang-javascript">{
+    states: Promise&lt;[State]&gt;
+    state: String "IL”,
+    cities: Promise&lt;[City]&gt;,
+    city: String "Chicago”,
+    restaurants: Promise&lt;[Restaurant]&gt;
+}</code></pre>
+</section>
+  </div>
+  <div class="slide hidden" id="slide-27">
+    <section class="slide-content"><h2 id="fixtures">fixtures</h2>
+</section>
+  </div>
+  <div class="slide hidden  title-page" id="slide-28">
+    <section class="slide-content"><h1 id="component-communication">Component communication</h1>
+</section>
+  </div>
+  <div class="slide hidden" id="slide-29">
+    <section class="slide-content"><h2 id="child-to-parent">Child to parent</h2>
+<h3 id="children-get-parent-view-model">Children get parent view model</h3>
+<pre><code>&lt;parent #parent&gt;
+    &lt;child parent=&quot;{parent}&quot;/&gt;
+&lt;/parent&gt;</code></pre>
+<p>leakScope?</p>
+<h3 id="child-view-model-to-parent">Child view model to parent</h3>
+<pre><code>&lt;parent&gt;
+    &lt;child (saved)=&quot;{parentMethod}&quot;/&gt;
+&lt;/parent&gt;
+
+viewModel: {
+    saveItem: function(item){
+        item.save().then(()=&gt;{
+          this.dispatch(&quot;saved&quot;,[item])
+        })
+    }
+},
+events: {
+    inserted: function(){
+        this.viewModel.attr(&quot;element&quot;, this.element)
+    },
+    &quot;{scope} saved&quot;: function(viewModel, ev, item){
+        this.element.trigger(&quot;saved&quot;,[viewModel].concat(arguments.slice(2)));
+    }
+}</code></pre>
+<ul>
+<li>testing .. you need an element</li>
+</ul>
+</section>
+  </div>
+  <div class="slide hidden" id="slide-30">
+    <section class="slide-content"><h2 id="parent-to-child">Parent to child</h2>
+<h3 id="view-scope">view scope</h3>
+<pre><code>&lt;editor toolbar=&quot;{toolbar}&quot;&gt;
+    &lt;toolbar #toolbar=&quot;{.}&quot;&gt;
+    &lt;rich-text #rich-text=&quot;{.}&quot;&gt;
+&lt;/editor&gt;
+
+Editor{
+    viewModel: {
+        refresh: function(){
+            this.attr(&quot;toolbar&quot;).refresh();
+            this.attr(&quot;richText&quot;).refresh()
+        }
+    }
+}</code></pre>
+<h3 id="add-to-parent-view-model-method-bit-tabs-">add to parent view model method (bit-tabs)</h3>
+<pre><code>events: {
+    inserted: function(){
+
+    }
+}</code></pre>
+</section>
+  </div>
+  <div class="slide hidden" id="slide-31">
+    <section class="slide-content"><h2 id="sibling-to-sibling">Sibling to sibling</h2>
+<p>instantiate_4</p>
+</section>
+  </div>
+  <div class="slide hidden" id="slide-32">
+    <section class="slide-content"><h2 id="broadcast-">Broadcast?</h2>
+<p>anti-pattern</p>
+<pre><code>.attr(&quot;@root&quot;).dispatch(&quot;error&quot;)
+
+&quot;{@root} error&quot;</code></pre>
+</section>
+  </div>
+  <div class="slide hidden" id="slide-33">
+    <section class="slide-content"><h1 id="testing-and-ci">Testing and CI</h1>
+</section>
+  </div>
+  <div class="slide hidden" id="slide-34">
+    <section class="slide-content"><h1 id="nested-routes">Nested routes</h1>
+</section>
+  </div>
+  <div class="slide hidden" id="slide-35">
+    <section class="slide-content"><h1 id="documentation">Documentation</h1>
+</section>
+  </div>
+  <div class="slide hidden" id="slide-36">
+    <section class="slide-content"><h1 id="deployment">Deployment</h1>
+</section>
+  </div>
+
+
+  <script type="text/javascript">
+    /**
+ * Returns the current page number of the presentation.
+ */
+function currentPosition() {
+  return parseInt(document.querySelector('.slide:not(.hidden)').id.slice(6));
+}
+
+
+/**
+ * Navigates forward n pages
+ * If n is negative, we will navigate in reverse
+ */
+function navigate(n) {
+  var position = currentPosition();
+  var numSlides = document.getElementsByClassName('slide').length;
+
+  /* Positions are 1-indexed, so we need to add and subtract 1 */
+  var nextPosition = (position - 1 + n) % numSlides + 1;
+
+  /* Normalize nextPosition in-case of a negative modulo result */
+  nextPosition = (nextPosition - 1 + numSlides) % numSlides + 1;
+
+  document.getElementById('slide-' + position).classList.add('hidden');
+  document.getElementById('slide-' + nextPosition).classList.remove('hidden');
+
+  updateProgress();
+  updateURL();
+  updateTabIndex();
+}
+
+
+/**
+ * Updates the current URL to include a hashtag of the current page number.
+ */
+function updateURL() {
+  window.history.replaceState({} , null, '#' + currentPosition());
+}
+
+
+/**
+ * Sets the progress indicator.
+ */
+function updateProgress() {
+  var progressBar = document.querySelector('.progress-bar');
+
+  if (progressBar !== null) {
+    var numSlides = document.getElementsByClassName('slide').length;
+    var position = currentPosition() - 1;
+    var percent = (numSlides === 1) ? 100 : 100 * position / (numSlides - 1);
+    progressBar.style.width = percent.toString() + '%';
+  }
+}
+
+
+/**
+ * Removes tabindex property from all links on the current slide, sets
+ * tabindex = -1 for all links on other slides. Prevents slides from appearing
+ * out of control.
+ */
+function updateTabIndex() {
+  var allLinks = document.querySelectorAll('.slide a');
+  var position = currentPosition();
+  var currentPageLinks = document.getElementById('slide-' + position).querySelectorAll('a');
+  var i;
+
+  for (i = 0; i < allLinks.length; i++) {
+    allLinks[i].setAttribute('tabindex', -1);
+  }
+
+  for (i = 0; i < currentPageLinks.length; i++) {
+    currentPageLinks[i].removeAttribute('tabindex');
+  }
+}
+
+/**
+ * Determines whether or not we are currently in full screen mode
+ */
+function isFullScreen() {
+  return document.fullscreenElement ||
+         document.mozFullScreenElement ||
+         document.webkitFullscreenElement ||
+         document.msFullscreenElement;
+}
+
+/**
+ * Toggle fullScreen mode on document element.
+ * Works on chrome (>= 15), firefox (>= 9), ie (>= 11), opera(>= 12.1), safari (>= 5).
+ */
+function toggleFullScreen() {
+  /* Convenient renames */
+  var docElem = document.documentElement;
+  var doc = document;
+
+  docElem.requestFullscreen =
+      docElem.requestFullscreen ||
+      docElem.msRequestFullscreen ||
+      docElem.mozRequestFullScreen ||
+      docElem.webkitRequestFullscreen.bind(docElem, Element.ALLOW_KEYBOARD_INPUT);
+
+  doc.exitFullscreen =
+      doc.exitFullscreen ||
+      doc.msExitFullscreen ||
+      doc.mozCancelFullScreen ||
+      doc.webkitExitFullscreen;
+
+  isFullScreen() ? doc.exitFullscreen() : docElem.requestFullscreen();
+}
+
+document.addEventListener('DOMContentLoaded', function () {
+  // Update the tabindex to prevent weird slide transitioning
+  updateTabIndex();
+
+  // If the location hash specifies a page number, go to it.
+  var page = window.location.hash.slice(1);
+  if (page) {
+    navigate(parseInt(page) - 1);
+  }
+
+  document.onkeydown = function (e) {
+    var kc = e.keyCode;
+
+    // left, down, H, J, backspace, PgUp - BACK
+    // up, right, K, L, space, PgDn - FORWARD
+    // enter - FULLSCREEN
+    if (kc === 37 || kc === 40 || kc === 8 || kc === 72 || kc === 74 || kc === 33) {
+      navigate(-1);
+    } else if (kc === 38 || kc === 39 || kc === 32 || kc === 75 || kc === 76 || kc === 34) {
+      navigate(1);
+    } else if (kc === 13) {
+      toggleFullScreen();
+    }
+  };
+
+  if (document.querySelector('.next') && document.querySelector('.prev')) {
+    document.querySelector('.next').onclick = function (e) {
+      e.preventDefault();
+      navigate(1);
+    };
+
+    document.querySelector('.prev').onclick = function (e) {
+      e.preventDefault();
+      navigate(-1);
+    };
+  }
+});
+
+
+  </script>
+</body>
+</html>

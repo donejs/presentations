@@ -1,0 +1,25 @@
+{
+  "name": "slide-template",
+  "description": "The YYCJS slide template",
+  "version": "0.3.0",
+  "private": true,
+  "homepage": "http://yycjs.com",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:yycjs/slide-template.git"
+  },
+  "engines": {
+    "node": "~0.10.0"
+  },
+  "devDependencies": {
+    "cleaver": "^0.7.4",
+    "grunt-contrib-watch": "~0.3.1",
+    "grunt-exec": "~0.4.0"
+  },
+  "scripts": {
+    "start": "grunt"
+  },
+  "dependencies": {
+    "cleaver": "^0.7.4"
+  }
+}
