@@ -803,22 +803,6 @@ module.exports = generators.Base.extend({
 </section>
   </div>
   <div class="slide hidden" id="slide-23">
-    <section class="slide-content"><h2 id="canjs-2-3">CanJS 2.3</h2>
-<ul>
-<li><a href="http://canjs.com/2.3-pre/docs/can.view.href.html">can-href</a></li>
-<li><a href="http://canjs.com/2.3-pre/docs/can%7Cview%7Cstache%7Csystem.import.html">&lt;can-import /&gt;</a></li>
-<li>Stache sub-expressions (<code>{{#helper1 (helper2 prop test) &#39;arg&#39;}}</code>)</li>
-<li>Base URL helper <a href="http://canjs.com/2.3-pre/docs/can.stache.helpers.tilde.html">{{~}}</a></li>
-<li><code>switch</code> statements<ul>
-<li><a href="http://canjs.com/2.3-pre/docs/can.stache.helpers.switch.html">{{#switch}}</a></li>
-<li><a href="http://canjs.com/2.3-pre/docs/can.stache.helpers.case.html">{{#case}}</a></li>
-<li><a href="http://canjs.com/2.3-pre/docs/can.stache.helpers.default.html">{{#default}}</a></li>
-</ul>
-</li>
-</ul>
-</section>
-  </div>
-  <div class="slide hidden" id="slide-24">
     <section class="slide-content"><h2 id="routes-vs-application-state">Routes vs. application state</h2>
 <pre><code class="lang-javascript">route.deparam(<span class="string">'/home'</span>)
 <span class="comment">// -&gt; { page: 'home' }</span>
@@ -837,11 +821,35 @@ route.attr({
 <span class="comment">// -&gt; /restaurants?state=IL&amp;city=Chicago</span></code></pre>
 </section>
   </div>
-  <div class="slide hidden  title-page" id="slide-25">
+  <div class="slide hidden" id="slide-24">
+    <section class="slide-content"><h2 id="canjs-2-3">CanJS 2.3</h2>
+<ul>
+<li><a href="http://canjs.com/2.3-pre/docs/can.view.href.html">can-href</a></li>
+<li><a href="http://canjs.com/2.3-pre/docs/can.view.bindings.can-EVENT.html">(event)</a> notation</li>
+<li><a href="http://canjs.com/2.3-pre/docs/can.view.bindings.reference.html">#property</a> scope reference importing</li>
+<li><a href="http://canjs.com/2.3-pre/docs/can%7Cview%7Cstache%7Csystem.import.html">&lt;can-import /&gt;</a></li>
+<li>Stache sub-expressions (<code>{{#helper1 (helper2 prop test) &#39;arg&#39;}}</code>)</li>
+<li>Base URL helper <a href="http://canjs.com/2.3-pre/docs/can.stache.helpers.tilde.html">{{~}}</a></li>
+<li><code>switch</code> statements<ul>
+<li><a href="http://canjs.com/2.3-pre/docs/can.stache.helpers.switch.html">{{#switch}}</a></li>
+<li><a href="http://canjs.com/2.3-pre/docs/can.stache.helpers.case.html">{{#case}}</a></li>
+<li><a href="http://canjs.com/2.3-pre/docs/can.stache.helpers.default.html">{{#default}}</a></li>
+</ul>
+</li>
+</ul>
+</section>
+  </div>
+  <div class="slide hidden  title-page centered" id="slide-25">
+    <section class="slide-content"><h1 id="supermodels-">Supermodels!</h1>
+<h2 id="-can-connect-http-connect-canjs-com-"><a href="http://connect.canjs.com/">can-connect</a></h2>
+<p>Model layer utilities for every JavaScript framework! Assemble real-time, high performance, restful data connections.</p>
+</section>
+  </div>
+  <div class="slide hidden  title-page" id="slide-26">
     <section class="slide-content"><h1 id="creating-a-view-model">Creating a view-model</h1>
 </section>
   </div>
-  <div class="slide hidden" id="slide-26">
+  <div class="slide hidden" id="slide-27">
     <section class="slide-content"><h2 id="view-model-state">View model state</h2>
 <pre><code class="lang-javascript">{
     states: Promise&lt;[State]&gt;
@@ -852,25 +860,39 @@ route.attr({
 }</code></pre>
 </section>
   </div>
-  <div class="slide hidden" id="slide-27">
+  <div class="slide hidden" id="slide-28">
     <section class="slide-content"><h2 id="fixtures">fixtures</h2>
+<p><code>fixtures.store</code> creates a complete REST mock service:</p>
+<pre><code class="lang-javascript">import fixture from <span class="string">'can-connect/fixture/'</span>;
+
+<span class="keyword">const</span> store = fixture.store([ data ]);
+
+fixture({
+  <span class="string">'GET /orders'</span>: store.findAll,
+  <span class="string">'GET /orders/{id}'</span>: store.findOne,
+  <span class="string">'POST /orders'</span>: store.create,
+  <span class="string">'PUT /orders/{id}'</span>: store.update,
+  <span class="string">'DELETE /order/{id}'</span>: store.destroy
+});
+
+export <span class="keyword">default</span> store;</code></pre>
 </section>
   </div>
-  <div class="slide hidden  title-page" id="slide-28">
+  <div class="slide hidden  title-page" id="slide-29">
     <section class="slide-content"><h1 id="component-communication">Component communication</h1>
 </section>
   </div>
-  <div class="slide hidden" id="slide-29">
+  <div class="slide hidden" id="slide-30">
     <section class="slide-content"><h2 id="child-to-parent">Child to parent</h2>
-<h3 id="children-get-parent-view-model">Children get parent view model</h3>
-<pre><code>&lt;parent #parent&gt;
-    &lt;child parent=&quot;{parent}&quot;/&gt;
-&lt;/parent&gt;</code></pre>
-<p>leakScope?</p>
-<h3 id="child-view-model-to-parent">Child view model to parent</h3>
-<pre><code>&lt;parent&gt;
-    &lt;child (saved)=&quot;{parentMethod}&quot;/&gt;
-&lt;/parent&gt;
+<h4 id="children-get-parent-view-model">Children get parent view model</h4>
+<pre><code class="lang-javascript">&lt;parent-component&gt;
+    <span class="xml"><span class="tag">&lt;<span class="title">child-component</span> <span class="attribute">parent</span>=<span class="value">"{.}"</span>/&gt;</span>
+<span class="tag">&lt;/<span class="title">parent-component</span>&gt;</span></span></code></pre>
+<p><a href="http://jsbin.com/cimifoxeku/edit?js,output">JSBin</a></p>
+<h4 id="child-view-model-sends-dom-events">Child view model sends DOM events</h4>
+<pre><code>&lt;parent-component&gt;
+    &lt;child-component (saved)=&quot;{parentMethod}&quot;/&gt;
+&lt;/parent-component&gt;
 
 viewModel: {
     saveItem: function(item){
@@ -892,7 +914,7 @@ events: {
 </ul>
 </section>
   </div>
-  <div class="slide hidden" id="slide-30">
+  <div class="slide hidden" id="slide-31">
     <section class="slide-content"><h2 id="parent-to-child">Parent to child</h2>
 <h3 id="view-scope">view scope</h3>
 <pre><code>&lt;editor toolbar=&quot;{toolbar}&quot;&gt;
@@ -916,12 +938,12 @@ Editor{
 }</code></pre>
 </section>
   </div>
-  <div class="slide hidden" id="slide-31">
+  <div class="slide hidden" id="slide-32">
     <section class="slide-content"><h2 id="sibling-to-sibling">Sibling to sibling</h2>
 <p>instantiate_4</p>
 </section>
   </div>
-  <div class="slide hidden" id="slide-32">
+  <div class="slide hidden" id="slide-33">
     <section class="slide-content"><h2 id="broadcast-">Broadcast?</h2>
 <p>anti-pattern</p>
 <pre><code>.attr(&quot;@root&quot;).dispatch(&quot;error&quot;)
@@ -929,19 +951,19 @@ Editor{
 &quot;{@root} error&quot;</code></pre>
 </section>
   </div>
-  <div class="slide hidden" id="slide-33">
-    <section class="slide-content"><h1 id="testing-and-ci">Testing and CI</h1>
-</section>
-  </div>
-  <div class="slide hidden" id="slide-34">
+  <div class="slide hidden  title-page" id="slide-34">
     <section class="slide-content"><h1 id="nested-routes">Nested routes</h1>
 </section>
   </div>
-  <div class="slide hidden" id="slide-35">
+  <div class="slide hidden  title-page" id="slide-35">
+    <section class="slide-content"><h1 id="testing-and-ci">Testing and CI</h1>
+</section>
+  </div>
+  <div class="slide hidden  title-page" id="slide-36">
     <section class="slide-content"><h1 id="documentation">Documentation</h1>
 </section>
   </div>
-  <div class="slide hidden" id="slide-36">
+  <div class="slide hidden  title-page" id="slide-37">
     <section class="slide-content"><h1 id="deployment">Deployment</h1>
 </section>
   </div>

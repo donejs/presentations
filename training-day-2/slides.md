@@ -234,19 +234,6 @@ module.exports = generators.Base.extend({
 
 --
 
-## CanJS 2.3
-
-- [can-href](http://canjs.com/2.3-pre/docs/can.view.href.html)
-- [&lt;can-import /&gt;](http://canjs.com/2.3-pre/docs/can%7Cview%7Cstache%7Csystem.import.html)
-- Stache sub-expressions (`{{#helper1 (helper2 prop test) 'arg'}}`)
-- Base URL helper [{{~}}](http://canjs.com/2.3-pre/docs/can.stache.helpers.tilde.html)
-- `switch` statements
-    - [{{#switch}}](http://canjs.com/2.3-pre/docs/can.stache.helpers.switch.html)
-    - [{{#case}}](http://canjs.com/2.3-pre/docs/can.stache.helpers.case.html)
-    - [{{#default}}](http://canjs.com/2.3-pre/docs/can.stache.helpers.default.html)
-
---
-
 ## Routes vs. application state
 
 ```javascript
@@ -266,6 +253,29 @@ route.attr({
 })
 // -> /restaurants?state=IL&city=Chicago
 ```
+
+--
+
+## CanJS 2.3
+
+- [can-href](http://canjs.com/2.3-pre/docs/can.view.href.html)
+- [(event)](http://canjs.com/2.3-pre/docs/can.view.bindings.can-EVENT.html) notation
+- [#property](http://canjs.com/2.3-pre/docs/can.view.bindings.reference.html) scope reference importing
+- [&lt;can-import /&gt;](http://canjs.com/2.3-pre/docs/can%7Cview%7Cstache%7Csystem.import.html)
+- Stache sub-expressions (`{{#helper1 (helper2 prop test) 'arg'}}`)
+- Base URL helper [{{~}}](http://canjs.com/2.3-pre/docs/can.stache.helpers.tilde.html)
+- `switch` statements
+    - [{{#switch}}](http://canjs.com/2.3-pre/docs/can.stache.helpers.switch.html)
+    - [{{#case}}](http://canjs.com/2.3-pre/docs/can.stache.helpers.case.html)
+    - [{{#default}}](http://canjs.com/2.3-pre/docs/can.stache.helpers.default.html)
+
+-- title-page centered
+
+# Supermodels!
+
+## [can-connect](http://connect.canjs.com/)
+
+Model layer utilities for every JavaScript framework! Assemble real-time, high performance, restful data connections.
 
 -- title-page
 
@@ -289,6 +299,24 @@ route.attr({
 
 ## fixtures
 
+`fixtures.store` creates a complete REST mock service:
+
+```javascript
+import fixture from 'can-connect/fixture/';
+
+const store = fixture.store([ data ]);
+
+fixture({
+  'GET /orders': store.findAll,
+  'GET /orders/{id}': store.findOne,
+  'POST /orders': store.create,
+  'PUT /orders/{id}': store.update,
+  'DELETE /order/{id}': store.destroy
+});
+
+export default store;
+```
+
 -- title-page
 
 # Component communication
@@ -297,21 +325,22 @@ route.attr({
 
 ## Child to parent
 
-### Children get parent view model
+#### Children get parent view model
+
+```javascript
+<parent-component>
+	<child-component parent="{.}"/>
+</parent-component>
+```
+
+[JSBin](http://jsbin.com/cimifoxeku/edit?js,output)
+
+#### Child view model sends DOM events
 
 ```
-<parent #parent>
-	<child parent="{parent}"/>
-</parent>
-```
-leakScope?
-
-### Child view model to parent
-
-```
-<parent>
-	<child (saved)="{parentMethod}"/>
-</parent>
+<parent-component>
+	<child-component (saved)="{parentMethod}"/>
+</parent-component>
 
 viewModel: {
 	saveItem: function(item){
@@ -375,24 +404,25 @@ instantiate_4
 ## Broadcast?
 
 anti-pattern
+
 ```
 .attr("@root").dispatch("error")
 
 "{@root} error"
 ```
 
---
-
-# Testing and CI
-
---
+-- title-page
 
 # Nested routes
 
---
+-- title-page
+
+# Testing and CI
+
+-- title-page
 
 # Documentation
 
---
+-- title-page
 
 # Deployment
