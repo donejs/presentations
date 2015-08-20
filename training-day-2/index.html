@@ -746,7 +746,7 @@ $(<span class="string">'body'</span>).append(template(state));</code></pre>
 <span class="keyword">var</span> path = require(<span class="string">'path'</span>);
 
 module.exports = generators.Base.extend({
-  prompting() {
+    prompting() {
         <span class="keyword">this</span>.prompt({
             name: <span class="string">'name'</span>, type: String, required: <span class="literal">true</span>,
             message: <span class="string">'The name for you model (e.g. order)'</span>
@@ -754,55 +754,97 @@ module.exports = generators.Base.extend({
             <span class="keyword">this</span>.name = prompts.name;
             done();
         });
-  },
+    },
 
-  writing() {
-    <span class="keyword">this</span>.fs.copyTpl(<span class="keyword">this</span>.templatePath(<span class="string">'mymodel.js'</span>),
-      <span class="keyword">this</span>.destinationPath(path.join(<span class="string">'models'</span>, <span class="string">'mymodel.js'</span>)),
-      { data }
-    );
-  }
+    writing() {
+            <span class="keyword">this</span>.fs.copyTpl(<span class="keyword">this</span>.templatePath(<span class="string">'mymodel.js'</span>),
+            <span class="keyword">this</span>.destinationPath(path.join(<span class="string">'models'</span>, <span class="string">'mymodel.js'</span>)),
+            { data }
+        );
+    }
 });</code></pre>
 </section>
   </div>
-  <div class="slide hidden  centered" id="slide-15">
+  <div class="slide hidden" id="slide-15">
+    <section class="slide-content"><h2 id="project-structure">Project structure</h2>
+<ul>
+<li><code>package.json</code> - main configuration</li>
+<li><code>test.html</code> - global test page</li>
+<li><code>documentjs.json</code> - Documentation</li>
+<li><code>src</code> - development asset folder</li>
+<li><code>src/app.js</code> - main application file</li>
+<li><code>src/index.stache</code> - main template</li>
+<li><code>src/models/</code> - models and fixtures</li>
+<li><code>src/styles.less</code> - main application LESS</li>
+<li><code>src/test/test.js</code> - loads all tests that run in <code>test.html</code></li>
+<li><code>src/test/smoke.js</code> - functional application smoke test</li>
+</ul>
+</section>
+  </div>
+  <div class="slide hidden  centered" id="slide-16">
     <section class="slide-content"><h2 id="assets-and-api">Assets and API</h2>
 <p><img src="img/feathers-logo.png" style="width: 50%; margin-top: 1em;" alt="Feathers logo" /></p>
 <h2 id="-">+</h2>
 <p><img src="img/less-logo.png" style="width: 50%;" alt="Less logo" /></p>
 </section>
   </div>
-  <div class="slide hidden  title-page" id="slide-16">
+  <div class="slide hidden  title-page" id="slide-17">
     <section class="slide-content"><h1>Custom elements <br><small>aka &lt;components /&gt;</small></h1></section>
   </div>
-  <div class="slide hidden  centered" id="slide-17">
+  <div class="slide hidden  centered" id="slide-18">
     <section class="slide-content"><h2 id="modlet-workflows">Modlet workflows</h2>
 <p><img src="img/modlet.png" alt="modlets"></p>
 </section>
   </div>
-  <div class="slide hidden  centered" id="slide-18">
+  <div class="slide hidden  centered" id="slide-19">
     <section class="slide-content"><h2 id="not-modlets">Not Modlets</h2>
 <p><img src="img/modlet/before.png" alt="modlet-before"></p>
 </section>
   </div>
-  <div class="slide hidden  centered" id="slide-19">
+  <div class="slide hidden  centered" id="slide-20">
     <section class="slide-content"><h2 id="modlets-">Modlets!</h2>
 <p><img src="img/modlet/after.png" alt="modlet-after"></p>
 </section>
   </div>
-  <div class="slide hidden" id="slide-20">
-    <section class="slide-content"><h2 id="done-component">done-component</h2>
-</section>
-  </div>
   <div class="slide hidden" id="slide-21">
-    <section class="slide-content"><h2 id="modlet-components">Modlet components</h2>
+    <section class="slide-content"><h2 id="benefits">Benefits</h2>
+<ul>
+<li>Easier to identify missing tests or documentation.</li>
+<li>More likely to update tests and documentation.</li>
+<li>Good API design.</li>
+<li>Easier to develop in isolation.</li>
+</ul>
 </section>
   </div>
-  <div class="slide hidden  title-page" id="slide-22">
-    <section class="slide-content"><h1 id="routing">Routing</h1>
+  <div class="slide hidden" id="slide-22">
+    <section class="slide-content"><h2 id="done-component">done-component</h2>
+<p>A StealJS plugin that allows composing CanJS Components in a single file:</p>
+<pre><code class="lang-javascript">&lt;can-component tag=<span class="string">"hello-greeting"</span>&gt;
+  <span class="xml"><span class="tag">&lt;<span class="title">template</span>&gt;</span>
+    <span class="tag">&lt;<span class="title">h1</span>&gt;</span>Hello {{name}}!<span class="tag">&lt;/<span class="title">h1</span>&gt;</span>
+  <span class="tag">&lt;/<span class="title">template</span>&gt;</span>
+  <span class="tag">&lt;<span class="title">view-model</span>&gt;</span>
+    import Map from "can/map/";
+
+    export default Map.extend({ name: "" });
+  <span class="tag">&lt;/<span class="title">view-model</span>&gt;</span>
+<span class="tag">&lt;/<span class="title">can-component</span>&gt;</span></span></code></pre>
+<pre><code class="lang-javascript">import { ViewModel, template } from <span class="string">"hello-world.component!"</span>;
+
+<span class="keyword">const</span> vm = <span class="keyword">new</span> ViewModel();
+
+console.log(template(vm));</code></pre>
 </section>
   </div>
   <div class="slide hidden" id="slide-23">
+    <section class="slide-content"><h2 id="modlet-components">Modlet components</h2>
+</section>
+  </div>
+  <div class="slide hidden  title-page" id="slide-24">
+    <section class="slide-content"><h1 id="routing">Routing</h1>
+</section>
+  </div>
+  <div class="slide hidden" id="slide-25">
     <section class="slide-content"><h2 id="routes-vs-application-state">Routes vs. application state</h2>
 <pre><code class="lang-javascript">route.deparam(<span class="string">'/home'</span>)
 <span class="comment">// -&gt; { page: 'home' }</span>
@@ -821,7 +863,7 @@ route.attr({
 <span class="comment">// -&gt; /restaurants?state=IL&amp;city=Chicago</span></code></pre>
 </section>
   </div>
-  <div class="slide hidden" id="slide-24">
+  <div class="slide hidden" id="slide-26">
     <section class="slide-content"><h2 id="canjs-2-3">CanJS 2.3</h2>
 <ul>
 <li><a href="http://canjs.com/2.3-pre/docs/can.view.href.html">can-href</a></li>
@@ -839,17 +881,133 @@ route.attr({
 </ul>
 </section>
   </div>
-  <div class="slide hidden  title-page centered" id="slide-25">
+  <div class="slide hidden" id="slide-27">
+    <section class="slide-content"><h2 id="routing-in-templates">Routing in templates</h2>
+<pre><code class="lang-javascript">{{#<span class="keyword">switch</span> page}}
+    {{#<span class="keyword">case</span> <span class="string">'home'</span>}}
+        &lt;pmo-home&gt;<span class="xml"><span class="tag">&lt;/<span class="title">pmo-home</span>&gt;</span>
+    {{/case}}
+    {{#case 'restaurants'}}
+        <span class="tag">&lt;<span class="title">can-import</span> <span class="attribute">from</span>=<span class="value">"pmo/restaurant/list/"</span> <span class="attribute">can-tag</span>=<span class="value">"pmo-loading"</span>&gt;</span>
+            <span class="tag">&lt;<span class="title">pmo-restaurant-list</span>&gt;</span><span class="tag">&lt;/<span class="title">pmo-restaurant-list</span>&gt;</span>
+        <span class="tag">&lt;/<span class="title">can-import</span>&gt;</span>
+    {{/case}}
+{{/switch}}</span></code></pre>
+</section>
+  </div>
+  <div class="slide hidden  title-page" id="slide-28">
+    <section class="slide-content"><h1 id="component-communication">Component communication</h1>
+</section>
+  </div>
+  <div class="slide hidden" id="slide-29">
+    <section class="slide-content"><h2 id="child-knows-about-parent">Child knows about parent</h2>
+<h4 id="children-get-parent-view-model">Children get parent view model</h4>
+<pre><code class="lang-javascript">&lt;parent-component&gt;
+    <span class="xml"><span class="tag">&lt;<span class="title">child-component</span> <span class="attribute">parent</span>=<span class="value">"{.}"</span>/&gt;</span>
+<span class="tag">&lt;/<span class="title">parent-component</span>&gt;</span></span></code></pre>
+<p><a href="http://jsbin.com/sefame/edit?js,output">JSBin</a></p>
+</section>
+  </div>
+  <div class="slide hidden" id="slide-30">
+    <section class="slide-content"><h2 id="child-knows-about-parent-2">Child knows about parent #2</h2>
+<h4 id="register-on-inserted">Register on inserted</h4>
+<pre><code class="lang-javascript">events: {
+    inserted: <span class="keyword">function</span>() {
+        <span class="keyword">var</span> parent = <span class="keyword">this</span>.element.parent().viewModel();
+        <span class="keyword">this</span>.viewModel.attr(<span class="string">'parent'</span>, parent);
+    }
+}</code></pre>
+<p><a href="http://jsbin.com/wabahi/edit?js,output">JSBin</a></p>
+</section>
+  </div>
+  <div class="slide hidden" id="slide-31">
+    <section class="slide-content"><h2 id="parent-knows-about-children">Parent knows about children</h2>
+<h4 id="importing-a-reference">Importing a reference</h4>
+<pre><code class="lang-javascript">&lt;app-editor toolbar=<span class="string">"{toolbar}"</span> rich-text=<span class="string">"{rich-text}"</span>&gt;
+    <span class="xml"><span class="tag">&lt;<span class="title">app-toolbar</span> #<span class="attribute">toolbar</span>=<span class="value">"{.}"</span>&gt;</span>
+    <span class="tag">&lt;<span class="title">app-rich-text</span> #<span class="attribute">rich-text</span>=<span class="value">"{.}"</span>&gt;</span>
+<span class="tag">&lt;/<span class="title">app-editor</span>&gt;</span></span></code></pre>
+<pre><code class="lang-javascript">{
+    viewModel: {
+        refresh: <span class="keyword">function</span>(){
+            <span class="keyword">this</span>.attr(<span class="string">"toolbar"</span>).refresh();
+            <span class="keyword">this</span>.attr(<span class="string">"richText"</span>).refresh()
+        }
+    }
+}</code></pre>
+</section>
+  </div>
+  <div class="slide hidden" id="slide-32">
+    <section class="slide-content"><h2 id="sibling-to-sibling">Sibling to sibling</h2>
+<pre><code class="lang-javascript">&lt;app-editor #editor=<span class="string">"{.}"</span> /&gt;
+<span class="xml"><span class="tag">&lt;<span class="title">app-toolbar</span> <span class="attribute">editor</span>=<span class="value">"{editor}"</span> /&gt;</span></span></code></pre>
+<pre><code class="lang-javascript">viewModel: {
+    refresh: <span class="keyword">function</span>() {
+        <span class="keyword">this</span>.attr(<span class="string">'editor'</span>).refresh();
+    }
+}</code></pre>
+<p><a href="http://jsbin.com/diwiju/edit?js,output">JSBin</a></p>
+</section>
+  </div>
+  <div class="slide hidden" id="slide-33">
+    <section class="slide-content"><h2 id="broadcast">Broadcast</h2>
+<p>Access <code>@root</code> view model.</p>
+<pre><code class="lang-javascript">viewModel: {
+    refresh: <span class="keyword">function</span>() {
+        <span class="keyword">this</span>.attr(<span class="string">'@root.error'</span>, <span class="string">'This is a global error'</span>);
+    }
+}</code></pre>
+<p><em>Avoid if possible</em></p>
+<p><a href="http://jsbin.com/tizeqa/edit?html,js,output">JSBin</a></p>
+</section>
+  </div>
+  <div class="slide hidden" id="slide-34">
+    <section class="slide-content"><h2 id="sending-events-to-parents">Sending events to parents</h2>
+<pre><code class="lang-javascript">&lt;parent-component (saved)=<span class="string">"{parentMethod}"</span>&gt;
+    <span class="xml"><span class="tag">&lt;<span class="title">child-component</span> /&gt;</span>
+<span class="tag">&lt;/<span class="title">parent-component</span>&gt;</span></span></code></pre>
+<p>child-component:</p>
+<pre><code class="lang-javascript">viewModel: {
+    saveItem: <span class="keyword">function</span>(item) {
+        can.dispatch.call(<span class="keyword">this</span>, <span class="string">"saved"</span>, [item]);
+    }
+},
+events: {
+    <span class="string">"{viewModel} saved"</span>: <span class="keyword">function</span>(viewModel, ev, item) {
+        <span class="keyword">this</span>.element.trigger(<span class="string">"saved"</span>, item);
+    }
+}</code></pre>
+<p><a href="http://jsbin.com/biroxe/edit?js,output">JSBin</a></p>
+</section>
+  </div>
+  <div class="slide hidden" id="slide-35">
+    <section class="slide-content"><h2 id="sending-events-to-children">Sending events to children</h2>
+<h4 id="-jquery-http-jquerypp-com-event-reverse"><a href="http://jquerypp.com/">jQuery++</a> event reverse</h4>
+<pre><code class="lang-javascript">$.event.reverse(<span class="string">'refresh'</span>);
+
+viewModel: {
+  refresh: <span class="keyword">function</span>(item) {
+    can.dispatch.call(<span class="keyword">this</span>, <span class="string">"refresh"</span>, [item]);
+  }
+},
+events: {
+  <span class="string">"{viewModel} refresh"</span>: <span class="keyword">function</span>(viewModel, ev, item) {
+    <span class="keyword">this</span>.element.trigger(<span class="string">"refresh"</span>, item);
+  }
+}</code></pre>
+</section>
+  </div>
+  <div class="slide hidden  title-page centered" id="slide-36">
     <section class="slide-content"><h1 id="supermodels-">Supermodels!</h1>
 <h2 id="-can-connect-http-connect-canjs-com-"><a href="http://connect.canjs.com/">can-connect</a></h2>
 <p>Model layer utilities for every JavaScript framework! Assemble real-time, high performance, restful data connections.</p>
 </section>
   </div>
-  <div class="slide hidden  title-page" id="slide-26">
+  <div class="slide hidden  title-page" id="slide-37">
     <section class="slide-content"><h1 id="creating-a-view-model">Creating a view-model</h1>
 </section>
   </div>
-  <div class="slide hidden" id="slide-27">
+  <div class="slide hidden" id="slide-38">
     <section class="slide-content"><h2 id="view-model-state">View model state</h2>
 <pre><code class="lang-javascript">{
     states: Promise&lt;[State]&gt;
@@ -860,7 +1018,7 @@ route.attr({
 }</code></pre>
 </section>
   </div>
-  <div class="slide hidden" id="slide-28">
+  <div class="slide hidden" id="slide-39">
     <section class="slide-content"><h2 id="fixtures">fixtures</h2>
 <p><code>fixtures.store</code> creates a complete REST mock service:</p>
 <pre><code class="lang-javascript">import fixture from <span class="string">'can-connect/fixture/'</span>;
@@ -878,92 +1036,92 @@ fixture({
 export <span class="keyword">default</span> store;</code></pre>
 </section>
   </div>
-  <div class="slide hidden  title-page" id="slide-29">
-    <section class="slide-content"><h1 id="component-communication">Component communication</h1>
-</section>
-  </div>
-  <div class="slide hidden" id="slide-30">
-    <section class="slide-content"><h2 id="child-to-parent">Child to parent</h2>
-<h4 id="children-get-parent-view-model">Children get parent view model</h4>
-<pre><code class="lang-javascript">&lt;parent-component&gt;
-    <span class="xml"><span class="tag">&lt;<span class="title">child-component</span> <span class="attribute">parent</span>=<span class="value">"{.}"</span>/&gt;</span>
-<span class="tag">&lt;/<span class="title">parent-component</span>&gt;</span></span></code></pre>
-<p><a href="http://jsbin.com/cimifoxeku/edit?js,output">JSBin</a></p>
-<h4 id="child-view-model-sends-dom-events">Child view model sends DOM events</h4>
-<pre><code>&lt;parent-component&gt;
-    &lt;child-component (saved)=&quot;{parentMethod}&quot;/&gt;
-&lt;/parent-component&gt;
+  <div class="slide hidden" id="slide-40">
+    <section class="slide-content"><h2 id="unit-tests">Unit tests</h2>
+<pre><code class="lang-javascript">import QUnit from <span class="string">'steal-qunit'</span>;
+import cityStore from <span class="string">'place-my-order/models/fixtures/city'</span>;
+import stateStore from <span class="string">'place-my-order/models/fixtures/state'</span>;
+import restaurantStore from <span class="string">'place-my-order/models/fixtures/restaurant'</span>;
+import { ViewModel } from <span class="string">'./list'</span>;
 
-viewModel: {
-    saveItem: function(item){
-        item.save().then(()=&gt;{
-          this.dispatch(&quot;saved&quot;,[item])
-        })
-    }
-},
-events: {
-    inserted: function(){
-        this.viewModel.attr(&quot;element&quot;, this.element)
-    },
-    &quot;{scope} saved&quot;: function(viewModel, ev, item){
-        this.element.trigger(&quot;saved&quot;,[viewModel].concat(arguments.slice(2)));
-    }
-}</code></pre>
-<ul>
-<li>testing .. you need an element</li>
-</ul>
+QUnit.module(<span class="string">'place-my-order/restaurant/list'</span>, {
+  beforeEach() {
+    localStorage.clear();
+  }
+});</code></pre>
 </section>
   </div>
-  <div class="slide hidden" id="slide-31">
-    <section class="slide-content"><h2 id="parent-to-child">Parent to child</h2>
-<h3 id="view-scope">view scope</h3>
-<pre><code>&lt;editor toolbar=&quot;{toolbar}&quot;&gt;
-    &lt;toolbar #toolbar=&quot;{.}&quot;&gt;
-    &lt;rich-text #rich-text=&quot;{.}&quot;&gt;
-&lt;/editor&gt;
-
-Editor{
-    viewModel: {
-        refresh: function(){
-            this.attr(&quot;toolbar&quot;).refresh();
-            this.attr(&quot;richText&quot;).refresh()
-        }
-    }
-}</code></pre>
-<h3 id="add-to-parent-view-model-method-bit-tabs-">add to parent view model method (bit-tabs)</h3>
-<pre><code>events: {
-    inserted: function(){
-
-    }
-}</code></pre>
-</section>
-  </div>
-  <div class="slide hidden" id="slide-32">
-    <section class="slide-content"><h2 id="sibling-to-sibling">Sibling to sibling</h2>
-<p>instantiate_4</p>
-</section>
-  </div>
-  <div class="slide hidden" id="slide-33">
-    <section class="slide-content"><h2 id="broadcast-">Broadcast?</h2>
-<p>anti-pattern</p>
-<pre><code>.attr(&quot;@root&quot;).dispatch(&quot;error&quot;)
-
-&quot;{@root} error&quot;</code></pre>
-</section>
-  </div>
-  <div class="slide hidden  title-page" id="slide-34">
+  <div class="slide hidden  title-page" id="slide-41">
     <section class="slide-content"><h1 id="nested-routes">Nested routes</h1>
 </section>
   </div>
-  <div class="slide hidden  title-page" id="slide-35">
+  <div class="slide hidden" id="slide-42">
+    <section class="slide-content"><h2 id="in-template-nested-routes">In-template nested routes</h2>
+<pre><code class="lang-javascript">route(<span class="string">':page'</span>, { page: <span class="literal">null</span> });
+route(<span class="string">':page/:slug'</span>, { slug: <span class="literal">null</span> });
+route(<span class="string">':page/:slug/:action'</span>, { slug: <span class="literal">null</span>, action: <span class="literal">null</span> });</code></pre>
+<pre><code class="lang-javascript">{{#case "restaurants"}}
+  {{#if slug}}
+    {{#switch action}}
+        {{#case 'order'}}...{{/case}}
+        {{#default}}...{{/default}}
+    {{/switch}}
+  {{else}}
+    &lt;pmo-restaurant-list&gt;&lt;/pmo-restaurant-list&gt;
+  {{/if}}
+{{/case}}</code></pre>
+</section>
+  </div>
+  <div class="slide hidden  title-page" id="slide-43">
+    <section class="slide-content"><h1 id="importing-other-projects">Importing other projects</h1>
+</section>
+  </div>
+  <div class="slide hidden" id="slide-44">
+    <section class="slide-content"><h2 id="-bit-tabs-https-github-com-bitovi-components-bit-tabs-"><a href="https://github.com/bitovi-components/bit-tabs">bit-tabs</a></h2>
+<pre><code class="lang-javascript">&lt;can-import from=<span class="string">"bit-tabs"</span>/&gt;
+
+<span class="xml"><span class="tag">&lt;<span class="title">bit-tabs</span>&gt;</span>
+    <span class="tag">&lt;<span class="title">bit-panel</span> <span class="attribute">title</span>=<span class="value">"CanJS"</span>&gt;</span>
+      CanJS provides the MV*
+    <span class="tag">&lt;/<span class="title">bit-panel</span>&gt;</span>
+    <span class="tag">&lt;<span class="title">bit-panel</span> <span class="attribute">title</span>=<span class="value">"StealJS"</span>&gt;</span>
+      StealJS provides the infrastructure.
+    <span class="tag">&lt;/<span class="title">bit-panel</span>&gt;</span>
+<span class="tag">&lt;/<span class="title">bit-tabs</span>&gt;</span></span></code></pre>
+</section>
+  </div>
+  <div class="slide hidden  title-page" id="slide-45">
     <section class="slide-content"><h1 id="testing-and-ci">Testing and CI</h1>
 </section>
   </div>
-  <div class="slide hidden  title-page" id="slide-36">
+  <div class="slide hidden" id="slide-46">
+    <section class="slide-content"><h2 id="popular-ci-servers">Popular CI servers</h2>
+<ul>
+<li>Open source:<ul>
+<li><a href="http://jenkins-ci.org/">Jenkins</a>: Probably most popular CI server, formerly Hudson</li>
+<li><a href="http://cruisecontrol.sourceforge.net/">CruiseControl</a>: CI framework initially by Thoughtworks</li>
+<li><a href="http://travis-ci.org">TravisCI</a>: Distributed build platform for the open source community (paid)</li>
+</ul>
+</li>
+<li>Paid:<ul>
+<li><a href="https://codeship.com/">Codeship</a></li>
+<li><a href="https://circleci.com/">CircleCI</a></li>
+<li><a href="http://www.appveyor.com/">Appveyor</a> (Windows)</li>
+</ul>
+</li>
+</ul>
+</section>
+  </div>
+  <div class="slide hidden  centered" id="slide-47">
+    <section class="slide-content"><h2 id="-testee-https-github-com-bitovi-testee-automated-cross-browser-testing"><a href="https://github.com/bitovi/testee">Testee</a> - Automated cross-browser testing</h2>
+<p><img alt="Testee overview" src="img/testee_overview.png" style="width: 80%;"></p>
+</section>
+  </div>
+  <div class="slide hidden  title-page" id="slide-48">
     <section class="slide-content"><h1 id="documentation">Documentation</h1>
 </section>
   </div>
-  <div class="slide hidden  title-page" id="slide-37">
+  <div class="slide hidden  title-page" id="slide-49">
     <section class="slide-content"><h1 id="deployment">Deployment</h1>
 </section>
   </div>

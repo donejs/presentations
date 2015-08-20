@@ -168,7 +168,7 @@ var generators = require('yeoman-generator');
 var path = require('path');
 
 module.exports = generators.Base.extend({
-  prompting() {
+    prompting() {
 		this.prompt({
 			name: 'name', type: String, required: true,
 			message: 'The name for you model (e.g. order)'
@@ -176,16 +176,31 @@ module.exports = generators.Base.extend({
 		    this.name = prompts.name;
 		    done();
 		});
-  },
+    },
 
-  writing() {
-    this.fs.copyTpl(this.templatePath('mymodel.js'),
-      this.destinationPath(path.join('models', 'mymodel.js')),
-      { data }
-    );
-  }
+    writing() {
+            this.fs.copyTpl(this.templatePath('mymodel.js'),
+            this.destinationPath(path.join('models', 'mymodel.js')),
+            { data }
+        );
+    }
 });
 ```
+
+--
+
+## Project structure
+
+- `package.json` - main configuration
+- `test.html` - global test page
+- `documentjs.json` - Documentation
+- `src` - development asset folder
+- `src/app.js` - main application file
+- `src/index.stache` - main template
+- `src/models/` - models and fixtures
+- `src/styles.less` - main application LESS
+- `src/test/test.js` - loads all tests that run in `test.html`
+- `src/test/smoke.js` - functional application smoke test
 
 -- centered
 
@@ -222,7 +237,39 @@ module.exports = generators.Base.extend({
 
 --
 
+## Benefits
+
+* Easier to identify missing tests or documentation.
+* More likely to update tests and documentation.
+* Good API design.
+* Easier to develop in isolation.
+
+--
+
 ## done-component
+
+A StealJS plugin that allows composing CanJS Components in a single file:
+
+```javascript
+<can-component tag="hello-greeting">
+  <template>
+    <h1>Hello {{name}}!</h1>
+  </template>
+  <view-model>
+    import Map from "can/map/";
+
+    export default Map.extend({ name: "" });
+  </view-model>
+</can-component>
+```
+
+```javascript
+import { ViewModel, template } from "hello-world.component!";
+
+const vm = new ViewModel();
+
+console.log(template(vm));
+```
 
 --
 
@@ -268,6 +315,169 @@ route.attr({
     - [{{#switch}}](http://canjs.com/2.3-pre/docs/can.stache.helpers.switch.html)
     - [{{#case}}](http://canjs.com/2.3-pre/docs/can.stache.helpers.case.html)
     - [{{#default}}](http://canjs.com/2.3-pre/docs/can.stache.helpers.default.html)
+
+--
+
+## Routing in templates
+
+```javascript
+{{#switch page}}
+    {{#case 'home'}}
+        <pmo-home></pmo-home>
+    {{/case}}
+    {{#case 'restaurants'}}
+        <can-import from="pmo/restaurant/list/" can-tag="pmo-loading">
+            <pmo-restaurant-list></pmo-restaurant-list>
+        </can-import>
+    {{/case}}
+{{/switch}}
+```
+
+-- title-page
+
+# Component communication
+
+--
+
+## Child knows about parent
+
+#### Children get parent view model
+
+```javascript
+<parent-component>
+	<child-component parent="{.}"/>
+</parent-component>
+```
+
+[JSBin](http://jsbin.com/sefame/edit?js,output)
+
+--
+
+## Child knows about parent #2
+
+#### Register on inserted
+
+```javascript
+events: {
+    inserted: function() {
+        var parent = this.element.parent().viewModel();
+        this.viewModel.attr('parent', parent);
+    }
+}
+```
+
+[JSBin](http://jsbin.com/wabahi/edit?js,output)
+
+--
+
+## Parent knows about children
+
+#### Importing a reference
+
+```javascript
+<app-editor toolbar="{toolbar}" rich-text="{rich-text}">
+	<app-toolbar #toolbar="{.}">
+	<app-rich-text #rich-text="{.}">
+</app-editor>
+```
+
+
+```javascript
+{
+	viewModel: {
+		refresh: function(){
+			this.attr("toolbar").refresh();
+			this.attr("richText").refresh()
+		}
+	}
+}
+```
+
+--
+
+## Sibling to sibling
+
+```javascript
+<app-editor #editor="{.}" />
+<app-toolbar editor="{editor}" />
+```
+
+```javascript
+viewModel: {
+    refresh: function() {
+        this.attr('editor').refresh();
+    }
+}
+```
+
+[JSBin](http://jsbin.com/diwiju/edit?js,output)
+
+--
+
+## Broadcast
+
+Access `@root` view model.
+
+```javascript
+viewModel: {
+    refresh: function() {
+        this.attr('@root.error', 'This is a global error');
+    }
+}
+```
+
+*Avoid if possible*
+
+[JSBin](http://jsbin.com/tizeqa/edit?html,js,output
+)
+
+--
+
+## Sending events to parents
+
+```javascript
+<parent-component (saved)="{parentMethod}">
+	<child-component />
+</parent-component>
+```
+
+child-component:
+
+```javascript
+viewModel: {
+    saveItem: function(item) {
+        can.dispatch.call(this, "saved", [item]);
+    }
+},
+events: {
+    "{viewModel} saved": function(viewModel, ev, item) {
+        this.element.trigger("saved", item);
+    }
+}
+```
+
+[JSBin](http://jsbin.com/biroxe/edit?js,output)
+
+--
+
+## Sending events to children
+
+#### [jQuery++](http://jquerypp.com/) event reverse
+
+```javascript
+$.event.reverse('refresh');
+
+viewModel: {
+  refresh: function(item) {
+    can.dispatch.call(this, "refresh", [item]);
+  }
+},
+events: {
+  "{viewModel} refresh": function(viewModel, ev, item) {
+    this.element.trigger("refresh", item);
+  }
+}
+```
 
 -- title-page centered
 
@@ -317,107 +527,94 @@ fixture({
 export default store;
 ```
 
--- title-page
-
-# Component communication
-
 --
 
-## Child to parent
-
-#### Children get parent view model
+## Unit tests
 
 ```javascript
-<parent-component>
-	<child-component parent="{.}"/>
-</parent-component>
-```
+import QUnit from 'steal-qunit';
+import cityStore from 'place-my-order/models/fixtures/city';
+import stateStore from 'place-my-order/models/fixtures/state';
+import restaurantStore from 'place-my-order/models/fixtures/restaurant';
+import { ViewModel } from './list';
 
-[JSBin](http://jsbin.com/cimifoxeku/edit?js,output)
-
-#### Child view model sends DOM events
-
-```
-<parent-component>
-	<child-component (saved)="{parentMethod}"/>
-</parent-component>
-
-viewModel: {
-	saveItem: function(item){
-		item.save().then(()=>{
-		  this.dispatch("saved",[item])
-		})
-	}
-},
-events: {
-	inserted: function(){
-		this.viewModel.attr("element", this.element)
-	},
-	"{scope} saved": function(viewModel, ev, item){
-		this.element.trigger("saved",[viewModel].concat(arguments.slice(2)));
-	}
-}
-```
-
- - testing .. you need an element
-
---
-
-## Parent to child
-
-### view scope
-
-```
-<editor toolbar="{toolbar}">
-	<toolbar #toolbar="{.}">
-	<rich-text #rich-text="{.}">
-</editor>
-
-Editor{
-	viewModel: {
-		refresh: function(){
-			this.attr("toolbar").refresh();
-			this.attr("richText").refresh()
-		}
-	}
-}
-```
-
-### add to parent view model method (bit-tabs)
-
-```
-events: {
-	inserted: function(){
-
-	}
-}
-```
-
---
-
-## Sibling to sibling
-
-instantiate_4
-
---
-
-## Broadcast?
-
-anti-pattern
-
-```
-.attr("@root").dispatch("error")
-
-"{@root} error"
+QUnit.module('place-my-order/restaurant/list', {
+  beforeEach() {
+    localStorage.clear();
+  }
+});
 ```
 
 -- title-page
 
 # Nested routes
 
+--
+
+## In-template nested routes
+
+```javascript
+route(':page', { page: null });
+route(':page/:slug', { slug: null });
+route(':page/:slug/:action', { slug: null, action: null });
+```
+
+```javascript
+{{#case "restaurants"}}
+  {{#if slug}}
+    {{#switch action}}
+        {{#case 'order'}}...{{/case}}
+        {{#default}}...{{/default}}
+    {{/switch}}
+  {{else}}
+    <pmo-restaurant-list></pmo-restaurant-list>
+  {{/if}}
+{{/case}}
+```
+
+-- title-page
+
+# Importing other projects
+
+--
+
+## [bit-tabs](https://github.com/bitovi-components/bit-tabs)
+
+```javascript
+<can-import from="bit-tabs"/>
+
+<bit-tabs>
+    <bit-panel title="CanJS">
+      CanJS provides the MV*
+    </bit-panel>
+    <bit-panel title="StealJS">
+      StealJS provides the infrastructure.
+    </bit-panel>
+</bit-tabs>
+```
+
 -- title-page
 
 # Testing and CI
+
+--
+
+## Popular CI servers
+
+- Open source:
+	- [Jenkins](http://jenkins-ci.org/): Probably most popular CI server, formerly Hudson
+	- [CruiseControl](http://cruisecontrol.sourceforge.net/): CI framework initially by Thoughtworks
+	- [TravisCI](http://travis-ci.org): Distributed build platform for the open source community (paid)
+- Paid:
+    - [Codeship](https://codeship.com/)
+    - [CircleCI](https://circleci.com/)
+    - [Appveyor](http://www.appveyor.com/) (Windows)
+
+-- centered
+
+## [Testee](https://github.com/bitovi/testee) - Automated cross-browser testing
+
+<img alt="Testee overview" src="img/testee_overview.png" style="width: 80%;">
 
 -- title-page
 
