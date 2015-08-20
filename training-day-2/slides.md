@@ -616,6 +616,33 @@ route(':page/:slug/:action', { slug: null, action: null });
 
 <img alt="Testee overview" src="img/testee_overview.png" style="width: 80%;">
 
+--
+
+## [FuncUnit](http://funcunit.com/)
+
+Enable frame-mode (to avoid browser popup and PhantomJS errors):
+
+```javascript
+<script>FuncUnit = { frameMode: true };</script>
+```
+
+```javascript
+import F from 'funcunit';
+import QUnit from 'steal-qunit';
+
+F.attach(QUnit);
+
+QUnit.module('place-my-order functional smoke test', {
+  beforeEach() {
+    F.open('/');
+  }
+});
+
+QUnit.test('place-my-order main page shows up', function() {
+  F('title').text('place-my-order', 'Title is set');
+});
+```
+
 -- title-page
 
 # Documentation

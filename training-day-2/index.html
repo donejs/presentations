@@ -1117,11 +1117,31 @@ route(<span class="string">':page/:slug/:action'</span>, { slug: <span class="li
 <p><img alt="Testee overview" src="img/testee_overview.png" style="width: 80%;"></p>
 </section>
   </div>
-  <div class="slide hidden  title-page" id="slide-48">
-    <section class="slide-content"><h1 id="documentation">Documentation</h1>
+  <div class="slide hidden" id="slide-48">
+    <section class="slide-content"><h2 id="-funcunit-http-funcunit-com-"><a href="http://funcunit.com/">FuncUnit</a></h2>
+<p>Enable frame-mode (to avoid browser popup and PhantomJS errors):</p>
+<pre><code class="lang-javascript">&lt;script&gt;FuncUnit = { frameMode: <span class="literal">true</span> };<span class="xml"><span class="tag">&lt;/<span class="title">script</span>&gt;</span></span></code></pre>
+<pre><code class="lang-javascript">import F from <span class="string">'funcunit'</span>;
+import QUnit from <span class="string">'steal-qunit'</span>;
+
+F.attach(QUnit);
+
+QUnit.module(<span class="string">'place-my-order functional smoke test'</span>, {
+  beforeEach() {
+    F.open(<span class="string">'/'</span>);
+  }
+});
+
+QUnit.test(<span class="string">'place-my-order main page shows up'</span>, <span class="keyword">function</span>() {
+  F(<span class="string">'title'</span>).text(<span class="string">'place-my-order'</span>, <span class="string">'Title is set'</span>);
+});</code></pre>
 </section>
   </div>
   <div class="slide hidden  title-page" id="slide-49">
+    <section class="slide-content"><h1 id="documentation">Documentation</h1>
+</section>
+  </div>
+  <div class="slide hidden  title-page" id="slide-50">
     <section class="slide-content"><h1 id="deployment">Deployment</h1>
 </section>
   </div>
