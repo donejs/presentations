@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+	<html class="sl-root base export loaded">
+	<head>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<title>Server-Side Rendering Isn&#39;t Enough: Slides</title>
+		<meta name="description" content="Slides">
+
+		<link rel="stylesheet" type="text/css" href="lib/offline-v2.css">
+
+
+
+	</head>
+	<body class="reveal-viewport theme-font-league theme-color-yellow-black">
+		<div class="reveal">
+			<div class="slides">
+				<section class="stack" data-id="9b89531a4114f96b44a06d202677db4a"><section data-id="784ec41c77f95f941f84be46581a7b51"><div class="sl-block" data-block-type="text" style="width: 800px; left: 81px; top: 302px; height: auto;" data-block-id="789472420b84248b6c0d461c45eba8ac"><div class="sl-block-content" data-placeholder-tag="h1" data-placeholder-text="Title Text" style="z-index: 10;">
+<h1>Server-Side Rendering Isn't Enough</h1>
+</div></div>
+<div class="sl-block" data-block-type="image" data-block-id="78160beed34b6d7195d17a37817db505" style="min-width: 30px; min-height: 30px; width: 360px; height: 96.75px; left: 520px; top: 533px;"><div class="sl-block-content" style="z-index: 12;"><img style="" data-natural-width="800" data-natural-height="215" data-src="server-side-rendering-isnt-enough/2033093-nodejs.png"></div></div></section><section data-id="4812e2a7fa207ab8db857bdbd07f8af4"><div class="sl-block" data-block-type="text" style="width: 800px; left: 80px; top: 190px; height: auto;" data-block-id="0c5ced7b66dfa0095c40468b210a3bda"><div class="sl-block-content" data-placeholder-tag="h1" data-placeholder-text="Title Text" style="z-index: 11;">
+<h1>Matthew Phillips</h1>
+</div></div>
+<div class="sl-block" data-block-type="image" data-block-id="fb3b3e4b421f06ec5b5b782cedf767af" style="min-width: 30px; min-height: 30px; width: 360px; height: 93.6px; left: 301px; top: 400px;"><a class="sl-block-content" style="z-index: 16; border-width: 1px;" data-inline-svg="false" href="http://donejs.com" target="_blank"><img data-natural-width="600" data-natural-height="156" data-src="server-side-rendering-isnt-enough/1933815-donejs-logo-white.svg"></a></div>
+<div class="sl-block" data-block-type="shape" data-block-id="3998a2aa342213f1f0792e2d5e2a23da" style="min-width: 4px; min-height: 4px; width: 379px; height: 115px; left: 291px; top: 387px;"><div class="sl-block-content" data-shape-type="rect" data-shape-fill-color="rgb(255, 255, 255)" data-shape-stretch="true" style="z-index: 12;"><svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="100%" height="100%" preserveaspectratio="none" viewbox="0 0 379 115"><rect width="379" height="115" class="shape-element" fill="rgb(255, 255, 255)"></rect></svg></div></div>
+<div class="sl-block" data-block-type="shape" data-block-id="bb5d48dfc8f216ca8c6a0ffe1b6a7028" style="min-width: 4px; min-height: 4px; width: 29px; height: 55px; left: 312px; top: 413px;"><div class="sl-block-content" data-shape-type="triangle-up" data-shape-fill-color="rgb(25, 152, 193)" data-shape-stretch="true" style="z-index: 13;"><svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="100%" height="100%" preserveaspectratio="none" viewbox="0 0 29 55"><polygon points="14.5,0 29,55 0,55" class="shape-element" fill="rgb(25, 152, 193)"></polygon></svg></div></div>
+<div class="sl-block" data-block-type="shape" data-block-id="32d215159a24838b09b1cd7e5fd828e3" style="min-width: 4px; min-height: 4px; width: 55px; height: 51.5px; left: 327px; top: 416px;"><div class="sl-block-content" data-shape-type="rect" data-shape-fill-color="rgb(25, 152, 193)" data-shape-stretch="false" style="z-index: 14;"><svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="100%" height="100%" preserveaspectratio="xMidYMid" viewbox="0 0 52 52"><rect width="52" height="52" class="shape-element" fill="rgb(25, 152, 193)"></rect></svg></div></div>
+<div class="sl-block" data-block-type="shape" style="min-width: 4px; min-height: 4px; width: 31px; height: 48px; left: 361px; top: 420px;" data-block-id="3e591435723b6b0a56b2a91449783d66"><div class="sl-block-content" data-shape-type="triangle-down" data-shape-fill-color="rgb(25, 152, 193)" data-shape-stretch="true" style="z-index: 15;"><svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="100%" height="100%" preserveaspectratio="none" viewbox="0 0 31 48"><polygon points="0,0 31,0 15.5,48" class="shape-element" fill="rgb(25, 152, 193)"></polygon></svg></div></div>
+<div class="sl-block" data-block-type="text" data-block-id="beae1e2bcf0d8749a28931b72fe0f2fe" style="height: auto; min-width: 30px; min-height: 30px; width: 600px; left: 180px; top: 544px;"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 17;">
+<h3><a href="https://github.com/canjs/can-ssr" target="_blank">github.com/canjs/can-ssr</a></h3>
+</div></div>
+<div class="sl-block" data-block-type="text" data-block-id="893e35b87dad6d872111b4d0689e45d3" style="height: auto; min-width: 30px; min-height: 30px; width: 600px; left: 180px; top: 280px;"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 18;">
+<p style="text-align: center;"><span style="font-size:1.2em">@matthewcp</span></p>
+</div></div></section><section data-id="f4dd089f29300702881052baf4844361"><div class="sl-block" data-block-type="text" style="width: 800px; left: 80px; top: 232px; height: auto;" data-block-id="8a0bb027fa059d83a97412409a5cac3b"><div class="sl-block-content" data-placeholder-tag="h1" data-placeholder-text="Title Text" style="z-index: 10;">
+<h1>Terms</h1>
+</div></div>
+<div class="sl-block" data-block-type="text" data-block-id="867634113a167910af4fffee87717469" style="height: auto; min-width: 30px; min-height: 30px; width: 600px; left: 180px; top: 330px;"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 12;">
+<ul>
+	<li class="fragment" data-fragment-index="0">Shared codebase</li>
+	<li class="fragment" data-fragment-index="1">Isomorphic</li>
+	<li class="fragment" data-fragment-index="2">Universal</li>
+</ul>
+</div></div></section><section data-id="b487b676e9dac131964420426154a5f4"><div class="sl-block" data-block-type="text" style="width: 430px; left: 23px; top: 87px; height: auto;" data-block-id="83737f0a6c67cd4923f73709ae4cad59"><div class="sl-block-content" data-placeholder-tag="h2" data-placeholder-text="Title Text" style="text-align: left; z-index: 11;">
+<h2>Why bother</h2>
+</div></div>
+<div class="sl-block" data-block-type="text" style="width: 410px; left: 23px; top: 161px; height: auto;" data-block-id="0b5f6ee495ddcf6b5c190b3f9161f29b"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi nec metus justo. Aliquam erat volutpat." style="z-index: 13; text-align: left;">
+<p><strong>Perceived performance</strong>: no one likes staring at a spinner.</p>
+</div></div>
+<div class="sl-block" data-block-type="image" style="width: 480px; height: 319.091px; left: 453px; top: 179px;" data-block-id="99df31770339caace6dedae98fbac651"><div class="sl-block-content" style="z-index: 12;"><img data-natural-width="176" data-natural-height="117" style="" data-src="server-side-rendering-isnt-enough/1907026-browser-spin.svg"></div></div>
+<div class="sl-block" data-block-type="text" data-block-id="72681675949a0720ca4c4c0a2ef4fb88" style="height: auto; min-width: 30px; min-height: 30px; width: 428px; left: 480px; top: 140px;"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 14;">
+<p><strong>This sucks</strong></p>
+</div></div>
+<div class="sl-block" data-block-type="text" data-block-id="2abf6af0bd1c6389f186b15533dd06c3" style="height: auto; min-width: 30px; min-height: 30px; width: 377px; left: 23px; top: 261px;"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 15; text-align: left;">
+<p><strong>SEO</strong>: if you care about that sort of thing, it helps. Not every bot is Googlebot.</p>
+</div></div>
+<div class="sl-block" data-block-type="text" data-block-id="97bbf67d4e7405d820326e575ad1642b" style="height: auto; min-width: 30px; min-height: 30px; width: 377px; left: 23px; top: 401px;"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 16;">
+<p style="text-align:left"><strong>BLING BLING</strong>: Amazon reports that conversion increased by 1% for every 100ms improvement.</p>
+</div></div></section></section><section class="stack" data-id="4b28190122923451661cc9aa16fc5861"><section data-id="bb0f6100b8e248028bea1a8a5d200257"><div class="sl-block" data-block-type="text" style="width: 800px; left: 80px; top: 265px; height: auto;" data-block-id="5f0720a5179d5321d4f3bf1764939385"><div class="sl-block-content" data-placeholder-tag="h1" data-placeholder-text="Title Text">
+<h1>The state of Server Rendering</h1>
+</div></div>
+</section><section data-id="05ae9b772d6a749ad0557e1d56211ae2">
+<div class="sl-block" data-block-type="text" data-block-id="7f74759956910ac33ee70ec27e2a297f" style="height: auto; min-width: 30px; min-height: 30px; width: 724px; left: 118px; top: 182px;"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 11;">
+<h2>Everything should be server rendered</h2>
+</div></div>
+<div class="sl-block" data-block-type="image" data-block-id="d2bd2b6cfe7416c85c894024b8112f68" style="min-width: 30px; min-height: 30px; width: 360px; height: 270px; left: 300px; top: 280px;"><div class="sl-block-content" style="z-index: 12;"><img style="" data-natural-width="1024" data-natural-height="768" data-src="server-side-rendering-isnt-enough/2046925-misc-all-the-things-l-1-1024x768.jpg"></div></div></section><section data-id="5b358dc876f728e684bc26b4f60dbbda"><div class="sl-block" data-block-type="text" style="width: 800px; left: 80px; top: 66px; height: auto;" data-block-id="ef3a4077fcf5baa2715388ff636775c8"><div class="sl-block-content" data-placeholder-tag="h2" data-placeholder-text="Title Text" style="z-index: 10;">
+<h2>Requirements</h2>
+</div></div>
+<div class="sl-block" data-block-type="text" style="width: 800px; left: 80px; top: 262px; height: auto;" data-block-id="f21b616550432640b57cbac71ed113ac"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 11; text-align: left;">
+<ul>
+	<li class="fragment" data-fragment-index="1">Rendering speed</li>
+	<li class="fragment" data-fragment-index="2">Only includes the assets needed (CSS and JavaScript)</li>
+	<li class="fragment" data-fragment-index="3">Prevents unnecessary requests in the client</li>
+</ul>
+</div></div>
+<div class="sl-block" data-block-type="text" style="width: 257px; left: 40px; top: 173px; height: auto;" data-block-id="f71d6987401b161abbeb372c05c27d9b"><div class="sl-block-content fragment" data-placeholder-tag="h1" style="text-align: left; z-index: 12;" data-placeholder-text="Text" data-fragment-index="0">
+<h2>Performance</h2>
+</div></div>
+<div class="sl-block" data-block-type="text" style="width: 800px; left: 80px; top: 474px; height: auto;" data-block-id="f6388f9ae3a0e065d13caa0d6e73dc46"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 14; text-align: left;">
+<ul>
+	<li class="fragment" data-fragment-index="4">Shared router</li>
+	<li class="fragment" data-fragment-index="5">Asynchronous rendering</li>
+	<li class="fragment" data-fragment-index="6">Fast development experience with hot module swapping</li>
+</ul>
+</div></div>
+<div class="sl-block" data-block-type="text" style="width: 293px; left: 40px; top: 383px; height: auto;" data-block-id="5c39e1aa2923dca4c7f44257ac5f8fdf"><div class="sl-block-content fragment" data-placeholder-tag="h1" style="text-align: left; z-index: 15;" data-placeholder-text="Text" data-fragment-index="0">
+<h2>Maintainability</h2>
+</div></div></section></section><section class="stack" data-id="0a136c1a2baefa63e84b3cc6126edc50"><section data-id="4ab61690aaff849c8c641d83f7e059ac"><div class="sl-block" data-block-type="text" style="width: 800px; left: 80px; top: 270px; height: auto;" data-block-id="440f6693d4afcca6bf1fcd7655cd0a75"><div class="sl-block-content" data-placeholder-tag="h1" data-placeholder-text="Title Text">
+<h1>Rendering Performance</h1>
+</div></div></section><section data-id="bb07b8d5c60bac83416d4502dcd6a5c5"><div class="sl-block" data-block-type="text" style="width: 800px; left: 80px; top: 190px; height: auto;" data-block-id="286bd109b35fd3697fe82914d91498ff"><div class="sl-block-content" data-placeholder-tag="h1" data-placeholder-text="Title Text" style="z-index: 11;">
+<h1>Headless Browser</h1>
+</div></div>
+<div class="sl-block" data-block-type="text" data-block-id="fbaf880d863775ee8e216c52d47af191" style="height: auto; min-width: 30px; min-height: 30px; width: 600px; left: 180px; top: 287px;"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 12;">
+<p>PhantomJS</p>
+</div></div>
+<div class="sl-block" data-block-type="text" data-block-id="0c350262b955e2e063c4b3d19e22b748" style="height: auto; min-width: 30px; min-height: 30px; width: 600px; left: 180px; top: 366px;"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 13;">
+<ul>
+	<li class="fragment" data-fragment-index="0">Consumed a lot of memory</li>
+	<li class="fragment" data-fragment-index="1">Needed pooling</li>
+	<li class="fragment" data-fragment-index="2">Very fast</li>
+</ul>
+</div></div></section><section data-id="43d6780bd058b6d0f95f322d027ca8d6"><div class="sl-block" data-block-type="text" style="width: 800px; left: 80px; top: 190px; height: auto;" data-block-id="eb1c6f5b0c2cf7bf840665ad7bc85082"><div class="sl-block-content" data-placeholder-tag="h2" data-placeholder-text="Title Text">
+<h2>Virtual DOMS</h2>
+</div></div>
+<div class="sl-block" data-block-type="text" style="width: 800px; left: 80px; top: 280px; height: auto;" data-block-id="b9911e17b03208c7e5169791392b3a00"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text">
+<ul>
+	<li class="fragment" data-fragment-index="0">Run the same code on the client and server</li>
+	<li class="fragment" data-fragment-index="1">Run within a single Node context</li>
+	<li class="fragment" data-fragment-index="2">Rendering is usually synchronous</li>
+</ul>
+</div></div></section><section data-id="4bced962a1d469e79449df39c4a95962"><div class="sl-block" data-block-type="text" style="width: 800px; left: 80px; top: 270px; height: auto;" data-block-id="6be6486379a254d9637f0e0575524de1"><div class="sl-block-content" data-placeholder-tag="h1" data-placeholder-text="Title Text" style="z-index: 10;">
+<h1>can-ssr's vdom</h1>
+</div></div>
+<div class="sl-block" data-block-type="text" data-block-id="4961b3e643d747cb59e59e746cbf45d4" style="height: auto; min-width: 30px; min-height: 30px; width: 600px; left: 180px; top: 367px;"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 12;">
+<p>Looks like a real DOM, only the basics</p>
+</div></div></section><section data-id="06439c6c2f4cf86d8339d426427c12ec"><div class="sl-block" data-block-type="text" style="width: 800px; left: 80px; top: 270px; height: auto;" data-block-id="8abad5e26e5eff3e1f03f8340749be13"><div class="sl-block-content" data-placeholder-tag="h1" data-placeholder-text="Title Text">
+<h1>Demo compatibility</h1>
+</div></div></section></section><section class="stack" data-id="56399b8852185fc411dcac051efb8bd0"><section data-id="6630884061af9ef52e076c821c7dfb7a"><div class="sl-block" data-block-type="text" style="width: 800px; left: 80px; top: 270px; height: auto;" data-block-id="7290a0f8d7e2674362f97380e76299f2"><div class="sl-block-content" data-placeholder-tag="h1" data-placeholder-text="Title Text">
+<h1>Minimizing request size</h1>
+</div></div></section><section data-id="6c424e5e1dc4b9602c16bb33c44f966a"><div class="sl-block" data-block-type="shape" data-block-id="836dc2016ed5609a1c32bf8b34ae01b7" style="min-width: 4px; min-height: 4px; width: 300px; height: 300px; left: 57px; top: 228px;"><div class="sl-block-content" data-shape-type="rect" data-shape-fill-color="rgb(255, 255, 255)" data-shape-stretch="true" style="z-index: 10;" data-shape-stroke-color="#000000" data-shape-stroke-width="2"><svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="100%" height="100%" preserveaspectratio="none" viewbox="0 0 300 300"><defs><clippath id="shape-mask-1-1449615719877"><rect width="300" height="300"></rect></clippath></defs><rect width="300" height="300" clip-path="url(#shape-mask-1-1449615719877)" class="shape-element" fill="rgb(255, 255, 255)" stroke="#000000" stroke-width="4"></rect></svg></div></div>
+<div class="sl-block" data-block-type="shape" data-block-id="2016dd78f16371e2814b4ee4f596475d" style="min-width: 4px; min-height: 4px; width: 300px; height: 38px; left: 57px; top: 228px;"><div class="sl-block-content" data-shape-type="rect" data-shape-fill-color="rgb(225, 225, 225)" data-shape-stretch="true" style="z-index: 11;" data-shape-stroke-color="#000000" data-shape-stroke-width="2"><svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="100%" height="100%" preserveaspectratio="none" viewbox="0 0 300 38"><defs><clippath id="shape-mask-2-1449615719882"><rect width="300" height="38"></rect></clippath></defs><rect width="300" height="38" clip-path="url(#shape-mask-2-1449615719882)" class="shape-element" fill="rgb(225, 225, 225)" stroke="#000000" stroke-width="4"></rect></svg></div></div>
+<div class="sl-block" data-block-type="shape" data-block-id="496ab8037b35c90d70c792208e2b2ff5" style="min-width: 4px; min-height: 4px; width: 13px; height: 13px; left: 331px; top: 241px;"><div class="sl-block-content" data-shape-type="circle" data-shape-fill-color="#000000" data-shape-stretch="true" style="z-index: 12;"><svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="100%" height="100%" preserveaspectratio="none" viewbox="0 0 13 13"><ellipse rx="6.5" ry="6.5" cx="6.5" cy="6.5" class="shape-element" fill="#000000"></ellipse></svg></div></div>
+<div class="sl-block" data-block-type="shape" style="min-width: 4px; min-height: 4px; width: 13px; height: 13px; left: 312px; top: 241px;" data-block-id="fcf74968489cb3032c5b95857b593453"><div class="sl-block-content" data-shape-type="circle" data-shape-fill-color="#000000" data-shape-stretch="true" style="z-index: 13;"><svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="100%" height="100%" preserveaspectratio="none" viewbox="0 0 13 13"><ellipse rx="6.5" ry="6.5" cx="6.5" cy="6.5" class="shape-element" fill="#000000"></ellipse></svg></div></div>
+<div class="sl-block" data-block-type="shape" style="min-width: 4px; min-height: 4px; width: 13px; height: 13px; left: 291px; top: 241px;" data-block-id="4a99f3adaacc3cf8c1017d57da429b9a"><div class="sl-block-content" data-shape-type="circle" data-shape-fill-color="#000000" data-shape-stretch="true" style="z-index: 14;"><svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="100%" height="100%" preserveaspectratio="none" viewbox="0 0 13 13"><ellipse rx="6.5" ry="6.5" cx="6.5" cy="6.5" class="shape-element" fill="#000000"></ellipse></svg></div></div>
+<div class="sl-block" data-block-type="shape" data-block-id="d88f0aa4b5db1bcbb3c3ecda3afd95d9" style="min-width: 4px; min-height: 4px; width: 183px; height: 18px; left: 72px; top: 239px;"><div class="sl-block-content" data-shape-type="rect" data-shape-fill-color="rgb(255, 255, 255)" data-shape-stretch="true" style="z-index: 15;" data-shape-stroke-color="#000000" data-shape-stroke-width="1"><svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="100%" height="100%" preserveaspectratio="none" viewbox="0 0 183 18"><defs><clippath id="shape-mask-3-1449615719897"><rect width="183" height="18"></rect></clippath></defs><rect width="183" height="18" clip-path="url(#shape-mask-3-1449615719897)" class="shape-element" fill="rgb(255, 255, 255)" stroke="#000000" stroke-width="2"></rect></svg></div></div>
+<div class="sl-block" data-block-type="text" data-block-id="a02101bc66384c7f3c5389d2cfed7180" style="height: auto; min-width: 30px; min-height: 30px; width: 173px; left: 77px; top: 241px;"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 16; font-size: 50%;">
+<pre><span style="font-size:1.0em">/cart</span></pre>
+</div></div>
+<div class="sl-block" data-block-type="shape" data-block-id="9d55f6cde884effd9fee9f442421deac" style="min-width: 4px; min-height: 4px; width: 257px; height: 58px; left: 79px; top: 276px;"><div class="sl-block-content" data-shape-type="rect" data-shape-fill-color="rgb(204, 204, 204)" data-shape-stretch="true" style="z-index: 17;"><svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="100%" height="100%" preserveaspectratio="none" viewbox="0 0 257 58"><rect width="257" height="58" class="shape-element" fill="rgb(204, 204, 204)"></rect></svg></div></div>
+<div class="sl-block" data-block-type="shape" data-block-id="29f76a40eabe9610070148005428aa4f" style="min-width: 4px; min-height: 4px; width: 29px; height: 167px; left: 79px; top: 346px;"><div class="sl-block-content" data-shape-type="rect" data-shape-fill-color="rgb(204, 204, 204)" data-shape-stretch="true" style="z-index: 18;"><svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="100%" height="100%" preserveaspectratio="none" viewbox="0 0 29 167"><rect width="29" height="167" class="shape-element" fill="rgb(204, 204, 204)"></rect></svg></div></div>
+<div class="sl-block" data-block-type="text" data-block-id="4ad148383edf2e6311f3c7eca729a3c7" style="height: auto; min-width: 30px; min-height: 30px; width: 104px; left: 128px; top: 346px;"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 19;">
+<p><strong>Title</strong></p>
+</div></div>
+<div class="sl-block" data-block-type="shape" data-block-id="648b0425c68ee71836fb6abf0d71fd35" style="min-width: 4px; min-height: 4px; width: 101px; height: 48px; left: 232px; top: 346px;"><div class="sl-block-content" data-shape-type="rect" data-shape-fill-color="rgb(204, 204, 204)" data-shape-stretch="true" style="z-index: 20;"><svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="100%" height="100%" preserveaspectratio="none" viewbox="0 0 101 48"><rect width="101" height="48" class="shape-element" fill="rgb(204, 204, 204)"></rect></svg></div></div>
+<div class="sl-block" data-block-type="shape" data-block-id="42440325bdf51a21053d026c658780d6" style="min-width: 4px; min-height: 4px; width: 214px; height: 12px; left: 117px; top: 404px;"><div class="sl-block-content" data-shape-type="rect" data-shape-fill-color="rgb(204, 204, 204)" data-shape-stretch="true" style="z-index: 21;"><svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="100%" height="100%" preserveaspectratio="none" viewbox="0 0 214 12"><rect width="214" height="12" class="shape-element" fill="rgb(204, 204, 204)"></rect></svg></div></div>
+<div class="sl-block" data-block-type="shape" style="min-width: 4px; min-height: 4px; width: 214px; height: 12px; left: 117px; top: 453px;" data-block-id="c4ef3b00b5d89239fc283acdd6d647d0"><div class="sl-block-content" data-shape-type="rect" data-shape-fill-color="rgb(204, 204, 204)" data-shape-stretch="true" style="z-index: 22;"><svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="100%" height="100%" preserveaspectratio="none" viewbox="0 0 214 12"><rect width="214" height="12" class="shape-element" fill="rgb(204, 204, 204)"></rect></svg></div></div>
+<div class="sl-block" data-block-type="shape" style="min-width: 4px; min-height: 4px; width: 214px; height: 12px; left: 117px; top: 480px;" data-block-id="19f0357ba6dfa74826f1eec6d01fb7a4"><div class="sl-block-content" data-shape-type="rect" data-shape-fill-color="rgb(204, 204, 204)" data-shape-stretch="true" style="z-index: 23;"><svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="100%" height="100%" preserveaspectratio="none" viewbox="0 0 214 12"><rect width="214" height="12" class="shape-element" fill="rgb(204, 204, 204)"></rect></svg></div></div>
+<div class="sl-block" data-block-type="shape" style="min-width: 4px; min-height: 4px; width: 100px; height: 4px; left: 117px; top: 416px;" data-block-id="8913acfcc1c67a3ab6abb760200b7313"><div class="sl-block-content fragment" data-shape-type="rect" data-shape-fill-color="rgb(204, 204, 204)" data-shape-stretch="true" style="z-index: 24;" data-fragment-index="2"><svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="100%" height="100%" preserveaspectratio="none" viewbox="0 0 100 4"><rect width="100" height="4" class="shape-element" fill="rgb(204, 204, 204)"></rect></svg></div></div>
+<div class="sl-block" data-block-type="shape" style="min-width: 4px; min-height: 4px; width: 126px; height: 4px; left: 117px; top: 430px;" data-block-id="30e503e0de354315a592c56a74bfdfff"><div class="sl-block-content" data-shape-type="rect" data-shape-fill-color="rgb(204, 204, 204)" data-shape-stretch="true" style="z-index: 25;"><svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="100%" height="100%" preserveaspectratio="none" viewbox="0 0 126 4"><rect width="126" height="4" class="shape-element" fill="rgb(204, 204, 204)"></rect></svg></div></div>
+<div class="sl-block" data-block-type="shape" style="min-width: 4px; min-height: 4px; width: 214px; height: 12px; left: 117px; top: 501px;" data-block-id="42443f9dd91fa11c7cc72b8365675a5a"><div class="sl-block-content" data-shape-type="rect" data-shape-fill-color="rgb(204, 204, 204)" data-shape-stretch="true" style="z-index: 26;"><svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="100%" height="100%" preserveaspectratio="none" viewbox="0 0 214 12"><rect width="214" height="12" class="shape-element" fill="rgb(204, 204, 204)"></rect></svg></div></div>
+<div class="sl-block" data-block-type="shape" style="min-width: 4px; min-height: 4px; width: 257px; height: 58px; left: 79px; top: 276px;" data-block-id="9689fcdcab368fea407454bc9be26a8e"><div class="sl-block-content fragment" data-shape-type="rect" data-shape-fill-color="rgb(244, 204, 204)" data-shape-stretch="true" style="z-index: 30;" data-fragment-index="0"><svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="100%" height="100%" preserveaspectratio="none" viewbox="0 0 257 58"><rect width="257" height="58" class="shape-element" fill="rgb(244, 204, 204)"></rect></svg></div></div>
+<div class="sl-block" data-block-type="shape" style="min-width: 4px; min-height: 4px; width: 29px; height: 167px; left: 79px; top: 346px;" data-block-id="f4994bdf08d6aaef5fa6f07637037f38"><div class="sl-block-content fragment" data-shape-type="rect" data-shape-fill-color="rgb(252, 229, 205)" data-shape-stretch="true" style="z-index: 31;" data-fragment-index="0"><svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="100%" height="100%" preserveaspectratio="none" viewbox="0 0 29 167"><rect width="29" height="167" class="shape-element" fill="rgb(252, 229, 205)"></rect></svg></div></div>
+<div class="sl-block" data-block-type="shape" style="min-width: 4px; min-height: 4px; width: 101px; height: 48px; left: 232px; top: 346px;" data-block-id="22dde54858b0862fee4fc04c2a2db673"><div class="sl-block-content fragment" data-shape-type="rect" data-shape-fill-color="rgb(217, 234, 211)" data-shape-stretch="true" style="z-index: 32;" data-fragment-index="1"><svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="100%" height="100%" preserveaspectratio="none" viewbox="0 0 101 48"><rect width="101" height="48" class="shape-element" fill="rgb(217, 234, 211)"></rect></svg></div></div>
+<div class="sl-block" data-block-type="shape" style="min-width: 4px; min-height: 4px; width: 214px; height: 12px; left: 117px; top: 480px;" data-block-id="a71d35c4999dfe14cb715cc207157595"><div class="sl-block-content fragment" data-shape-type="rect" data-shape-fill-color="rgb(207, 226, 243)" data-shape-stretch="true" style="z-index: 33;" data-fragment-index="1"><svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="100%" height="100%" preserveaspectratio="none" viewbox="0 0 214 12"><rect width="214" height="12" class="shape-element" fill="rgb(207, 226, 243)"></rect></svg></div></div>
+<div class="sl-block" data-block-type="shape" style="min-width: 4px; min-height: 4px; width: 214px; height: 12px; left: 117px; top: 453px;" data-block-id="446045b5515b074646ac762be8053ea7"><div class="sl-block-content fragment" data-shape-type="rect" data-shape-fill-color="rgb(207, 226, 243)" data-shape-stretch="true" style="z-index: 34;" data-fragment-index="1"><svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="100%" height="100%" preserveaspectratio="none" viewbox="0 0 214 12"><rect width="214" height="12" class="shape-element" fill="rgb(207, 226, 243)"></rect></svg></div></div>
+<div class="sl-block" data-block-type="shape" style="min-width: 4px; min-height: 4px; width: 214px; height: 12px; left: 117px; top: 501px;" data-block-id="9a7a8ee59d08331b7cafb7e692684fcb"><div class="sl-block-content fragment" data-shape-type="rect" data-shape-fill-color="rgb(207, 226, 243)" data-shape-stretch="true" style="z-index: 35;" data-fragment-index="1"><svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="100%" height="100%" preserveaspectratio="none" viewbox="0 0 214 12"><rect width="214" height="12" class="shape-element" fill="rgb(207, 226, 243)"></rect></svg></div></div>
+<div class="sl-block" data-block-type="shape" style="min-width: 4px; min-height: 4px; width: 214px; height: 12px; left: 117px; top: 404px;" data-block-id="4d2d40c2b8963f731f4aab3b5b7b42ff"><div class="sl-block-content fragment" data-shape-type="rect" data-shape-fill-color="rgb(207, 226, 243)" data-shape-stretch="true" style="z-index: 36;" data-fragment-index="1"><svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="100%" height="100%" preserveaspectratio="none" viewbox="0 0 214 12"><rect width="214" height="12" class="shape-element" fill="rgb(207, 226, 243)"></rect></svg></div></div>
+<div class="sl-block" data-block-type="shape" style="min-width: 4px; min-height: 4px; width: 126px; height: 4px; left: 117px; top: 430px;" data-block-id="4c61d348e42ae5c51726fa3bd7b9ddee"><div class="sl-block-content fragment" data-shape-type="rect" data-shape-fill-color="rgb(217, 210, 233)" data-shape-stretch="true" style="z-index: 37;" data-fragment-index="1"><svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="100%" height="100%" preserveaspectratio="none" viewbox="0 0 126 4"><rect width="126" height="4" class="shape-element" fill="rgb(217, 210, 233)"></rect></svg></div></div>
+<div class="sl-block" data-block-type="shape" style="min-width: 4px; min-height: 4px; width: 100px; height: 5.5px; left: 117px; top: 416px;" data-block-id="b3abfd4cbf594ff09535bec8d2a7122e"><div class="sl-block-content fragment" data-shape-type="rect" data-shape-fill-color="rgb(217, 210, 233)" data-shape-stretch="true" style="z-index: 38;" data-fragment-index="1"><svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="100%" height="100%" preserveaspectratio="none" viewbox="0 0 100 6"><rect width="100" height="6" class="shape-element" fill="rgb(217, 210, 233)"></rect></svg></div></div>
+<div class="sl-block" data-block-type="text" style="height: auto; min-width: 30px; min-height: 30px; width: 600px; left: 172px; top: 33px;" data-block-id="ccdfa57bbaa59f870a4bf640ea13c545"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 28;">
+<h2>Traditional method</h2>
+</div></div>
+<div class="sl-block" data-block-type="text" style="height: auto; min-width: 30px; min-height: 30px; width: 523px; left: 380px; top: 241px;" data-block-id="fc97e8b2482a636a2d259ec3e031c8df"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 29;">
+<ol>
+	<li>Initially unstyled</li>
+	<li class="fragment" data-fragment-index="0">Main, site-wide style is loaded</li>
+	<li class="fragment" data-fragment-index="1">Page specific style is loaded progressively.</li>
+</ol>
+</div></div>
+<div class="sl-block" data-block-type="text" style="height: auto; min-width: 30px; min-height: 30px; width: 600px; left: 172px; top: 107px;" data-block-id="5186551674059f76aa25702626128c84"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 39;">
+<h3>CSS loaded in JavaScript</h3>
+</div></div></section><section data-id="d4c607e7074a000382a3f57f0709ab78"><div class="sl-block" data-block-type="shape" style="width: 300px; height: 300px; left: 57px; top: 229px;" data-block-id="55fad87508c5a1c0ad504b688564ad9c"><div class="sl-block-content" data-shape-type="rect" data-shape-fill-color="rgb(255, 255, 255)" data-shape-stretch="true" style="z-index: 11;" data-shape-stroke-color="#000000" data-shape-stroke-width="2"><svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="100%" height="100%" preserveaspectratio="none" viewbox="0 0 300 300"><defs><clippath id="shape-mask-4-1449606349636"><rect width="300" height="300"></rect></clippath></defs><rect width="300" height="300" clip-path="url(#shape-mask-4-1449606349636)" class="shape-element" fill="rgb(255, 255, 255)" stroke="#000000" stroke-width="4"></rect></svg></div></div>
+<div class="sl-block" data-block-type="shape" style="width: 300px; height: 38px; left: 57px; top: 229px;" data-block-id="6f23603fbf1ed5a29dd520218c6fd21c"><div class="sl-block-content" data-shape-type="rect" data-shape-fill-color="rgb(225, 225, 225)" data-shape-stretch="true" style="z-index: 12;" data-shape-stroke-color="#000000" data-shape-stroke-width="2"><svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="100%" height="100%" preserveaspectratio="none" viewbox="0 0 300 38"><defs><clippath id="shape-mask-5-1449606349639"><rect width="300" height="38"></rect></clippath></defs><rect width="300" height="38" clip-path="url(#shape-mask-5-1449606349639)" class="shape-element" fill="rgb(225, 225, 225)" stroke="#000000" stroke-width="4"></rect></svg></div></div>
+<div class="sl-block" data-block-type="shape" style="width: 13px; height: 13px; left: 331px; top: 242px;" data-block-id="6fe4bd98e8d5f424b923c795a739158c"><div class="sl-block-content" data-shape-type="circle" data-shape-fill-color="#000000" data-shape-stretch="true" style="z-index: 13;"><svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="100%" height="100%" preserveaspectratio="none" viewbox="0 0 13 13"><ellipse rx="6.5" ry="6.5" cx="6.5" cy="6.5" class="shape-element" fill="#000000"></ellipse></svg></div></div>
+<div class="sl-block" data-block-type="shape" style="width: 13px; height: 13px; left: 312px; top: 242px;" data-block-id="91cb26dd61a49af40163510502d19271"><div class="sl-block-content" data-shape-type="circle" data-shape-fill-color="#000000" data-shape-stretch="true" style="z-index: 14;"><svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="100%" height="100%" preserveaspectratio="none" viewbox="0 0 13 13"><ellipse rx="6.5" ry="6.5" cx="6.5" cy="6.5" class="shape-element" fill="#000000"></ellipse></svg></div></div>
+<div class="sl-block" data-block-type="shape" style="width: 13px; height: 13px; left: 291px; top: 242px;" data-block-id="92b0e021db244bef25e10fe24dcf478f"><div class="sl-block-content" data-shape-type="circle" data-shape-fill-color="#000000" data-shape-stretch="true" style="z-index: 15;"><svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="100%" height="100%" preserveaspectratio="none" viewbox="0 0 13 13"><ellipse rx="6.5" ry="6.5" cx="6.5" cy="6.5" class="shape-element" fill="#000000"></ellipse></svg></div></div>
+<div class="sl-block" data-block-type="shape" style="width: 183px; height: 18px; left: 72px; top: 240px;" data-block-id="d7edf4286474555abe86729a6f046346"><div class="sl-block-content" data-shape-type="rect" data-shape-fill-color="rgb(255, 255, 255)" data-shape-stretch="true" style="z-index: 16;" data-shape-stroke-color="#000000" data-shape-stroke-width="1"><svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="100%" height="100%" preserveaspectratio="none" viewbox="0 0 183 18"><defs><clippath id="shape-mask-6-1449606349648"><rect width="183" height="18"></rect></clippath></defs><rect width="183" height="18" clip-path="url(#shape-mask-6-1449606349648)" class="shape-element" fill="rgb(255, 255, 255)" stroke="#000000" stroke-width="2"></rect></svg></div></div>
+<div class="sl-block" data-block-type="text" style="height: auto; width: 173px; left: 77px; top: 242px;" data-block-id="76d3adc2b27f6e3491d57c3dcb290ef2"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 17; font-size: 50%;">
+<pre><span style="font-size:1.0em">/cart</span></pre>
+</div></div>
+<div class="sl-block" data-block-type="shape" style="width: 257px; height: 58px; left: 79px; top: 277px;" data-block-id="f482aa663d70de003df23a39a3e15a5d"><div class="sl-block-content" data-shape-type="rect" data-shape-fill-color="rgb(204, 204, 204)" data-shape-stretch="true" style="z-index: 18;"><svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="100%" height="100%" preserveaspectratio="none" viewbox="0 0 257 58"><rect width="257" height="58" class="shape-element" fill="rgb(204, 204, 204)"></rect></svg></div></div>
+<div class="sl-block" data-block-type="shape" style="width: 29px; height: 167px; left: 79px; top: 347px;" data-block-id="8ac261dc793b28d939b47bb9523e0a68"><div class="sl-block-content" data-shape-type="rect" data-shape-fill-color="rgb(204, 204, 204)" data-shape-stretch="true" style="z-index: 19;"><svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="100%" height="100%" preserveaspectratio="none" viewbox="0 0 29 167"><rect width="29" height="167" class="shape-element" fill="rgb(204, 204, 204)"></rect></svg></div></div>
+<div class="sl-block" data-block-type="text" style="height: auto; width: 104px; left: 128px; top: 347px;" data-block-id="270e21b59a9935d0cf52854452788d7c"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 20;">
+<p><strong>Title</strong></p>
+</div></div>
+<div class="sl-block" data-block-type="shape" style="width: 101px; height: 48px; left: 232px; top: 347px;" data-block-id="fd29a54f32c6f73890dc71ef9d478a12"><div class="sl-block-content" data-shape-type="rect" data-shape-fill-color="rgb(204, 204, 204)" data-shape-stretch="true" style="z-index: 21;"><svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="100%" height="100%" preserveaspectratio="none" viewbox="0 0 101 48"><rect width="101" height="48" class="shape-element" fill="rgb(204, 204, 204)"></rect></svg></div></div>
+<div class="sl-block" data-block-type="shape" style="width: 214px; height: 12px; left: 117px; top: 405px;" data-block-id="df277c9e027ba2c90b58adc0cdd17c3c"><div class="sl-block-content" data-shape-type="rect" data-shape-fill-color="rgb(204, 204, 204)" data-shape-stretch="true" style="z-index: 22;"><svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="100%" height="100%" preserveaspectratio="none" viewbox="0 0 214 12"><rect width="214" height="12" class="shape-element" fill="rgb(204, 204, 204)"></rect></svg></div></div>
+<div class="sl-block" data-block-type="shape" style="width: 214px; height: 12px; left: 117px; top: 454px;" data-block-id="919bc2f5e7319d461141a4de6ce0a5fd"><div class="sl-block-content" data-shape-type="rect" data-shape-fill-color="rgb(204, 204, 204)" data-shape-stretch="true" style="z-index: 23;"><svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="100%" height="100%" preserveaspectratio="none" viewbox="0 0 214 12"><rect width="214" height="12" class="shape-element" fill="rgb(204, 204, 204)"></rect></svg></div></div>
+<div class="sl-block" data-block-type="shape" style="width: 214px; height: 12px; left: 117px; top: 481px;" data-block-id="60d267baecca063caa839019ae8eea71"><div class="sl-block-content" data-shape-type="rect" data-shape-fill-color="rgb(204, 204, 204)" data-shape-stretch="true" style="z-index: 24;"><svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="100%" height="100%" preserveaspectratio="none" viewbox="0 0 214 12"><rect width="214" height="12" class="shape-element" fill="rgb(204, 204, 204)"></rect></svg></div></div>
+<div class="sl-block" data-block-type="shape" style="width: 100px; height: 4px; left: 117px; top: 417px;" data-block-id="048bc019d9f0eea26728e7268cc869e9"><div class="sl-block-content" data-shape-type="rect" data-shape-fill-color="rgb(204, 204, 204)" data-shape-stretch="true" style="z-index: 25;"><svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="100%" height="100%" preserveaspectratio="none" viewbox="0 0 100 4"><rect width="100" height="4" class="shape-element" fill="rgb(204, 204, 204)"></rect></svg></div></div>
+<div class="sl-block" data-block-type="shape" style="width: 126px; height: 4px; left: 117px; top: 431px;" data-block-id="7bae611aedf3119b9f6bb5ee9c31c8eb"><div class="sl-block-content" data-shape-type="rect" data-shape-fill-color="rgb(204, 204, 204)" data-shape-stretch="true" style="z-index: 26;"><svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="100%" height="100%" preserveaspectratio="none" viewbox="0 0 126 4"><rect width="126" height="4" class="shape-element" fill="rgb(204, 204, 204)"></rect></svg></div></div>
+<div class="sl-block" data-block-type="shape" style="width: 214px; height: 12px; left: 117px; top: 502px;" data-block-id="d6f2e08aa9f4787b9bbcecc1a4b77832"><div class="sl-block-content" data-shape-type="rect" data-shape-fill-color="rgb(204, 204, 204)" data-shape-stretch="true" style="z-index: 27;"><svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="100%" height="100%" preserveaspectratio="none" viewbox="0 0 214 12"><rect width="214" height="12" class="shape-element" fill="rgb(204, 204, 204)"></rect></svg></div></div>
+<div class="sl-block" data-block-type="shape" style="width: 257px; height: 58px; left: 79px; top: 277px;" data-block-id="789a8461fc955df68f9066914358e8e6"><div class="sl-block-content" data-shape-type="rect" data-shape-fill-color="rgb(244, 204, 204)" data-shape-stretch="true" style="z-index: 28;"><svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="100%" height="100%" preserveaspectratio="none" viewbox="0 0 257 58"><rect width="257" height="58" class="shape-element" fill="rgb(244, 204, 204)"></rect></svg></div></div>
+<div class="sl-block" data-block-type="shape" style="width: 29px; height: 167px; left: 79px; top: 347px;" data-block-id="7e4b49070ca3af550b20c8adba20aa92"><div class="sl-block-content" data-shape-type="rect" data-shape-fill-color="rgb(252, 229, 205)" data-shape-stretch="true" style="z-index: 29;"><svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="100%" height="100%" preserveaspectratio="none" viewbox="0 0 29 167"><rect width="29" height="167" class="shape-element" fill="rgb(252, 229, 205)"></rect></svg></div></div>
+<div class="sl-block" data-block-type="shape" style="width: 101px; height: 48px; left: 232px; top: 347px;" data-block-id="a3ee042e1c3b5095094fcc5fe8c2d708"><div class="sl-block-content" data-shape-type="rect" data-shape-fill-color="rgb(217, 234, 211)" data-shape-stretch="true" style="z-index: 30;"><svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="100%" height="100%" preserveaspectratio="none" viewbox="0 0 101 48"><rect width="101" height="48" class="shape-element" fill="rgb(217, 234, 211)"></rect></svg></div></div>
+<div class="sl-block" data-block-type="shape" style="width: 214px; height: 12px; left: 117px; top: 481px;" data-block-id="7c4e63c49f65b096ea92d202fc6e9bda"><div class="sl-block-content fragment" data-shape-type="rect" data-shape-fill-color="rgb(207, 226, 243)" data-shape-stretch="true" style="z-index: 31;" data-fragment-index="0"><svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="100%" height="100%" preserveaspectratio="none" viewbox="0 0 214 12"><rect width="214" height="12" class="shape-element" fill="rgb(207, 226, 243)"></rect></svg></div></div>
+<div class="sl-block" data-block-type="shape" style="width: 214px; height: 12px; left: 117px; top: 454px;" data-block-id="03d2478b3028004c631f7ca34deaa72d"><div class="sl-block-content fragment" data-shape-type="rect" data-shape-fill-color="rgb(207, 226, 243)" data-shape-stretch="true" style="z-index: 32;" data-fragment-index="0"><svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="100%" height="100%" preserveaspectratio="none" viewbox="0 0 214 12"><rect width="214" height="12" class="shape-element" fill="rgb(207, 226, 243)"></rect></svg></div></div>
+<div class="sl-block" data-block-type="shape" style="width: 214px; height: 12px; left: 117px; top: 502px;" data-block-id="f5dd98473aa91570a9231bb57758e9d6"><div class="sl-block-content fragment" data-shape-type="rect" data-shape-fill-color="rgb(207, 226, 243)" data-shape-stretch="true" style="z-index: 33;" data-fragment-index="0"><svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="100%" height="100%" preserveaspectratio="none" viewbox="0 0 214 12"><rect width="214" height="12" class="shape-element" fill="rgb(207, 226, 243)"></rect></svg></div></div>
+<div class="sl-block" data-block-type="shape" style="width: 214px; height: 12px; left: 117px; top: 405px;" data-block-id="b7e7973b833b4c2d06de93d218d608d3"><div class="sl-block-content fragment" data-shape-type="rect" data-shape-fill-color="rgb(207, 226, 243)" data-shape-stretch="true" style="z-index: 34;" data-fragment-index="0"><svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="100%" height="100%" preserveaspectratio="none" viewbox="0 0 214 12"><rect width="214" height="12" class="shape-element" fill="rgb(207, 226, 243)"></rect></svg></div></div>
+<div class="sl-block" data-block-type="shape" style="width: 126px; height: 4px; left: 117px; top: 431px;" data-block-id="107128df725b68ff80f0cc5c55d0eeaa"><div class="sl-block-content" data-shape-type="rect" data-shape-fill-color="rgb(217, 210, 233)" data-shape-stretch="true" style="z-index: 35;"><svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="100%" height="100%" preserveaspectratio="none" viewbox="0 0 126 4"><rect width="126" height="4" class="shape-element" fill="rgb(217, 210, 233)"></rect></svg></div></div>
+<div class="sl-block" data-block-type="shape" style="width: 100px; height: 5.5px; left: 117px; top: 417px;" data-block-id="60a4112c57468a8396e860b7e6047a8d"><div class="sl-block-content" data-shape-type="rect" data-shape-fill-color="rgb(217, 210, 233)" data-shape-stretch="true" style="z-index: 36;"><svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="100%" height="100%" preserveaspectratio="none" viewbox="0 0 100 6"><rect width="100" height="6" class="shape-element" fill="rgb(217, 210, 233)"></rect></svg></div></div>
+<div class="sl-block" data-block-type="text" data-block-id="010c4a933e04f8a9796568cea33db579" style="height: auto; min-width: 30px; min-height: 30px; width: 600px; left: 172px; top: 33px;"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 37;">
+<h2>with server template</h2>
+</div></div>
+<div class="sl-block" data-block-type="text" data-block-id="14bdfc37eb722d6745081485a480d1a7" style="height: auto; min-width: 30px; min-height: 30px; width: 523px; left: 380px; top: 242px;"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 38;">
+<ol>
+	<li>Initially partially styled; main CSS is included, most of the page-specific CSS.</li>
+	<li class="fragment" data-fragment-index="0">Rest of page-specific styles are added.</li>
+</ol>
+</div></div>
+<div class="sl-block" data-block-type="text" data-block-id="b763df074d2920445399116f769c0eba" style="height: auto; min-width: 30px; min-height: 30px; width: 600px; left: 180px; top: 107px;"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 39;">
+<h3>adding css manually</h3>
+</div></div></section><section data-id="bff97a54c6026a81e6b5b25f78b2c46e"><div class="sl-block" data-block-type="shape" style="width: 300px; height: 300px; left: 61px; top: 231px;" data-block-id="7ecb5042f848bd0239aafaffd41e3dcb"><div class="sl-block-content" data-shape-type="rect" data-shape-fill-color="rgb(255, 255, 255)" data-shape-stretch="true" style="z-index: 10;" data-shape-stroke-color="#000000" data-shape-stroke-width="2"><svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="100%" height="100%" preserveaspectratio="none" viewbox="0 0 300 300"><defs><clippath id="shape-mask-7-1449606350550"><rect width="300" height="300"></rect></clippath></defs><rect width="300" height="300" clip-path="url(#shape-mask-7-1449606350550)" class="shape-element" fill="rgb(255, 255, 255)" stroke="#000000" stroke-width="4"></rect></svg></div></div>
+<div class="sl-block" data-block-type="shape" style="width: 300px; height: 38px; left: 61px; top: 231px;" data-block-id="ef7872625bd55a35ef91dccc5feb647e"><div class="sl-block-content" data-shape-type="rect" data-shape-fill-color="rgb(225, 225, 225)" data-shape-stretch="true" style="z-index: 11;" data-shape-stroke-color="#000000" data-shape-stroke-width="2"><svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="100%" height="100%" preserveaspectratio="none" viewbox="0 0 300 38"><defs><clippath id="shape-mask-8-1449606350553"><rect width="300" height="38"></rect></clippath></defs><rect width="300" height="38" clip-path="url(#shape-mask-8-1449606350553)" class="shape-element" fill="rgb(225, 225, 225)" stroke="#000000" stroke-width="4"></rect></svg></div></div>
+<div class="sl-block" data-block-type="shape" style="width: 13px; height: 13px; left: 335px; top: 244px;" data-block-id="44b5f3432adfec433615023709e7ba9a"><div class="sl-block-content" data-shape-type="circle" data-shape-fill-color="#000000" data-shape-stretch="true" style="z-index: 12;"><svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="100%" height="100%" preserveaspectratio="none" viewbox="0 0 13 13"><ellipse rx="6.5" ry="6.5" cx="6.5" cy="6.5" class="shape-element" fill="#000000"></ellipse></svg></div></div>
+<div class="sl-block" data-block-type="shape" style="width: 13px; height: 13px; left: 316px; top: 244px;" data-block-id="702802e253b24322fade02881f77cbd0"><div class="sl-block-content" data-shape-type="circle" data-shape-fill-color="#000000" data-shape-stretch="true" style="z-index: 13;"><svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="100%" height="100%" preserveaspectratio="none" viewbox="0 0 13 13"><ellipse rx="6.5" ry="6.5" cx="6.5" cy="6.5" class="shape-element" fill="#000000"></ellipse></svg></div></div>
+<div class="sl-block" data-block-type="shape" style="width: 13px; height: 13px; left: 295px; top: 244px;" data-block-id="c91c6925afac033eed497bb98606910d"><div class="sl-block-content" data-shape-type="circle" data-shape-fill-color="#000000" data-shape-stretch="true" style="z-index: 14;"><svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="100%" height="100%" preserveaspectratio="none" viewbox="0 0 13 13"><ellipse rx="6.5" ry="6.5" cx="6.5" cy="6.5" class="shape-element" fill="#000000"></ellipse></svg></div></div>
+<div class="sl-block" data-block-type="shape" style="width: 183px; height: 18px; left: 76px; top: 242px;" data-block-id="1f399cb9ccf562a13b4681a40aee4510"><div class="sl-block-content" data-shape-type="rect" data-shape-fill-color="rgb(255, 255, 255)" data-shape-stretch="true" style="z-index: 15;" data-shape-stroke-color="#000000" data-shape-stroke-width="1"><svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="100%" height="100%" preserveaspectratio="none" viewbox="0 0 183 18"><defs><clippath id="shape-mask-9-1449606350571"><rect width="183" height="18"></rect></clippath></defs><rect width="183" height="18" clip-path="url(#shape-mask-9-1449606350571)" class="shape-element" fill="rgb(255, 255, 255)" stroke="#000000" stroke-width="2"></rect></svg></div></div>
+<div class="sl-block" data-block-type="text" style="height: auto; width: 173px; left: 81px; top: 244px;" data-block-id="5fedbb2c8e727d18c7fe53e6e7d28b88"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 16; font-size: 50%;">
+<pre><span style="font-size:1.0em">/cart</span></pre>
+</div></div>
+<div class="sl-block" data-block-type="shape" style="width: 257px; height: 58px; left: 83px; top: 279px;" data-block-id="5c6bd4c6fbd78dd2009ade6fcde6b045"><div class="sl-block-content" data-shape-type="rect" data-shape-fill-color="rgb(204, 204, 204)" data-shape-stretch="true" style="z-index: 17;"><svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="100%" height="100%" preserveaspectratio="none" viewbox="0 0 257 58"><rect width="257" height="58" class="shape-element" fill="rgb(204, 204, 204)"></rect></svg></div></div>
+<div class="sl-block" data-block-type="shape" style="width: 29px; height: 167px; left: 83px; top: 349px;" data-block-id="ded7ccd841af1b85cd32498e20c8f3d2"><div class="sl-block-content" data-shape-type="rect" data-shape-fill-color="rgb(204, 204, 204)" data-shape-stretch="true" style="z-index: 18;"><svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="100%" height="100%" preserveaspectratio="none" viewbox="0 0 29 167"><rect width="29" height="167" class="shape-element" fill="rgb(204, 204, 204)"></rect></svg></div></div>
+<div class="sl-block" data-block-type="text" style="height: auto; width: 104px; left: 132px; top: 349px;" data-block-id="59e94722072a75a6792d7752c3b75aa6"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 19;">
+<p><strong>Title</strong></p>
+</div></div>
+<div class="sl-block" data-block-type="shape" style="width: 101px; height: 48px; left: 236px; top: 349px;" data-block-id="a9be1447a489e8cc64269b612e46759d"><div class="sl-block-content" data-shape-type="rect" data-shape-fill-color="rgb(204, 204, 204)" data-shape-stretch="true" style="z-index: 20;"><svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="100%" height="100%" preserveaspectratio="none" viewbox="0 0 101 48"><rect width="101" height="48" class="shape-element" fill="rgb(204, 204, 204)"></rect></svg></div></div>
+<div class="sl-block" data-block-type="shape" style="width: 214px; height: 12px; left: 121px; top: 407px;" data-block-id="58721d5ebcc6530ffc243adda2941f33"><div class="sl-block-content" data-shape-type="rect" data-shape-fill-color="rgb(204, 204, 204)" data-shape-stretch="true" style="z-index: 21;"><svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="100%" height="100%" preserveaspectratio="none" viewbox="0 0 214 12"><rect width="214" height="12" class="shape-element" fill="rgb(204, 204, 204)"></rect></svg></div></div>
+<div class="sl-block" data-block-type="shape" style="width: 214px; height: 12px; left: 121px; top: 456px;" data-block-id="2a919e17b1a683fe84b168556ad5aa82"><div class="sl-block-content" data-shape-type="rect" data-shape-fill-color="rgb(204, 204, 204)" data-shape-stretch="true" style="z-index: 22;"><svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="100%" height="100%" preserveaspectratio="none" viewbox="0 0 214 12"><rect width="214" height="12" class="shape-element" fill="rgb(204, 204, 204)"></rect></svg></div></div>
+<div class="sl-block" data-block-type="shape" style="width: 214px; height: 12px; left: 121px; top: 483px;" data-block-id="364870379ae828528515c23e8ae98596"><div class="sl-block-content" data-shape-type="rect" data-shape-fill-color="rgb(204, 204, 204)" data-shape-stretch="true" style="z-index: 23;"><svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="100%" height="100%" preserveaspectratio="none" viewbox="0 0 214 12"><rect width="214" height="12" class="shape-element" fill="rgb(204, 204, 204)"></rect></svg></div></div>
+<div class="sl-block" data-block-type="shape" style="width: 100px; height: 4px; left: 121px; top: 419px;" data-block-id="89d2f225fc98a5690629247f559f076c"><div class="sl-block-content" data-shape-type="rect" data-shape-fill-color="rgb(204, 204, 204)" data-shape-stretch="true" style="z-index: 24;"><svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="100%" height="100%" preserveaspectratio="none" viewbox="0 0 100 4"><rect width="100" height="4" class="shape-element" fill="rgb(204, 204, 204)"></rect></svg></div></div>
+<div class="sl-block" data-block-type="shape" style="width: 126px; height: 4px; left: 121px; top: 433px;" data-block-id="c2b085f6fe6a27e971055cbd8b8627a0"><div class="sl-block-content" data-shape-type="rect" data-shape-fill-color="rgb(204, 204, 204)" data-shape-stretch="true" style="z-index: 25;"><svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="100%" height="100%" preserveaspectratio="none" viewbox="0 0 126 4"><rect width="126" height="4" class="shape-element" fill="rgb(204, 204, 204)"></rect></svg></div></div>
+<div class="sl-block" data-block-type="shape" style="width: 214px; height: 12px; left: 121px; top: 504px;" data-block-id="c8f76fed4df9bf238c7afcc5c1950f15"><div class="sl-block-content" data-shape-type="rect" data-shape-fill-color="rgb(204, 204, 204)" data-shape-stretch="true" style="z-index: 26;"><svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="100%" height="100%" preserveaspectratio="none" viewbox="0 0 214 12"><rect width="214" height="12" class="shape-element" fill="rgb(204, 204, 204)"></rect></svg></div></div>
+<div class="sl-block" data-block-type="shape" style="width: 257px; height: 58px; left: 83px; top: 279px;" data-block-id="c6008b2b2c3413d66ba6a51269fe6a06"><div class="sl-block-content" data-shape-type="rect" data-shape-fill-color="rgb(244, 204, 204)" data-shape-stretch="true" style="z-index: 28;"><svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="100%" height="100%" preserveaspectratio="none" viewbox="0 0 257 58"><rect width="257" height="58" class="shape-element" fill="rgb(244, 204, 204)"></rect></svg></div></div>
+<div class="sl-block" data-block-type="shape" style="width: 29px; height: 167px; left: 83px; top: 349px;" data-block-id="2038d3468cc297d9e5e8c6b97b3a0eb4"><div class="sl-block-content" data-shape-type="rect" data-shape-fill-color="rgb(252, 229, 205)" data-shape-stretch="true" style="z-index: 29;"><svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="100%" height="100%" preserveaspectratio="none" viewbox="0 0 29 167"><rect width="29" height="167" class="shape-element" fill="rgb(252, 229, 205)"></rect></svg></div></div>
+<div class="sl-block" data-block-type="shape" style="width: 101px; height: 48px; left: 236px; top: 349px;" data-block-id="8606dd9e6956b99649bfb205790f9011"><div class="sl-block-content" data-shape-type="rect" data-shape-fill-color="rgb(217, 234, 211)" data-shape-stretch="true" style="z-index: 32;"><svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="100%" height="100%" preserveaspectratio="none" viewbox="0 0 101 48"><rect width="101" height="48" class="shape-element" fill="rgb(217, 234, 211)"></rect></svg></div></div>
+<div class="sl-block" data-block-type="shape" style="width: 214px; height: 12px; left: 121px; top: 483px;" data-block-id="4b453dee85d0cb144204bfd02eb4ea31"><div class="sl-block-content" data-shape-type="rect" data-shape-fill-color="rgb(207, 226, 243)" data-shape-stretch="true" style="z-index: 33;"><svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="100%" height="100%" preserveaspectratio="none" viewbox="0 0 214 12"><rect width="214" height="12" class="shape-element" fill="rgb(207, 226, 243)"></rect></svg></div></div>
+<div class="sl-block" data-block-type="shape" style="width: 214px; height: 12px; left: 121px; top: 456px;" data-block-id="19db4a02d2c6586c029849e6796ca4af"><div class="sl-block-content" data-shape-type="rect" data-shape-fill-color="rgb(207, 226, 243)" data-shape-stretch="true" style="z-index: 34;"><svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="100%" height="100%" preserveaspectratio="none" viewbox="0 0 214 12"><rect width="214" height="12" class="shape-element" fill="rgb(207, 226, 243)"></rect></svg></div></div>
+<div class="sl-block" data-block-type="shape" style="width: 214px; height: 12px; left: 121px; top: 504px;" data-block-id="c807d5ecff0be70ff476307b26398729"><div class="sl-block-content" data-shape-type="rect" data-shape-fill-color="rgb(207, 226, 243)" data-shape-stretch="true" style="z-index: 35;"><svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="100%" height="100%" preserveaspectratio="none" viewbox="0 0 214 12"><rect width="214" height="12" class="shape-element" fill="rgb(207, 226, 243)"></rect></svg></div></div>
+<div class="sl-block" data-block-type="shape" style="width: 214px; height: 12px; left: 121px; top: 407px;" data-block-id="3b27b095457e697f5915f7451974589c"><div class="sl-block-content" data-shape-type="rect" data-shape-fill-color="rgb(207, 226, 243)" data-shape-stretch="true" style="z-index: 36;"><svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="100%" height="100%" preserveaspectratio="none" viewbox="0 0 214 12"><rect width="214" height="12" class="shape-element" fill="rgb(207, 226, 243)"></rect></svg></div></div>
+<div class="sl-block" data-block-type="shape" style="width: 126px; height: 4px; left: 121px; top: 433px;" data-block-id="b1dc66eb389250ca854608401a592fce"><div class="sl-block-content" data-shape-type="rect" data-shape-fill-color="rgb(217, 210, 233)" data-shape-stretch="true" style="z-index: 37;"><svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="100%" height="100%" preserveaspectratio="none" viewbox="0 0 126 4"><rect width="126" height="4" class="shape-element" fill="rgb(217, 210, 233)"></rect></svg></div></div>
+<div class="sl-block" data-block-type="shape" style="width: 100px; height: 5.5px; left: 121px; top: 419px;" data-block-id="d3f06ed7de3fd59cd030318b065b7b7c"><div class="sl-block-content" data-shape-type="rect" data-shape-fill-color="rgb(217, 210, 233)" data-shape-stretch="true" style="z-index: 38;"><svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="100%" height="100%" preserveaspectratio="none" viewbox="0 0 100 6"><rect width="100" height="6" class="shape-element" fill="rgb(217, 210, 233)"></rect></svg></div></div>
+<div class="sl-block" data-block-type="text" style="height: auto; min-width: 30px; min-height: 30px; width: 600px; left: 172px; top: 33px;" data-block-id="ca3e43dcacd83274dcf0b39264352daf"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 30;">
+<h2>With Donejs</h2>
+</div></div>
+<div class="sl-block" data-block-type="text" style="height: auto; min-width: 30px; min-height: 30px; width: 523px; left: 372px; top: 244px;" data-block-id="2dc9b3b4917039be0aa68cef5ac6e02e"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 31;">
+<ol>
+	<li>All styles needed for the page are included directly in the head.
+	<ul>
+		<li>And only the styles needed for the page.</li>
+	</ul>
+	</li>
+</ol>
+</div></div>
+<div class="sl-block" data-block-type="text" style="height: auto; min-width: 30px; min-height: 30px; width: 600px; left: 180px; top: 107px;" data-block-id="bc6223f177d14be21d0d246138ade700"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 39;">
+<h3>can-ssr does it for you</h3>
+</div></div></section><section data-id="b26cad21f3ed8fa2b1832f6d1d3afb1b"><div class="sl-block" data-block-type="code" data-block-id="27257f81b34650f02b495e4c59289c38" style="min-width: 30px; min-height: 30px; width: 746px; height: 231px; left: 107px; top: 235px;"><div class="sl-block-content" style="z-index: 11; font-size: 180%;"><pre><code>import Framework from 'fancy-framework';
+import './styles.scss';
+
+...</code></pre></div></div>
+<div class="sl-block" data-block-type="text" data-block-id="97e65ade8af6bcb4e4ca3135fd4cbaef" style="height: auto; min-width: 30px; min-height: 30px; width: 600px; left: 180px; top: 121px;"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 12;">
+<h2>Component-based architecture</h2>
+</div></div></section></section><section class="stack" data-id="1d0eacc1e7c797db57f4a2df6b6880cb"><section data-id="119b34e2a6d154e07ea16165426fe138"><div class="sl-block" data-block-type="text" style="width: 800px; left: 80px; top: 270px; height: auto;" data-block-id="cfd80d2b91e35532c72239b94a8f4fd2"><div class="sl-block-content" data-placeholder-tag="h1" data-placeholder-text="Title Text">
+<h1>Minimizing the number of requests</h1>
+</div></div></section><section data-id="65da36db210c02a3bbfc45c55fa696a4"><div class="sl-block" data-block-type="text" data-block-id="7791589d3e1ee173a335b050c7a35544" style="height: auto; min-width: 30px; min-height: 30px; width: 600px; left: 180px; top: 173px;"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 11;">
+<h2>Prevent redundant requests</h2>
+</div></div>
+<div class="sl-block" data-block-type="code" data-block-id="21eae02698fdaccbf2d2ca66d462a5af" style="min-width: 30px; min-height: 30px; width: 656px; height: 122px; left: 152px; top: 420px;"><div class="sl-block-content" style="z-index: 12; font-size: 151%;"><pre><code>&lt;script&gt;
+  INLINE_CACHE = {"users": [{ ... } ] };
+&lt;/script&gt;</code></pre></div></div>
+<div class="sl-block" data-block-type="text" data-block-id="0c97dcfc6ce064223be72de816baeeeb" style="height: auto; min-width: 30px; min-height: 30px; width: 600px; left: 180px; top: 264px;"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 13;">
+<ul>
+	<li class="fragment" data-fragment-index="0">Embed responses into the rendered page.</li>
+	<li class="fragment" data-fragment-index="1">Can be reused on the client to do initial rendering.</li>
+</ul>
+</div></div></section></section><section class="stack" data-id="4e300c84a72d4f42d7009f8b5553f4ae"><section data-id="aedefbc32189a4c8785a8e2fe0635edb"><div class="sl-block" data-block-type="text" style="width: 800px; left: 80px; top: 270px; height: auto;" data-block-id="13d8e13bba3eac05d0a2552286428285"><div class="sl-block-content" data-placeholder-tag="h1" data-placeholder-text="Title Text" style="z-index: 10;">
+<h1>shared code-base</h1>
+</div></div></section><section data-id="c65fe45798377796774b1bdbbd46ddb6"><div class="sl-block" data-block-type="text" style="width: 800px; left: 80px; top: 190px; height: auto;" data-block-id="40373d5847a6ead70b990e3a9183c53b"><div class="sl-block-content" data-placeholder-tag="h2" data-placeholder-text="Title Text" style="z-index: 10;">
+<h2>HOw much code is shared?</h2>
+</div></div>
+<div class="sl-block" data-block-type="text" style="width: 800px; left: 80px; top: 264px; height: auto;" data-block-id="efa116a7f13552dfbafd44af05872f10"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 11;">
+<h3>Minimizing differences for easier maintainence</h3>
+</div></div>
+<div class="sl-block" data-block-type="text" data-block-id="01a25aaa7f76dcbe6362a37439a7da60" style="height: auto; min-width: 30px; min-height: 30px; width: 600px; left: 180px; top: 344px;"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 13;">
+<ul>
+	<li class="fragment" data-fragment-index="0">Same templating engine is used on server and client.</li>
+	<li class="fragment" data-fragment-index="1">A "main" that runs in both contexts.</li>
+	<li class="fragment" data-fragment-index="2">A shared router, not adding new routes in separate places</li>
+</ul>
+</div></div></section><section data-id="989339fac8f826b7b17e5b2965ae76d4"><div class="sl-block" data-block-type="text" style="width: 800px; left: 80px; top: 164px; height: auto;" data-block-id="d3fc584a94f2e8d24e8ae5b07274c662"><div class="sl-block-content" data-placeholder-tag="h1" data-placeholder-text="Title Text" style="z-index: 10;">
+<h2>can-ssr Example</h2>
+</div></div>
+<div class="sl-block" data-block-type="code" data-block-id="d9fb1562a3b5ed0493c8466afaa68a33" style="min-width: 30px; min-height: 30px; width: 468px; height: 326px; left: 12px; top: 303px;"><div class="sl-block-content fragment" style="z-index: 11; font-size: 115%;" data-fragment-index="0"><pre><code>var ssr = require("can-ssr/middleware");
+var app = require("express")();
+
+app.use(ssr());
+
+</code></pre></div></div>
+<div class="sl-block" data-block-type="text" data-block-id="5a0b36415eddb4fe5bab54becaa54650" style="height: auto; min-width: 30px; min-height: 30px; width: 220px; left: 124px; top: 249px;"><div class="sl-block-content fragment" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 12;" data-fragment-index="0">
+<p><strong>Middleware</strong></p>
+</div></div>
+<div class="sl-block" data-block-type="code" style="min-width: 30px; min-height: 30px; width: 461px; height: 326px; left: 490px; top: 303px;" data-block-id="c065f3eea5ac8d52b4fe8005c5d4deb0"><div class="sl-block-content fragment" style="z-index: 14; font-size: 115%;" data-fragment-index="1"><pre><code>var ssr = require("can-ssr");
+
+var render = ssr();
+
+render("/cart").then(function(result){
+  console.log(result.html);
+});
+</code></pre></div></div>
+<div class="sl-block" data-block-type="text" style="height: auto; min-width: 30px; min-height: 30px; width: 255px; left: 593px; top: 249px;" data-block-id="3cc27972a9c81f09123f01e1ee6119dc"><div class="sl-block-content fragment" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 15;" data-fragment-index="1">
+<p>Core API</p>
+</div></div></section><section><div class="sl-block" data-block-type="code" data-block-id="c9a2b09144bff0a7d2a2e5a7a6d636cb" style="min-width: 30px; min-height: 30px; width: 842px; height: 490px; left: 59px; top: 105px;"><div class="sl-block-content" style="z-index: 11; font-size: 130%;"><pre><code>export function createState(request){
+  // url could be: /, /profile, /messages, etc.
+  const page = request.url.split("/").pop() || "home";
+
+  return {
+    page: page
+  };
+}
+
+export function render(document, state){
+  $("&lt;title&gt;").text("jQuery App").appendTo(document.head);
+
+  let body = $(document.body);
+  body.append(template());
+
+  // Show the tab selected in the state
+  body.find(`[aria-controls=${state.page}]`).tab("show");
+}</code></pre></div></div></section></section><section class="stack" data-id="a9e09add6687587ef124408158f0caaa"><section data-id="2e84e161fbcd35597e06d45ad28f26be"><div class="sl-block" data-block-type="text" style="width: 800px; left: 80px; top: 270px; height: auto;" data-block-id="ffe61acd214c603f035d9ba82faad27e"><div class="sl-block-content" data-placeholder-tag="h1" data-placeholder-text="Title Text">
+<h1>asynchronous rendering</h1>
+</div></div></section><section data-id="7b456845b738af0e6183fb4da4cf176a"><div class="sl-block" data-block-type="text" style="width: 430px; left: 23px; top: 87px; height: auto;" data-block-id="2e9950870df9b6b3ca85a1cadeb5ab0c"><div class="sl-block-content" data-placeholder-tag="h2" data-placeholder-text="Title Text" style="text-align: left; z-index: 11;">
+<h2>Synchronous Rendering</h2>
+</div></div>
+<div class="sl-block" data-block-type="text" style="width: 418px; left: 23px; top: 161px; height: auto;" data-block-id="55827926847baa47c65901f01286540f"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi nec metus justo. Aliquam erat volutpat." style="z-index: 12; text-align: left;">
+<ul>
+	<li class="fragment" data-fragment-index="0">Forces all data to be present before rendering.</li>
+	<li class="fragment" data-fragment-index="1">Cannot use component-based architecture.</li>
+	<li class="fragment" data-fragment-index="2">Pushes application logic into another layer.</li>
+	<li class="fragment" data-fragment-index="3">Makes writing reusable components harder.</li>
+</ul>
+</div></div>
+<div class="sl-block" data-block-type="code" data-block-id="ebddd44b36a1c61831ec1f9680ab6314" style="min-width: 30px; min-height: 30px; width: 507px; height: 315px; left: 453px; top: 29px;"><div class="sl-block-content" style="z-index: 13; font-size: 126%;"><pre><code>// server.js
+import render from "framework-dom";
+
+app.get("/cart", function(req, res){
+
+    fetchCart().then(function(data){
+        res.send(
+            render(data)
+        );
+    });
+
+});</code></pre></div></div>
+<div class="sl-block" data-block-type="code" data-block-id="dda2b44779a39715975964c9e179a032" style="min-width: 30px; min-height: 30px; width: 507px; height: 300px; left: 453px; top: 366px;"><div class="sl-block-content" style="z-index: 14; font-size: 126%;"><pre><code>// cart.js
+import Component from "fancy-framework";
+
+class Cart extends Component {
+    render() {
+        let data = this.props.data;
+
+        return &lt;div&gt; ... &lt;/div&gt;
+    }
+}</code></pre></div></div></section><section data-id="dfe6163a4e8822f05608ba535105e544"><div class="sl-block" data-block-type="text" style="width: 800px; left: 80px; top: 270px; height: auto;" data-block-id="74003211c69b5137f22bf601f347b71e"><div class="sl-block-content" data-placeholder-tag="h1" data-placeholder-text="Title Text">
+<h1>Demo asynchronous react</h1>
+</div></div></section><section data-id="23eda44941686c39ce1fc8eaf990d5d7"><div class="sl-block" data-block-type="text" style="width: 800px; left: 80px; top: 270px; height: auto;" data-block-id="f49b15bbcce632d290685d674deb304a"><div class="sl-block-content" data-placeholder-tag="h1" data-placeholder-text="Title Text">
+<h2><a href="https://github.com/canjs/can-wait" target="_blank">https://github.com/canjs/can-wait</a></h2>
+</div></div></section></section><section class="stack" data-id="f7c1ecb6e69b8e7b707694056c4dca3a"><section data-id="ddeab01551dcd2d5dd74bfdb8b8fbeca"><div class="sl-block" data-block-type="text" style="width: 800px; left: 80px; top: 190px; height: auto;" data-block-id="52e03701b6ac1a1bbc8dea6feb64af53"><div class="sl-block-content" data-placeholder-tag="h1" data-placeholder-text="Title Text">
+<h1>INSTANT DEV WORKFLOW</h1>
+</div></div>
+<div class="sl-block" data-block-type="text" style="width: 800px; left: 80px; top: 287px; height: auto;" data-block-id="85b75de692f8f989e90ae335c3ae6511"><div class="sl-block-content fragment" data-placeholder-tag="h2" data-placeholder-text="Subtitle" data-fragment-index="0">
+<h2>hot module replacement</h2>
+</div></div></section><section data-id="f262e6805bfbf25c5e654c768b2bd498"><div class="sl-block" data-block-type="text" style="width: 800px; left: 80px; top: 270px; height: auto;" data-block-id="e395b7eba9af5a4275fea469f34b3749"><div class="sl-block-content" data-placeholder-tag="h1" data-placeholder-text="Title Text">
+<h1>demo donejs live-reload</h1>
+</div></div></section><section><div class="sl-block" data-block-type="text" style="width: 800px; left: 80px; top: 92px; height: auto;" data-block-id="6a93f99d1614b5a7e4464086941e9ed0"><div class="sl-block-content" data-placeholder-tag="h1" data-placeholder-text="Title Text" style="z-index: 10;">
+<h1>Take aways</h1>
+</div></div>
+<div class="sl-block" data-block-type="text" data-block-id="593e5e86b3d08c1769f0176a3edf06de" style="height: auto; min-width: 30px; min-height: 30px; width: 600px; left: 180px; top: 210px;"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 12;">
+<ul>
+	<li class="fragment" data-fragment-index="0">Only include the JavaScript and CSS needed for the request.</li>
+	<li class="fragment" data-fragment-index="1">Include any API responses in the response HTML. Reuse these in the client for initial rendering.</li>
+	<li class="fragment" data-fragment-index="2">Use a router that works on both the client and server.</li>
+	<li class="fragment" data-fragment-index="3">Component-based architecture is good, use it, with asynchronous rendering.</li>
+</ul>
+</div></div></section></section><section data-background-image="server-side-rendering-isnt-enough/2046770-happy.gif" data-id="36ec1a0404cc41f9af8f3b1131192525"><div class="sl-block" data-block-type="text" data-block-id="e9542644b681bd3c4dccaaf148f9f098" style="height: auto; min-width: 30px; min-height: 30px; width: 380px; left: 281px; top: 301px;"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 10; color: rgb(255, 255, 255);">
+<h2>The End</h2>
+
+<h3>BY Matthew Phillips</h3>
+</div></div>
+<div class="sl-block" data-block-type="shape" data-block-id="36b8eeca7b7fa4d23c39ec85b1318d20" style="min-width: 4px; min-height: 4px; width: 378px; height: 176px; left: 281px; top: 280px;"><div class="sl-block-content" data-shape-type="rect" data-shape-fill-color="#000000" data-shape-stretch="true" style="z-index: 0; opacity: 0.7;"><svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="100%" height="100%" preserveaspectratio="none" viewbox="0 0 378 176"><rect width="378" height="176" class="shape-element" fill="#000000"></rect></svg></div></div></section>
+			</div>
+		</div>
+
+		<script>
+			var SLConfig = {"deck": {"id":523116,"slug":"server-side-rendering-isnt-enough","title":"Server-Side Rendering Isn't Enough","description":"","visibility":"all","published_at":"2015-12-09T01:30:21.784Z","sanitize_messages":null,"thumbnail_url":"https://s3.amazonaws.com/media-p.slid.es/thumbnails/secure/e1ddaa/decks.jpg","view_count":39,"user":{"id":45800,"username":"matthewphillips","name":"Matthew Phillips","description":"","thumbnail_url":"https://www.gravatar.com/avatar/4394f414f0d4a043ad5e8fa261fa2953?s=140\u0026d=https%3A%2F%2Fs3.amazonaws.com%2Fstatic.slid.es%2Fimages%2Fdefault-profile-picture.png","pro":true,"enterprise":false,"enterprise_manager":false,"settings":{"id":195806,"present_controls":true,"present_upsizing":true,"present_notes":true},"registered":true},"background_transition":"slide","transition":"slide","theme_id":null,"theme_font":"league","theme_color":"yellow-black","auto_slide_interval":0,"comments_enabled":true,"forking_enabled":false,"rolling_links":false,"center":false,"should_loop":false,"share_notes":false,"slide_number":null,"rtl":false,"version":2,"notes":{"784ec41c77f95f941f84be46581a7b51":"Talk is about server side rendering and what is needed for a good user experience.","4812e2a7fa207ab8db857bdbd07f8af4":"I am Matthew Phillips and I work on a project called DoneJS. DoneJS is a full stack JavaScript framework at the same scope as Meteor.\n\nAs part of the project I worked on can-ssr, DoneJS' server-side rendering library.\n\nThis talk is about what I learned from developing it.","f4dd089f29300702881052baf4844361":"These are terms you often hear when people talk about SSR. They all mean basically the same thing.","b487b676e9dac131964420426154a5f4":"The importance of server-side rendering: primarily it is about perception. The perception that your application is fast.","bb0f6100b8e248028bea1a8a5d200257":"When developing can-ssr I started out with only rendering part of the application. Essentially just rendering the app's \"main\" template. Quickly I realized that wasn't enough.","5b358dc876f728e684bc26b4f60dbbda":"I developed a set of requirements I thought were necessary for a good server-rendering experience. \n\nThese can be categorized into 2 main categories.","4ab61690aaff849c8c641d83f7e059ac":"Your library should be able to quickly render a template on the server.","05ae9b772d6a749ad0557e1d56211ae2":"As I dug into improving the experience I eventually realized that nearly everything should be server rendered. Anything that can be server rendered, should be server rendered.\n\nThe rest of this talk will be explaining how we made that happen.","bb07b8d5c60bac83416d4502dcd6a5c5":"In the old days the only way to render on the server was to delegate to a headless browser, like Phantom. Doing so came with some compromises.\n\n-- After pooling\nMemory + Pooling = difficult to scale","43d6780bd058b6d0f95f322d027ca8d6":"When virtual DOMs started becoming popular a couple of years ago it opened up new opportunities for server rendering.","4bced962a1d469e79449df39c4a95962":"With these things known we decided that a virtual DOM was the way to go. But since our framework expects a real looking DOM we decided the best approach was to make a server DOM that looked the same.\n\nAs a result, can-ssr is compatible with a lot of different jQuery widgets.","6630884061af9ef52e076c821c7dfb7a":"What do I mean by this; Only including the assets you need to render a particular page.","aedefbc32189a4c8785a8e2fe0635edb":"","2e84e161fbcd35597e06d45ad28f26be":"Asynchronous rendering means that when you call your app's \"render\" method it doesn't immediately return html but rather returns html through a callback or Promise."}}};
+			SLConfig.current_user = {
+				name: "Matthew Phillips",
+				username: "matthewphillips",
+				pro: true
+			};
+		</script>
+
+		<script src="lib/head.min.js"></script>
+		<script src="lib/reveal.min.js"></script>
+		<script>
+			// Make Slides speaker notes available in the reveal.js speaker view
+			if( SLConfig.deck.notes ) {
+				[].forEach.call( document.querySelectorAll( '.reveal .slides section' ), function( slide ) {
+
+					var value = SLConfig.deck.notes[ slide.getAttribute( 'data-id' ) ];
+					if( value && typeof value === 'string' ) {
+						slide.setAttribute( 'data-notes', value );
+					}
+
+				} );
+			}
+
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				mouseWheel: false,
+				showNotes: SLConfig.deck.share_notes,
+				slideNumber: SLConfig.deck.slide_number,
+
+				autoSlide: SLConfig.deck.auto_slide_interval || 0,
+				autoSlideStoppable: true,
+
+				rolling_links: SLConfig.deck.rolling_links || true,
+				center: SLConfig.deck.center || false,
+				loop: SLConfig.deck.should_loop || false,
+				rtl: SLConfig.deck.rtl || false,
+
+				transition: SLConfig.deck.transition,
+				backgroundTransition: SLConfig.deck.background_transition,
+
+				maxScale: 2,
+
+				dependencies: [
+					{ src: 'lib/reveal-plugins/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'lib/reveal-plugins/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'lib/reveal-plugins/highlight/highlight.js', async: true, callback: function() { hljs.initHighlighting(); hljs.initHighlightingOnLoad(); } },
+					{ src: 'lib/reveal-plugins/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+				]
+			});
+		</script>
+
+		
+
+	</body>
+</html>
