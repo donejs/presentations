@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+  <script src="http://code.jquery.com/jquery-1.11.0.js"></script>
+  <script src="http://canjs.com/release/2.3.8/can.jquery.js"></script>
+  <script src="http://canjs.com/release/2.3.8/can.stache.js"></script>
+  <script src="http://canjs.com/release/2.3.8/can.fixture.js"></script>
+  <script src="http://canjs.com/release/2.3.8/can.map.define.js"></script>
+</head>
+<body>
+  <script type="text/javascript">
+    $(function() {
+      can.route.map(appState);
+
+      can.route('/blog/:id');
+
+      can.route.ready();
+    });
+  </script>
+
+  <script type="text/stache" id="template">
+
+  </script>
+</body>
+</html>
